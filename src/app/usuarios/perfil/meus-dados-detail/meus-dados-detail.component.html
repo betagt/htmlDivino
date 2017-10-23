@@ -12,7 +12,7 @@
                                 <img class="img-responsive" [src]="usuario?.imagem" alt="">
                             </a>
                             <div class="dropdown pmop-message">
-                                <input type="file" style="display: none;" #fileEvent (change)="changeListener($event)">
+                                <input type="file" style="display: none;" #fileEvent (change)="changeListenerImagem($event)">
                                 <a (click)="fileEvent.click()" style="z-index: 999;" class="btn bgm-white btn-float z-depth-1">
                                     <i class="zmdi zmdi-camera"></i>
                                 </a>

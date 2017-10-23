@@ -202,9 +202,9 @@ export class MeusDadosDetailComponent implements OnInit {
         };
     }
 
-    /*changeListener($event): void {
+    changeListenerImagem($event): void {
      this.sendFile($event.target);
-     }*/
+     }
 
     sendFile(inputValue) {
         const formData = new FormData();
