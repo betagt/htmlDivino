@@ -1,0 +1,104 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="((routeParams.id)?'Editar'+ ' Plano: ' + plano?.nome:'Cadastrar') "
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div class="row" >
+          <ul class="tab-nav tn-justified tn-icon" role="tablist">
+            <li role="presentation" class="active">
+              <a class="col-sx-4" href="#tab-1" aria-controls="tab-1" role="tab"
+                 data-toggle="tab">
+                Plano
+              </a>
+            </li>
+            <li role="presentation">
+              <a class="col-xs-4" href="#tab-2" *ngIf="routeParams.id" aria-controls="tab-2" role="tab"
+                 data-toggle="tab">
+                Preços
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content p-20">
+            <div role="tabpanel" class="tab-pane animated fadeIn in active" id="tab-1">
+              <form #formSave [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm.value)">
+                <div class="row-large m-t-10">
+                  <div class="col-xs-4">
+                    <div class="fg-line">
+                      <input type="text"  [formControl]="saveForm.controls['nome']" class="form-control input-sm" placeholder="Nome">
+                    </div>
+                    <app-error-message [erros]="saveForm.controls['nome']"></app-error-message>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="fg-line">
+                      <input type="number"  [formControl]="saveForm.controls['dias']" class="form-control input-sm" placeholder="Qtd. Dias">
+                    </div>
+                    <app-error-message [erros]="saveForm.controls['dias']"></app-error-message>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="fg-line">
+                      <select class="selectpickeAr" [formControl]="saveForm.controls['tipo']" >
+                        <option [value]="'anunciante'" [selected]="plano?.tipo == 'anunciante'" >Anunciante</option>
+                        <option [value]="'imobiliaria'" [selected]="plano?.tipo == 'imobiliaria'" >Imobiliaria</option>
+                        <option [value]="'qimob-erp'" [selected]="plano?.tipo == 'qimob-erp'">qImob ERP</option>
+                      </select>
+                    </div>
+                    <app-error-message [erros]="saveForm.controls['tipo']"></app-error-message>
+                  </div>
+                </div>
+                <div class="row-large m-t-10">
+                  <div class="col-xs-6">
+                    <div class="fg-line">
+                      <input type="number"  [formControl]="saveForm.controls['qtde_destaque']" class="form-control input-sm" placeholder="Qtd. Destaques">
+                    </div>
+                    <app-error-message [erros]="saveForm.controls['qtde_destaque']"></app-error-message>
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="fg-line">
+                      <input type="number"  [formControl]="saveForm.controls['qtde_anuncio']" class="form-control input-sm" placeholder="Qtd. Anuncios">
+                    </div>
+                    <app-error-message [erros]="saveForm.controls['qtde_anuncio']"></app-error-message>
+                  </div>
+                </div>
+                <div class="row-large m-t-10">
+                    <div class="col-xs-6">
+                        <div class="fg-line">
+                          <input type="text" [formControl]="saveForm.controls['valor']" class="form-control input-sm" placeholder="Valor">
+                        </div>
+                        <app-error-message [erros]="saveForm.controls['valor']"></app-error-message>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="fg-line">
+                          <select class="selectpickeAr" [formControl]="saveForm.controls['status']">
+                            <option [ngValue]="true" >Ativo</option>
+                            <option [ngValue]="false" >Inativo</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-large m-t-10">
+                    <div class="col-xs-6">
+                        <div class="fg-line">
+                          <button type="submit" class="btn bgm-green waves-effect">
+                            <i class="zmdi zmdi-save"></i> Salvar</button>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+
+            <div role="tabpanel" class="tab-pane animated fadeIn" id="tab-2">
+              <app-tabela-preco-list [idPlano]="routeParams.id"></app-tabela-preco-list>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

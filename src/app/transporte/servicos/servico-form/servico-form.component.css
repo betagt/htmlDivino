@@ -1,0 +1,11 @@
+.habilidade-list .caracteristicas-list {
+    float: left;
+}
+.habilidade-list .caracteristicas-item {
+    width: 152px;
+    float: left;
+    margin-bottom: 24px;
+}
+.habilidade-list ul li {
+    list-style-type: none;
+}

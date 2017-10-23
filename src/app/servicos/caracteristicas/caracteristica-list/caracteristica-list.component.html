@@ -1,0 +1,100 @@
+<section id="content">
+  <div class="container">
+    <app-buttons
+            [title]="'LISTA DE CARACTERISTICAS'"
+            [subtitle]="'Controle de caracteristicas do sistema.'"
+            [smalltext]="_total + ' Itens'"
+            [itemSelected]="itemSelected"
+            [countSelect]="countSelect"
+            (remover)="excluir()"
+            [hidebuttons]="buttons"
+            [icon]="'zmdi zmdi-assignment-account'">
+    </app-buttons>
+    <div class="card">
+      <div class="card-header card-header-theme">
+        <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
+          <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
+          <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
+          <div class="header-search input-group">
+            <div class="col-md-4">
+              <div class="fg-line">
+                <input type="text" [formControl]="pesquisaForm.controls['caracteristicas.titulo']" id="name" class="form-control" placeholder="Nome">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input type="text" [formControl]="pesquisaForm.controls['caracteristicas.tipo']" id="email" class="form-control" placeholder="Tipo">
+              </div>
+            </div>
+            <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
+          </div>
+        </form>
+        <div class="header-btn-actions">
+          <ul class="actions">
+            <li>
+              <a title="Atualizar" (click)="list()">
+                <i class="zmdi zmdi-refresh-alt"></i>
+              </a>
+            </li>
+            <li>
+              <a>
+                <i class="zmdi zmdi-filter-list"></i>
+              </a>
+            </li>
+            <li>
+              <a title="Lixeira" (click)="lixeira()">
+                <i class="zmdi zmdi-delete"></i>
+              </a>
+            </li>
+            <!--<li class="dropdown">
+                <a href="" data-toggle="dropdown">
+                <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Change Date Range</a>
+                    </li>
+                    <li>
+                        <a href="">Change Graph Type</a>
+                    </li>
+                    <li>
+                        <a href="">Other Settings</a>
+                    </li>
+                </ul>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
+            </th>
+            <th (click)="orderby('caracteristicas.id')">#</th>
+            <th (click)="orderby('caracteristicas.titulo')">Titulo</th>
+            <th (click)="orderby('caracteristicas.tipo')">Tipo</th>
+            <th (click)="orderby('created_at')">Criado</th>
+            <th (click)="orderby('updated_at')">Modificado</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+            <td>
+              <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
+            <td>{{item.id}}</td>
+            <td>{{item.titulo}}</td>
+            <td>{{item.tipo_label}}</td>
+            <td>{{item.created_at.date|date:'d-MM-y'}}</td>
+            <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="pagination" >
+          <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="" previousLabel="" autoHide="true" id="server"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

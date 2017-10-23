@@ -1,0 +1,48 @@
+<section id="content">
+  <app-buttons
+          [title]="'DETALHES DO SERVIÇO ' + item?.nome"
+          [hidebuttons]="buttons"
+          [itemSelected]="routeParams.id"
+          [countSelect]="1"
+          [icon]="'zmdi zmdi-lock'">
+  </app-buttons>
+  <div class="card" id="profile-main">
+    <div class="pmb-block col-xs-6">
+      <div class="pmbb-header">
+        <h2><i class="zmdi zmdi-http m-r-10"></i> Informações</h2>
+      </div>
+      <div class="pmbb-body p-l-30">
+        <div class="pmbb-view">
+          <dl class="dl-horizontal">
+            <dt>Nome:</dt>
+            <dd>{{item?.nome}}</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Nome Similar:</dt>
+            <dd>{{item?.nome_similar}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="pmb-block col-xs-6">
+      <div class="pmbb-header">
+        <h2><i class="zmdi zmdi-accounts-alt m-r-10"></i> Detalhes</h2>
+      </div>
+      <div class="pmbb-body p-l-30">
+        <div class="pmbb-view">
+          <dl class="dl-horizontal">
+            <dt>Doc. Necessários:</dt>
+            <dd>
+              <ul class="caracteristicas-list">
+                <li style="list-style: none;" class="caracteristicas-item" *ngFor="let n of item?.habilidades_labels">
+                  {{n}}
+                </li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

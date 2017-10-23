@@ -1,0 +1,85 @@
+<div id="content">
+   <div class="container">
+       <app-buttons
+               [title]="(routeParams.id)?'Editar':'Cadastrar'"
+               [hidebuttons]="buttons"
+               [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+               (eventsave)="updateOrCreate(saveForm.value)">
+       </app-buttons>
+       <div class="card" >
+           <div class="card-body card-padding" >
+               <div class="row" >
+                   <form #formSave [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm.value)">
+                       <div class="row-large m-t-10">
+                           <div class="col-xs-6">
+                               <div class="fg-line">
+                                   <select class="chosen-my" [formControl]="saveForm.controls['parent_id']" data-live-search="true">
+                                       <option [value]="" >Sem Vinculo</option>
+                                       <option *ngFor="let rota of rotasVinculo" [value]="rota.id" [selected]="rota.id == rotaAcesso?.parent_id" >{{rota.text}}: {{rota.rota}}</option>
+                                   </select>
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['parent_id']"></app-error-message>
+                           </div>
+                           <div class="col-xs-6" style="height: 56px;">
+                               <div class="fg-line">
+                                   <input type="text"  [formControl]="saveForm.controls['text']" class="form-control input-sm" placeholder="Texto">
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['text']"></app-error-message>
+                           </div>
+                       </div>
+                       <div class="row-large m-t-10">
+                           <div class="col-xs-6">
+                               <div class="fg-line">
+                                   <input type="text"  [formControl]="saveForm.controls['rota']" class="form-control input-sm" placeholder="Rota">
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['rota']"></app-error-message>
+                           </div>
+                           <div class="col-xs-6">
+                               <div class="fg-line">
+                                   <input type="text"  [formControl]="saveForm.controls['icon']" class="form-control input-sm" placeholder="icon">
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['icon']"></app-error-message>
+                           </div>
+                       </div>
+                       <div class="row-large m-t-10">
+                           <div class="col-xs-6">
+                               <div class="toggle-switch toggle-switch-demo m-t-10 fg-line" style="width: 50%;">
+                                   <label for="ts1" class="ts-label">Desabilitar</label>
+                                   <input id="ts1" [formControl]="saveForm.controls['disabled']"  [value]=""  type="checkbox" hidden="hidden">
+                                   <label for="ts1" class="ts-helper"></label>
+                               </div>
+                               <div class="toggle-switch toggle-switch-demo m-t-10 fg-line" style="width: 49%;">
+                                   <label for="ts2" class="ts-label">Habilitar no Menu</label>
+                                   <input id="ts2" [formControl]="saveForm.controls['is_menu']"  [value]=""  type="checkbox" hidden="hidden">
+                                   <label for="ts2" class="ts-helper"></label>
+                               </div>
+                           </div>
+                           <div class="col-xs-6">
+                               <div class="fg-line">
+                                   <select #selectpicker class="selectpickeAr" multiple [formControl]="saveForm.controls['roles']" title="Perfil de usuário">
+                                       <option *ngFor="let role of roleValues" [value]="role.id" >{{role.name}}</option>
+                                   </select>
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['roles']"></app-error-message>
+                           </div>
+                       </div>
+                       <div class="row-large m-t-10">
+                           <div class="col-xs-6">
+                               <div class="fg-line">
+                                   <input type="number" [formControl]="saveForm.controls['prioridade']" class="form-control input-sm" placeholder="prioridade">
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['prioridade']"></app-error-message>
+                           </div>
+                           <div class="col-xs-6" style="height: 56px;">
+                               <div class="fg-line">
+                                   <p-dropdown [options]="ambiente" formControlName="ambiente" placeholder="Ambiente"></p-dropdown>
+                               </div>
+                               <app-error-message [erros]="saveForm.controls['ambiente']"></app-error-message>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>

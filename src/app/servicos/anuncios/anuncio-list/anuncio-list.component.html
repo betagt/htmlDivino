@@ -1,0 +1,163 @@
+<section id="content">
+  <div class="container">
+    <app-buttons
+            [title]="'LISTA DE ANÚNCIOS'"
+            [smalltext]="_total + ' Itens'"
+            [itemSelected]="itemSelected"
+            [countSelect]="countSelect"
+            (remover)="excluir()"
+            (restaurar)="restaurar()"
+            [hidebuttons]="buttons"
+            [icon]="'zmdi zmdi-assignment'">
+    </app-buttons>
+    <div class="card">
+      <div class="card-header card-header-theme">
+        <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
+          <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
+          <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
+          <div class="header-search input-group col-md-10">
+            <div class="col-md-2">
+              <div class="fg-line">
+                <input type="text" [formControl]="pesquisaForm.controls['anuncios.id']" id="name" class="form-control" placeholder="Código">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="fg-line">
+                  <p-autoComplete
+                          placeholder="Contratante"
+                          minLength="3"
+                          delay="600"
+                          field="name"
+                          [suggestions]="usuarios?.data"
+                          (completeMethod)="search($event)"
+                          [dropdown]="false"
+                          (onSelect)="selectdItem($event)"
+                          (onDropdownClick)="handleDropdown($event)">
+                      <ng-template let-usuario pTemplate="item">
+                          <div class="card-body">
+                              <div class="list-group">
+                                  <a class="list-group-item media" style="padding: 0;">
+                                      <div class="pull-left">
+                                          <img class="lgi-img" src="{{usuario.imagem}}" alt="">
+                                      </div>
+                                      <div class="media-body">
+                                          <div class="lgi-heading">{{usuario.name}}</div>
+                                          <small class="lgi-text">{{usuario.cpf_cnpj}}</small>
+                                          <small class="lgi-text">{{usuario.email}}</small>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </ng-template>
+                  </p-autoComplete>
+              </div>
+            </div>
+            <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
+          </div>
+        </form>
+        <div class="header-btn-actions">
+          <ul class="actions">
+            <li>
+              <a pTooltip="Atualizar" tooltipPosition="top" (click)="list()">
+                <i class="zmdi zmdi-refresh-alt"></i>
+              </a>
+            </li>
+            <li>
+              <a>
+                <i class="zmdi zmdi-filter-list"></i>
+              </a>
+            </li>
+            <li>
+              <a pTooltip="Lixeira" tooltipPosition="top" (click)="lixeira()">
+                <i class="zmdi zmdi-delete"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
+                </th>
+                <th (click)="orderby('anuncios.id')">Detalhes</th>
+                <th >Ação</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" ngSwitch="{{item.tipo}}" [ngClass]="{'success c-white': item.state}" >
+                <td (click)="item.state = !item.state;count();alterarESeleciona($event, item)">
+                  <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
+                </td>
+                <td>
+                    <div class="pull-left">
+                        <img class="m-r-10" style="width: 254px;" src="../../../../assets/img/sem-imagem.jpg">
+                    </div>
+                    <div class="media-body">
+                        <div *ngSwitchCase="'imovel'">
+                            <b>Código: </b>#{{item.id}}<br>
+                            <b>Anunciante: </b> {{item.anunciante_nome}}<br>
+                            <b>Possui Contratacao Ativa?: </b> {{item.contratacao_ativa?'Sim':'Não'}}<br>
+                            <b>Endereço: </b>{{item?.endereco?.data.endereco}}, {{item?.endereco?.data.cidade}} - {{item?.endereco?.data.estado_uf}} {{item?.endereco?.data.cep}}<br>
+                            <b>Qtd. Quartos: </b>{{item?.qtde_dormitorio}} -
+                            <b>Qtd. Suites: </b>{{item?.qtde_suite}} -
+                            <b>Qtd. Vagas: </b>{{item?.qtde_vaga}} -
+                            <b>Area Total: </b>{{item?.area_total}} m² -
+                            <b>Area Util: </b>{{item?.area_util}} m²<br>
+                            <b>Pretensão: </b>{{item?.pretensao}} - <b>Finalidade: </b>{{item?.finalidade.data.titulo}} - <b>Tipo: </b>{{item.tipo}}<br>
+                            <b>Valor: </b>{{item?.valor|currency:"BRL":true}}<br>
+                            <b>Status: </b>{{item?.status?'Ativo':'Inativo'}}<br>
+                        </div>
+                        <div *ngSwitchCase="'empreendimento'">
+                            <b>Código: </b>#{{item.id}}<br>
+                            <b>Anunciante: </b> {{item.anunciante_nome}}<br>
+                            <b>Possui Contratacao Ativa?: </b> {{item.contratacao_ativa?'Sim':'Não'}}<br>
+                            <b>Titulo: </b>{{item.titulo}}<br>
+                            <b>Endereço: </b>{{item?.endereco?.data.endereco}}, {{item?.endereco?.data.cidade}} - {{item?.endereco?.data.estado_uf}} {{item?.endereco?.data.cep}}<br>
+                            <b>Qtd. Quartos: </b>{{item?.qtde_dormitoario_maximo}} á {{item?.qtde_dormitoario_minimo}} -
+                            <b>Qtd. Vagas: </b>{{item?.qtde_vaga}} -
+                            <b>Area: </b>{{item?.qtde_area_minimo}} á {{item?.qtde_area_minimo}} m² -
+                            <b>Pretensão: </b>{{item?.pretensao}} - <b>Finalidade: </b>{{item?.finalidade.data.titulo}} - <b>Tipo: </b>{{item.tipo}}<br>
+                            <b>Valor: </b>{{item?.valor|currency:"BRL":true}}<br>
+                            <b>Status: </b>{{item?.status?'Ativo':'Inativo'}}<br>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="actions dm-icon">
+                        <li class="dropdown">
+                            <a href="" data-toggle="dropdown">
+                                <i class="zmdi zmdi-more-vert"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li *ngIf="item.contratacao_ativa">
+                                    <a (click)="suspender(item)">
+                                        {{item.status?"Suspender":"Ativar"}}
+                                    </a>
+                                </li>
+                                <li *ngIf="!item.contratacao_ativa">
+                                    <a [routerLink]="['/plano-contratacoes', item.id, 'new']">
+                                        Pagar
+                                    </a>
+                                </li>
+                                <li *ngIf="item.contratacao_ativa">
+                                    <a [routerLink]="['/plano-contratacoes', item.contratacao_codigo, 'edit']" >
+                                        Alterar Plano
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+        <div class="pagination" >
+          <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="" previousLabel="" autoHide="true" id="server"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

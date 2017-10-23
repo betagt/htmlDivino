@@ -1,0 +1,145 @@
+<div class="modal fade" id="newUser" tabindex="-1" role="dialog" xmlns:v-validate="http://www.w3.org/1999/xhtml">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New User</h4>
+      </div>
+      <div id="newUserHTMLBody">
+        <form method="post" action="#" role="form" id="new_user_form">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" class="nofocus">
+          <div class="modal-body">
+            <div class="tabbable-custom">
+              <ul class="nav nav-tabs">
+                <li class="active" id="userCredentialsTab">
+                  <a href="#userCredentials" data-toggle="tab">
+                    Credentials
+                    <span class="badge badge-success">1</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="userCredentials">
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="text"
+                               ondrop="return false;"
+                               id="last_name"
+                               name="last_name"
+                               class="form-control"
+                               placeholder=""
+                               maxlength=30
+                               minlength=3
+                               required="required">
+                        <label for="last_name">
+                          Last Name
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="text"
+                               id="first_name"
+                               name="first_name"
+                               class="form-control"
+                               placeholder=""
+                               maxlength=30
+                               minlength=3
+                               required="required">
+                        <label for="first_name">
+                          First Name
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="text"
+                               id="username"
+                               name="username"
+                               class="form-control tooltips"
+                               placeholder=""
+                               data-original-title=""
+                               maxlength=20
+                               minlength=3
+                               required="required">
+                        <label for="username">
+                          Username
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               class="form-control tooltips"
+                               placeholder=""
+                               data-original-title=""
+                               maxlength=50
+                               minlength=3
+                               required="required">
+                        <label for="email">
+                          Email
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="form-control tooltips"
+                               autocomplete="off"
+                               data-original-title=""
+                               placeholder=""
+                               maxlength=20
+                               minlength=3
+                               required="required">
+                        <label for="password">
+                          Password
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group form-md-line-input form-md-floating-label input-icon right">
+                        <input type="password"
+                               id="password_confirmation"
+                               name="password_confirmation"
+                               class="form-control tooltips"
+                               autocomplete="off"
+                               data-original-title=""
+                               placeholder=""
+                               maxlength=20
+                               minlength=3
+                               required="required">
+                        <label for="password_confirmation">
+                          Password Confirmation
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <div class="">
+                <a class="btn btn-default" id="resetForm">
+                  <i class="fa fa-refresh"></i> Reset
+                </a>
+                <a class="btn btn-default" data-dismiss="modal" id="cancel" name="cancel">
+                  <i class="fa fa-ban"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-primary" name="save" id="newUserButton">
+                  <i class="fa fa-floppy-o"></i> Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

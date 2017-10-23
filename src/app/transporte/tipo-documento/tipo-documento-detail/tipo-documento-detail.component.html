@@ -1,0 +1,49 @@
+<section id="content">
+  <app-buttons
+          [title]="'DETALHES DO TIPO DE DOCUMENTO ' + item?.nome"
+          [hidebuttons]="buttons"
+          [itemSelected]="routeParams.id"
+          [countSelect]="1"
+          [icon]="'zmdi zmdi-lock'">
+  </app-buttons>
+  <div class="card" id="profile-main">
+    <!--<ul class="tab-nav tn-justified">
+        <li class="active"><a >Detalhes</a></li>
+    </ul>-->
+    <div class="pmb-block col-xs-6">
+      <div class="pmbb-header">
+        <h2><i class="zmdi zmdi-http m-r-10"></i> Informações</h2>
+      </div>
+      <div class="pmbb-body p-l-30">
+        <div class="pmbb-view">
+          <dl class="dl-horizontal">
+            <dt>Nome:</dt>
+            <dd>{{item?.nome}}</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Descrição:</dt>
+            <dd>{{item?.descricao}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="pmb-block col-xs-6">
+      <div class="pmbb-header">
+        <h2><i class="zmdi zmdi-accounts-alt m-r-10"></i> Detalhes</h2>
+      </div>
+      <div class="pmbb-body p-l-30">
+        <div class="pmbb-view">
+          <dl class="dl-horizontal">
+            <dt>Observação:</dt>
+            <dd>{{item?.observacao}}</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Precisa de Arquivo?</dt>
+            <dd>{{(item?.precisa_de_documento)?'Sim':'Não'}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

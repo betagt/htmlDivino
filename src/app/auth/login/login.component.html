@@ -1,0 +1,111 @@
+<div class="login-content" style="background: url('../../../assets/img/backlevez.jpg')">
+    <!-- Login -->
+    <div class="lc-block toggled" id="l-login">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+            <div class="lcb-form">
+                <img width="52%" class="m-b-20" src="../../../assets/img/Logo%20Levez.png" />
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                    <div class="fg-line">
+                        <input type="text" class="form-control" id="username" [formControl]="loginForm.controls['username']" placeholder="Login">
+                        <div *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched" class="alert alert-danger">Insira o Login.</div>
+                    </div>
+                </div>
+
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-lock-open"></i></span>
+                    <div class="fg-line">
+                        <input type="password" class="form-control" id="password" [formControl]="loginForm.controls['password']" placeholder="Senha">
+                        <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="alert alert-danger">Insira a Senha.</div>
+                    </div>
+                </div>
+                <button [disabled]="!loginForm.valid" type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+            </div>
+        </form>
+
+        <div class="lcb-navigation">
+            <a href="" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Register</span></a>
+            <a href="" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Recuperar Senha</span></a>
+        </div>
+    </div>
+
+    <!-- Register -->
+    <div class="lc-block" id="l-register">
+        <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar(cadastroForm.value)">
+            <div class="lcb-form">
+                <img width="52%" class="m-b-20" src="../../../assets/img/Logo%20Levez.png" />
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                    <div class="fg-line">
+                        <input type="text" [formControl]="cadastroForm.controls['name']" class="form-control" placeholder="Nome">
+                        <span *ngIf="cadastroForm.controls['name'].hasError('required') && cadastroForm.controls['name'].touched" >Insira a nome.</span>
+                    </div>
+                </div>
+
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <input type="text" [formControl]="cadastroForm.controls['email']" class="form-control" placeholder="Email">
+                        <span *ngIf="cadastroForm.controls['email'].hasError('required') && cadastroForm.controls['email'].touched" >Insira a Email.</span>
+                    </div>
+                </div>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <div class="col-md-3 no-padding">
+                            <input type="text" [formControl]="cadastroForm.controls['ddd']" class="form-control" placeholder="DDD">
+                            <span *ngIf="cadastroForm.controls['ddd'].hasError('required') && cadastroForm.controls['ddd'].touched">Insira o ddd.</span>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" [formControl]="cadastroForm.controls['numero']" class="form-control" placeholder="Numero">
+                            <span *ngIf="cadastroForm.controls['numero'].hasError('required') && cadastroForm.controls['numero'].touched">Insira o número.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                    <div class="fg-line">
+                        <input type="password" class="form-control" [formControl]="cadastroForm.controls['password']" placeholder="Senha">
+                        <span>A senha precisa ter no mínimo 8 caracteres.</span>
+                        <span *ngIf="cadastroForm.controls['password'].hasError('required') && cadastroForm.controls['password'].touched">Insira a Senha.</span>
+                    </div>
+                </div>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                    <div class="fg-line">
+                        <input type="password" class="form-control"[formControl]="cadastroForm.controls['password_confirmation']" placeholder="Confirma Senha">
+                        <span *ngIf="cadastroForm.controls['password_confirmation'].hasError('required') && cadastroForm.controls['password_confirmation'].touched">Insira a Confirmação da Senha.</span>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="!cadastroForm.valid" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-check"></i></button>
+            </div>
+        </form>
+
+        <div class="lcb-navigation">
+            <a href="" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-right"></i> <span>Login</span></a>
+            <a href="" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Recuperar Senha</span></a>
+        </div>
+    </div>
+
+    <!-- Forgot Password -->
+    <div class="lc-block" id="l-forget-password">
+        <form [formGroup]="fbReSenha" (ngSubmit)="recuperarSenha(fbReSenha.value)">
+            <div class="lcb-form">
+                <img width="52%" class="m-b-20" src="../../../assets/img/Logo%20Levez.png" />
+                <p class="text-left">Preencha os dados abaixo para reenviar a senha para o seu e-mail de acesso ao administrativo.</p>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <input type="text" [formControl]="fbReSenha.controls['email']"  class="form-control" placeholder="Email Address">
+                    </div>
+                </div>
+                <button [disabled]="!fbReSenha.valid" type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+            </div>
+            <div class="lcb-navigation">
+                <a href="" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-right"></i> <span>Login</span></a>
+                <a href="" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Register</span></a>
+            </div>
+        </form>
+    </div>
+</div>

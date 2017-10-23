@@ -1,0 +1,112 @@
+<section id="content">
+  <div class="container">
+    <app-buttons
+            [title]="'LISTA DE PLANOS'"
+            [subtitle]="'Lista com planos cadastrados em todas as regiões'"
+            [smalltext]="_total + ' Itens'"
+            [itemSelected]="itemSelected"
+            [countSelect]="countSelect"
+            (remover)="excluir()"
+            (restaurar)="restaurar()"
+            [hidebuttons]="buttons"
+            [icon]="'zmdi zmdi-receipt'">
+    </app-buttons>
+    <div class="card">
+      <div class="card-header card-header-theme">
+        <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
+          <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
+          <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
+          <div class="header-search input-group col-md-8">
+            <div class="col-md-4">
+              <div class="fg-line">
+                <input type="text" [formControl]="pesquisaForm.controls['planos.nome']" id="name" class="form-control" placeholder="Nome">
+              </div>
+            </div>
+            <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
+          </div>
+        </form>
+        <div class="header-btn-actions">
+          <ul class="actions">
+            <li>
+              <a title="Atualizar" (click)="list()">
+                <i class="zmdi zmdi-refresh-alt"></i>
+              </a>
+            </li>
+            <li>
+              <a>
+                <i class="zmdi zmdi-filter-list"></i>
+              </a>
+            </li>
+            <li>
+              <a title="Lixeira" (click)="lixeira()">
+                <i class="zmdi zmdi-delete"></i>
+              </a>
+            </li>
+            <!--<li class="dropdown">
+                <a href="" data-toggle="dropdown">
+                <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Change Date Range</a>
+                    </li>
+                    <li>
+                        <a href="">Change Graph Type</a>
+                    </li>
+                    <li>
+                        <a href="">Other Settings</a>
+                    </li>
+                </ul>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
+            </th>
+            <th>#</th>
+            <th (click)="orderby('planos.nome')">Nome</th>
+            <th (click)="orderby('rota_acessos.parent_id')">Dias (Qtd)</th>
+            <th (click)="orderby('rota')">Destaque (Qtd)</th>
+            <th>Anúncio (Qtd)</th>
+            <th (click)="orderby('disabled')">Valor</th>
+            <th (click)="orderby('prioridade')">Tipo</th>
+            <th (click)="orderby('is_menu')">Status</th>
+            <!--<th (click)="orderby('created_at')">Criado</th>-->
+            <th (click)="orderby('updated_at')">Modificado</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+            <td>
+              <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
+            </td>
+            <td>{{item.id}}</td>
+            <td>{{item.nome}}</td>
+            <td>{{item.dias}}</td>
+            <td>{{item.qtde_destaque}}</td>
+            <td>{{item.qtde_anuncio}}</td>
+            <!--<td>
+              <ul class="list-group">
+                <li *ngFor="let role of item.roles?.data" [value]="role"> {{role.name}}</li>
+              </ul>
+            </td>-->
+            <td>{{item.valor}}</td>
+            <td>{{item.tipo_label}}</td>
+            <td>{{item.status?'Ativo':'Inativo'}}</td>
+            <!--<td>{{item.created_at.date|date:'d-MM-y'}}</td>-->
+            <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="pagination" >
+          <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="" previousLabel="" autoHide="true" id="server"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

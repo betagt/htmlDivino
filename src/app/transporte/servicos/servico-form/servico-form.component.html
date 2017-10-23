@@ -1,0 +1,52 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="(routeParams.id)?'EDITAR ':'CADASTRAR ' + 'Servico' "
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div class="row" >
+          <form #formSave [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm.value)">
+            <div class="row-large m-t-10">
+              <div class="col-xs-6" >
+                <div class="fg-line">
+                  <label>
+                    Nome
+                  </label>
+                  <input type="text"  [formControl]="saveForm.controls['nome']" class="form-control input-sm" placeholder="">
+                </div>
+                <app-error-message [erros]="saveForm.controls['nome']"></app-error-message>
+              </div>
+              <div class="col-xs-6">
+                <div class="fg-line">
+                  <label>
+                    Observação
+                  </label>
+                  <input type="text"  [formControl]="saveForm.controls['nome_similar']" class="form-control input-sm" placeholder="">
+                </div>
+                <app-error-message [erros]="saveForm.controls['nome_similar']"></app-error-message>
+              </div>
+            </div>
+            <div class="row-large m-t-10 habilidade-list">
+              <div class="col-xs-12 pmb-block">
+                <div style="padding-left: 0 !important;" class="card-header pmbb-header">
+                  <h2>Documentos Necessários</h2>
+                </div>
+                <div class="ft-left col-xs-12">
+                  <ul class="caracteristicas-list">
+                    <li class="caracteristicas-item" *ngFor="let item of tipodocumentos">
+                      <p-checkbox [value]="item.value" (onChange)="changeHabilidades()" [label]="item.label" [(ngModel)]="tipodocumentosSelected" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<!-- header -->
+<app-header></app-header>
+<section id="main">
+    <!-- sidebar left-->
+    <aside id="sidebar" class="sidebar c-overflow">
+        <div class="s-profile">
+            <a href="" data-ma-action="profile-menu-toggle">
+                <div class="sp-pic">
+                    <img src="{{usuario.imagem}}" alt="">
+                </div>
+
+                <div class="sp-info">
+                    {{usuario.name}}
+                    <i class="zmdi zmdi-caret-down"></i>
+                </div>
+            </a>
+
+            <ul class="main-menu">
+                <li>
+                    <a [routerLink]="['/usuarios/perfil']"><i class="zmdi zmdi-account"></i> Perfil</a>
+                </li>
+                <li>
+                    <a (click)="logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+        <context-menu [options]="options"></context-menu>
+    </aside>
+    <!-- sidebar right-->
+    <aside id="chat" class="sidebar">
+        <div class="chat-search">
+            <div class="fg-line">
+                <input type="text" class="form-control" placeholder=" Procurar">
+                <i class="zmdi zmdi-search"></i>
+            </div>
+        </div>
+
+        <div class="lg-body c-overflow">
+            <div class="list-group">
+            </div>
+        </div>
+    </aside>
+    <!-- router -->
+    <section id="content">
+        <div class="container">
+            <div class="card-header-breadcrumb">
+
+            </div>
+        </div>
+    </section>
+    <router-outlet></router-outlet>
+</section>
+<!-- footer -->
+<app-footer></app-footer>

@@ -1,0 +1,52 @@
+<!--<div id="context-menu" class="custom-menu">
+    <ul>
+        <li *ngFor="let option of options; let i = index"
+            [ngClass]="{'active-item': !option.disabled}" (click)="itemClicked(i)">
+            <span [class]="'glyphicon ' + option.icon"></span>
+            <a href="#" [ngClass]="{'disabled-text': option.disabled}">{{option.text}}</a>
+        </li>
+    </ul>
+</div>-->
+<ul class="main-menu">
+    <li *ngFor="let option of options; let i = index"
+        [ngClass]="{'sub-menu': option.child?.length > 0}"
+        (click)="itemClicked(i)"
+    >
+        <a [routerLink]="option.rota" *ngIf="!option.disabled && option.child?.length <= 0" data-ma-action="submenu-toggle" [ngClass]="{'disabled-text': option.disabled}"><i [ngClass]="option.icon"></i> {{option.text}}</a>
+        <a *ngIf="!option.disabled && option.child?.length > 0" data-ma-action="submenu-toggle" [ngClass]="{'disabled-text': option.disabled}"><i [ngClass]="option.icon"></i> {{option.text}}</a>
+        <ul  *ngIf="option.child?.length > 0 && !option.disabled">
+            <li *ngFor="let child of option.child; let b = index"
+                [ngClass]="{'active-item': !child.disabled}" (click)="itemClicked(b)" [value]="child">
+                <a [routerLink]="child.rota" *ngIf="!child.disabled" [ngClass]="{'disabled-text': child.disabled}"><i [ngClass]="child.icon"></i> {{child.text}}</a>
+            </li>
+        </ul>
+    </li>
+<!--
+    <li class="sub-menu">
+        <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Usuários</a>
+        <ul>
+            <li class="sub-menu">
+                <a class="active" href="" data-ma-action="submenu-toggle">Permissões de Usuários</a>
+                <ul>
+                    <li><a class="active" routerLink="/usuarios/list">Listar todas Permissões</a></li>
+                    <li><a routerLink="/usuarios/new" routerLinkActive="active">Cadastrar Permissão</a></li>
+                    <li><a routerLink="/usuarios/1" routerLinkActive="active" href="#">Detalhar Permissão</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Outros menus de Usuários</a></li>
+        </ul>
+    </li>
+
+    <li class="sub-menu">
+        <a href="#"><i class="zmdi zmdi-view-list"></i> Páginas</a>
+        <ul>
+            <li><a class="active" href="#">Listar todas Páginas</a></li>
+            <li><a href="#">Cadastrar Páginas</a></li>
+            <li><a href="#">Detalhar Páginas</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="www.google.com.br"><i class="zmdi zmdi-money"></i>Acessar o portal</a>
+    </li>-->
+</ul>

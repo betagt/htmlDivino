@@ -1,0 +1,59 @@
+<section id="content">
+  <app-buttons
+          [title]="'Detalhes Rota de Acesso'"
+          [hidebuttons]="buttons"
+          [itemSelected]="routeParams.id"
+          [countSelect]="1"
+          [icon]="'zmdi zmdi-lock'">
+  </app-buttons>
+  <div class="card" id="profile-main">
+      <!--<ul class="tab-nav tn-justified">
+          <li class="active"><a >Detalhes</a></li>
+      </ul>-->
+      <div class="pmb-block col-xs-6">
+        <div class="pmbb-header">
+          <h2><i class="zmdi zmdi-http m-r-10"></i> Informações Do Acesso</h2>
+        </div>
+        <div class="pmbb-body p-l-30">
+          <div class="pmbb-view">
+            <dl class="dl-horizontal">
+              <dt>Texto:</dt>
+              <dd>{{item?.text}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Url de Acesso:</dt>
+              <dd>{{item?.rota}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Desabilitado?</dt>
+              <dd>{{item?.disabled?'sim':'não'}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Menu:</dt>
+              <dd>{{item?.is_menu?'sim':'não'}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Prioridade:</dt>
+              <dd>{{item?.prioridade}}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="pmb-block col-xs-6">
+        <div class="pmbb-header">
+          <h2><i class="zmdi zmdi-accounts-alt m-r-10"></i> Regras Permitidas</h2>
+        </div>
+        <div class="pmbb-body p-l-30">
+          <div class="pmbb-view">
+            <dl *ngIf="item?.roles.data.length > 0" class="dl-horizontal">
+              <dt>Perfis de acesso:</dt>
+              <dd *ngFor="let role of item?.roles.data">
+                {{role.name}}
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>

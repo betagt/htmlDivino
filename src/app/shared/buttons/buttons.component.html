@@ -1,0 +1,55 @@
+<div class="block-header">
+  <div class="header-pages-title">
+    <div class="card-header-icon">
+      <i class="{{icon}}"></i>
+    </div>
+    <div class="card-header-titles">
+      <h2>{{title}}</h2>
+      <h3>{{subtitle}}</h3>
+      <h3>{{smalltext}}</h3>
+    </div>
+  </div>
+  <div class="header-pages-buttons">
+    <ul class="fixed-buttons">
+      <li [hidden]="hidebuttons?.new">
+        <button [routerLink]="['new']" class="btn btn-success waves-effect">
+          <i class="zmdi zmdi-plus"></i> Novo</button>
+      </li>
+      <li [hidden]="hidebuttons?.view">
+        <button [routerLink]="[itemSelected]" [disabled]="countSelect != 1" class="btn bgm-gray waves-effect">
+          <i class="zmdi zmdi-eye"></i> Visualizar</button>
+      </li>
+      <li [hidden]="hidebuttons?.edit">
+        <button [routerLink]="checkUrlEdit()" [disabled]="countSelect != 1" class="btn bgm-orange waves-effect">
+          <i class="zmdi zmdi-edit"></i> Editar</button>
+      </li>
+      <li [hidden]="hidebuttons?.restaurar">
+        <button (click)="restore()" [disabled]="countSelect == 0" class="btn bgm-blue waves-effect">
+          <i class="zmdi zmdi-refresh-sync"></i> Restaurar</button>
+      </li>
+      <li [hidden]="hidebuttons?.remove">
+        <button (click)="excluir()" [disabled]="countSelect == 0" class="btn bgm-red waves-effect">
+          <i class="zmdi zmdi-delete"></i> Excluir</button>
+      </li>
+      <li [hidden]="hidebuttons?.save" >
+        <button type="submit" (click)="save()" class="btn bgm-green waves-effect">
+          <i class="zmdi zmdi-save"></i> Salvar
+        </button>
+      </li>
+      <li [hidden]="hidebuttons?.back">
+        <button (click)="voltar()" class="btn bgm-gray waves-effect"><i class="zmdi zmdi-arrow-back"></i> Voltar</button>
+      </li>
+      <!--<li>
+          <div class="btn-group">
+              <button type="button" class="dropdown-menu-right btn bgm-gray waves-effect" data-toggle="dropdown" aria-expanded="true">
+                  <i class="zmdi zmdi-menu"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                  <li><a href="#">Dropdown link</a></li>
+                  <li><a href="#">Dropdown link</a></li>
+              </ul>
+          </div>
+      </li>-->
+    </ul>
+  </div>
+</div>

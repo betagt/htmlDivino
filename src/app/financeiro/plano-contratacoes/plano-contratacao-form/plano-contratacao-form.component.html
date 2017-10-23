@@ -1,0 +1,459 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="(routeParams.id)?'Editar Contratação: ':'Contratar: '+'Anuncio Código #'+anuncio?.id"
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div class="row" >
+          <p-steps  [model]="steps" styleClass="steps-custom" [(activeIndex)]="activeIndex"></p-steps>
+          <div class="row p-t-25" *ngIf="checkStep(0)">
+            <div class="col-sm-2"  *ngFor="let plano of planos?.data" (click)="animate(plano);selectPlano=plano;">
+              <div class="card pt-inner sombra-dos-cards" [ngClass]="{'pulse animated': plano.state}">
+                <div class="pti-header " [ngClass]="{'bgm-red': plano.state, 'bgm-amber': !plano.state}">
+                  <h2>{{plano.valor|currency:'BRL':true}}
+                    <!--<small>| mês</small>-->
+                  </h2>
+                  <div class="ptih-title">{{plano.nome}}</div>
+                </div>
+                <div class="pti-body">
+                  <div class="ptib-item">
+                    <b>Qtd. Dias:</b> {{plano.dias}}
+                  </div>
+                  <div class="ptib-item">
+                    <b>Anuncios:</b>  {{plano.qtde_anuncio}}
+                  </div>
+                  <div class="ptib-item">
+                    <b>Destaques:</b> {{plano.qtde_destaque}}
+                  </div>
+                </div>
+                <div class="pti-footer">
+                  <a [ngClass]="{'bgm-red': plano.state, 'bgm-amber': !plano.state}"><i class="zmdi " [ngClass]="{'zmdi-check-all': plano.state, 'zmdi-check': !plano.state}"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row-large m-t-10">
+              <div class="col-xs-12" style="text-align: right">
+                <button class="btn btn-primary btn-sm" (click)="stepDadosDaFatura()">Próximo</button>
+              </div>
+            </div>
+          </div>
+
+          <form *ngIf="checkStep(1)" [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm)">
+            <div class="col-xs-3">
+              <div class="row-large">
+                <div style="width: 100%;" class="card pt-inner sombra-dos-cards" [ngClass]="{'pulse animated': selectPlano.state}">
+                  <div class="pti-header " [ngClass]="{'bgm-red': selectPlano.state, 'bgm-amber': !selectPlano.state}">
+                    <h2>{{selectPlano.valor|currency:'BRL':true}}
+                      <!--<small>| mês</small>-->
+                    </h2>
+                    <div class="ptih-title">{{selectPlano.nome}}</div>
+                  </div>
+                  <div class="pti-body">
+                    <div class="ptib-item">
+                      <b>Qtd. Dias:</b> {{selectPlano.dias}}
+                    </div>
+                    <div class="ptib-item">
+                      <b>Anuncios:</b>  {{selectPlano.qtde_anuncio}}
+                    </div>
+                    <div class="ptib-item">
+                      <b>Destaques:</b> {{selectPlano.qtde_destaque}}
+                    </div>
+                  </div>
+                  <div class="pti-footer">
+                    <a [ngClass]="{'bgm-red': selectPlano.state, 'bgm-amber': !selectPlano.state}"><i class="zmdi " [ngClass]="{'zmdi-check-all': selectPlano.state, 'zmdi-check': !selectPlano.state}"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-9">
+              <div class="col-xs-12  m-b-15" >
+                <h2 class="custom-title"><i class="zmdi zmdi-account m-r-10"></i> Dados do Anunciante</h2>
+              </div>
+                <div class="row-large m-t-20">
+                <div class="col-xs-6">
+                    <b>Nome:</b> {{anuncio?.anunciante_nome}}
+                </div>
+                <div class="col-xs-6">
+                    <b>CPF/CNPJ:</b> {{anunciante?.cpf_cnpj}}
+                </div>
+                </div>
+                <div class="col-xs-12  m-b-15" >
+                    <h2 class="custom-title"><i class="zmdi zmdi-pin m-r-10"></i> Endereço</h2>
+                </div>
+                <div class="row-large m-t-20">
+                    <div class="col-xs-6">
+                        <b>Endereço:</b> {{anuncio?.endereco.data.endereco}}, {{anuncio?.endereco.data.numero}}
+                    </div>
+                    <div class="col-xs-6">
+                        <b>Localidade:</b> {{anunciante?.endereco.data.cidade}} - {{anunciante?.endereco.data.estado}}, {{anunciante?.endereco.data.cep}}
+                    </div>
+                </div>
+              <div class="col-xs-12  m-b-15" >
+                <h2 class="custom-title"><i class="zmdi zmdi-account m-r-10"></i> Informações da fatura</h2>
+              </div>
+              <div class="row-large m-t-20">
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label>Tipo da fatura</label>
+                    <p-dropdown [options]="tiposFatura" placeholder="Selecione" (onChange)="tipoPessoaAlterada($event)"  [formControl]="faturaForm.controls['tipo_fatura']"></p-dropdown>
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['tipo_fatura']"></app-error-message>
+                </div>
+                <!--<div class="col-xs-4" >
+                  <div class="fg-line">
+                    <input type="number" pTooltip="Gerado automáticamente! Double click para inserir manualmente!" (dblclick)="faturaRead=!faturaRead" tooltipPosition="top" [readonly]="faturaRead" [formControl]="saveForm.controls['numero_fatura']" class="form-control input-sm" placeholder="Nº Fatura">
+                  </div>
+                </div>-->
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label>Tipo do cliente</label>
+                    <p-dropdown [options]="emitentes" placeholder="Selecione" [formControl]="faturaForm.controls['tipo_emitente']"></p-dropdown>
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['tipo_emitente']"></app-error-message>
+                </div>
+              </div>
+              <div class="row-large m-t-10">
+                <div class="col-xs-6" *ngIf="!isPessoaJuridica()">
+                  <div class="fg-line">
+                    <label>Nome</label>
+                    <input type="text" placeholder="Informe o Nome" [formControl]="faturaForm.controls['razaosocial']" class="form-control input-sm">
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['razaosocial']"></app-error-message>
+                </div>
+                <div class="col-xs-6" *ngIf="isPessoaJuridica()">
+                  <div class="fg-line">
+                    <label>Razão Social</label>
+                    <input type="text" placeholder="Informe a Razão social" [formControl]="faturaForm.controls['razaosocial']" class="form-control input-sm">
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['razaosocial']"></app-error-message>
+                </div>
+                <div class="col-xs-6" *ngIf="!isPessoaJuridica()">
+                  <div class="fg-line">
+                    <label>CPF</label>
+                    <input type="text"  pTooltip="CPF" diMask="999.999.999-99" placeholder="Ex: 999.999.999-99" [value]="anunciante.cpf_cnpj"  [formControl]="faturaForm.controls['cpf_cnpj']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['cpf_cnpj']"></app-error-message>
+                </div>
+                <div class="col-xs-6" *ngIf="isPessoaJuridica()">
+                  <div class="fg-line">
+                    <label>CNPJ</label>
+                    <input type="text"  pTooltip="CNPJ" diMask="99.999.999/9999-99" [value]="anunciante.cpf_cnpj" placeholder="Ex: 99.999.999/9999-99"  [formControl]="faturaForm.controls['cpf_cnpj']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['cpf_cnpj']"></app-error-message>
+                </div>
+              </div>
+              <div class="row-large m-t-10">
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label>Nome Fantasia</label>
+                    <input type="text"  placeholder="Informe o Nome Fantasia" (blur)="urlReplace($event.target.value)" [formControl]="faturaForm.controls['nomefantazia']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['nomefantazia']"></app-error-message>
+                </div>
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label>Pagina do Anunciante</label>
+                    <input type="text" [readonly]="true"  placeholder="Pagina da Anunciante/Imobiliaria/corretor"  [formControl]="saveForm.controls['pagina_user']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="saveForm.controls['pagina_user']"></app-error-message>
+                </div>
+              </div>
+              <div class="row-large m-t-10">
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label>Inscrição Estadual</label>
+                    <input type="text"  placeholder="Ex: 1523654-23"  [formControl]="faturaForm.controls['inscricao_estadual']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['inscricao_estadual']"></app-error-message>
+                </div>
+                <div class="col-xs-6" >
+                  <div class="fg-line">
+                    <label>CRECI</label>
+                    <input type="text"  placeholder="Ex: abc..."  [formControl]="faturaForm.controls['creci']" class="form-control input-sm" >
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['creci']"></app-error-message>
+                </div>
+              </div>
+              <div class="row-large m-t-10">
+                <div class="col-xs-6">
+                  <div class="fg-line">
+                    <label style="width: 100%">Endereço Diferente</label>
+                    <p-checkbox binary="true" [formControl]="faturaForm.controls['endereco_diferente']"></p-checkbox>
+                  </div>
+                  <app-error-message [erros]="faturaForm.controls['endereco_diferente']"></app-error-message>
+                </div>
+              </div>
+              <div style="width: 100%;" *ngIf="faturaForm.controls['endereco_diferente'].value">
+                <div class="col-xs-12  m-b-15" >
+                  <h2 class="custom-title"><i class="zmdi zmdi-pin-drop m-r-10"></i> Endereço</h2>
+                </div>
+                <div class="row-large m-t-10">
+                  <div class="col-xs-4">
+                    <div class="fg-line">
+                      <label>Estado</label>
+                      <p-dropdown [options]="estados" placeholder="Selecione" [formControl]="enderecoForm.controls['estado_id']" (onChange)="chageEstado($event.value)"></p-dropdown>
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['estado_id']"></app-error-message>
+                  </div>
+                  <div class="col-xs-4" *ngIf="cidades?.length > 0">
+                    <div class="fg-line">
+                      <label>Cidade</label>
+                      <p-dropdown [options]="cidades" placeholder="Selecione" [formControl]="enderecoForm.controls['cidade_id']" (onChange)="chageCidade($event.value)" [filter]="true"></p-dropdown>
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['cidade_id']"></app-error-message>
+                  </div>
+                  <div class="col-xs-4" *ngIf="bairros?.length > 0">
+                    <div class="fg-line">
+                      <label>Bairros</label>
+                      <p-dropdown [options]="bairros" placeholder="Selecione" [formControl]="enderecoForm.controls['bairro_id']" [filter]="true"></p-dropdown>
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['bairro_id']"></app-error-message>
+                  </div>
+                </div>
+                <div class="row-large m-t-10">
+                  <div class="col-xs-6" >
+                    <div class="fg-line">
+                      <label>Endereço</label>
+                      <input type="text"  placeholder="Ex: Rua 00"  [formControl]="enderecoForm.controls['endereco']" class="form-control input-sm" >
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['endereco']"></app-error-message>
+                  </div>
+                  <div class="col-xs-6" >
+                    <div class="fg-line">
+                      <label>CEP</label>
+                      <input type="text" placeholder="Ex: 00000-000"  [formControl]="enderecoForm.controls['cep']" class="form-control input-sm" >
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['cep']"></app-error-message>
+                  </div>
+                </div>
+                <div class="row-large m-t-10">
+                  <div class="col-xs-6" >
+                    <div class="fg-line">
+                      <label>Numero</label>
+                      <input type="text" placeholder="Nº"  [formControl]="enderecoForm.controls['numero']" class="form-control input-sm" >
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['numero']"></app-error-message>
+                  </div>
+                  <div class="col-xs-6" >
+                    <div class="fg-line">
+                      <label>Complemento</label>
+                      <input type="text" placeholder="Ex: Casa, Apartamento..."  [formControl]="enderecoForm.controls['complemento']" class="form-control input-sm" >
+                    </div>
+                    <app-error-message [erros]="enderecoForm.controls['complemento']"></app-error-message>
+                  </div>
+                </div>
+              </div>
+              <div class="row-large m-t-10">
+                <div class="col-xs-4 col-xs-offset-8" style="text-align: right;">
+                  <button class="btn btn-primary btn-sm" (click)="activeIndex=0">Voltar</button>
+                  <button class="btn btn-primary btn-sm" *ngIf="!this.routeParams.id" [disabled]="validateForm()" >Contratar</button>
+                  <button class="btn btn-primary btn-sm" *ngIf="this.routeParams.id" [disabled]="validateForm()" >Atualizar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+            <div class="row " *ngIf="checkStep(2)">
+                <p-dialog modal="true" [resizable]="false" [draggable]="false" header="Insira o Cartão" [(visible)]="displayCard">
+                    <form class="p-b-25" [formGroup]="cardForm" (ngSubmit)="paymentCreditCard(cardForm.value)">
+                        <input type="hidden" [formControl]="cardForm.controls['code_contratacao']">
+                        <input type="hidden" [formControl]="cardForm.controls['forma_pagamento']">
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6" >
+                                <div class="fg-line">
+                                    <label>Numero</label>
+                                    <input type="text" diMask="9999999999999999" [formControl]="cardForm.controls['num']" class="form-control input-sm" placeholder="000000000000000">
+                                </div>
+                                <app-error-message [erros]="cardForm.controls['num']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6" >
+                                <div class="fg-line">
+                                    <label>CVV</label>
+                                    <input type="text" diMask="999" [formControl]="cardForm.controls['cvv']" class="form-control input-sm" placeholder="000">
+                                </div>
+                                <app-error-message [erros]="cardForm.controls['cvv']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Mês de expiração</label>
+                                    <input type="text" diMask="99" [formControl]="cardForm.controls['monthExp']" class="form-control input-sm" placeholder="00">
+                                </div>
+                                <app-error-message [erros]="cardForm.controls['monthExp']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Ano de expiração</label>
+                                    <input type="text" diMask="9999" [formControl]="cardForm.controls['yearExp']" class="form-control input-sm" placeholder="00">
+                                </div>
+                                <app-error-message [erros]="cardForm.controls['yearExp']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-12">
+                                <button type="submit" [disabled]="cardForm.invalid" class="btn bgm-green waves-effect" >Pagar</button>
+                            </div>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog modal="true" [resizable]="false" [draggable]="false" header="Boleto" [(visible)]="displayBoleto">
+                    <p>
+                        Imprima ou envie o boleto por email.
+                    </p>
+                    <form class="p-b-25" [formGroup]="sendBoletoEmailForm" (ngSubmit)="sendBoletoEmail(sendBoletoEmailForm.value)">
+                        <input type="hidden" [formControl]="sendBoletoEmailForm.controls['link']" [value]="boletoLink">
+                        <input type="hidden" [formControl]="sendBoletoEmailForm.controls['code_contratacao']">
+                        <input type="hidden" [formControl]="sendBoletoEmailForm.controls['forma_pagamento']">
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-8" >
+                                <div class="fg-line">
+                                    <label>Email</label>
+                                    <input type="text" [formControl]="sendBoletoEmailForm.controls['email']" [value]="anunciante.email" class="form-control input-sm" placeholder="Ex: anunciante@teste.com">
+                                </div>
+                                <app-error-message [erros]="sendBoletoEmailForm.controls['email']"></app-error-message>
+                            </div>
+                            <div class="col-xs-4" style="text-align: right;">
+                                <button class="btn btn-primary btn-sm m-t-25 padd" target="_blank" >Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row-large m-t-10 m-b-10">
+                        <div class="col-xs-12">
+                            <div class="col-xs-6" style="text-align: right;">
+                                <a class="btn btn-success btn-sm" target="_blank" href="{{boletoLink}}">Imprimir Boleto</a>
+                            </div>
+                            <div class="col-xs-6" style="text-align: left;">
+                                <a class="btn btn-success btn-sm" target="_blank" routerLink="['/plano-contratacoes']">Voltar a contratacoes</a>
+                            </div>
+                        </div>
+                    </div>
+                </p-dialog>
+            </div>
+            <div *ngIf="checkStep(2)"  class="row m-b-25">
+                <div class="col-xs-12">
+                    <h2 style="text-align: center;">Revisão da Fatura</h2>
+                </div>
+                <div class="col-xs-6">
+                    <div class="text-right">
+                        <p class="c-gray">Faturado por</p>
+
+                        <h4>Portal Qimob</h4>
+
+                        <span class="text-muted">
+                        <address>
+                            44, Qube Towers
+                            Dubai Media City, Dubai<br>
+                            United Arab Emirates
+                        </address>
+
+                        33.028.136/0001-69<br/>
+                        portalqimob@portalquimob.com.br
+                    </span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="i-to">
+                        <p class="c-gray">Faturado Para</p>
+                        <h4>{{anunciante?.name}}</h4>
+                        <span class="text-muted">
+                        <address>
+                            {{anunciante?.endereco?.data.endereco}}<br>
+                            {{anunciante?.endereco?.data.cidade}} - {{anunciante?.endereco?.data.estado}}.
+                        </address>
+
+                        {{faturaForm.controls['cpf_cnpj'].value}}<br/>
+                        {{anunciante?.email}}
+                    </span>
+                    </div>
+                </div>
+          </div>
+
+            <div class="row m-t-25 p-0 m-b-25"  *ngIf="checkStep(2)">
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div class="col-xs-3">
+                        <div class="bgm-gray brd-2 p-15">
+                            <div class="c-white m-b-5">Código#</div>
+                            <h2 class="m-0 c-white f-300">{{contratacao.id}}</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <div class="bgm-gray brd-2 p-15">
+                            <div class="c-white m-b-5">Data início</div>
+                            <h2 class="m-0 c-white f-300">{{contratacao.data_inicio.date|date:'d-MM-y'}}</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <div class="bgm-gray brd-2 p-15">
+                            <div class="c-white m-b-5">Data Final</div>
+                            <h2 class="m-0 c-white f-300">{{contratacao.data_inicio.date|date:'d-MM-y'}}</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <div class="bgm-green brd-2 p-15">
+                            <div class="c-white m-b-5">Total da Fatura</div>
+                            <h2 class="m-0 c-white f-300">{{selectPlano.valor|currency:"BRL":true}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div class="col-xs-12">
+                        <table class="table i-table m-t-25 m-b-25">
+                            <thead class="text-uppercase">
+                                <tr>
+                                    <th class="c-gray">ITEM CONTRATADO</th>
+                                    <th class="c-gray">PREÇO UNIT.</th>
+                                    <th class="c-gray">QTD.</th>
+                                    <th class="highlight">TOTAL</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td width="50%">
+                                        <h5 class="text-uppercase f-400">{{selectPlano.nome}}</h5>
+                                        <p class="text-muted">
+                                            <b>Qtd. Dias:</b> {{selectPlano.dias}}<br>
+                                            <b>Anuncios:</b>  {{selectPlano.qtde_anuncio}}<br>
+                                            <b>Destaques:</b> {{selectPlano.qtde_destaque}}
+                                        </p>
+                                    </td>
+                                    <td>{{selectPlano.valor|currency:"BRL":true}}</td>
+                                    <td>01</td>
+                                    <td class="highlight">{{selectPlano.valor|currency:"BRL":true}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="bgm-green c-white highlight">{{selectPlano.valor|currency:"BRL":true}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-12" style="text-align: center;">
+                    <h4 style="text-align: center;">Portal Qimob</h4>
+                    <button class="btn btn-primary btn-sm m-t-20 m-b-20" (click)="toggleCardModal()" style="padding: 12px 20px;">
+                        <i class="fa fa-credit-card c-white m-r-5"></i>Cartão de Crédito
+                    </button>
+                    <button class="btn btn-primary btn-sm m-r-10" (click)="toggleBoletoModal()" style="padding: 12px 20px;">
+                        <i class="fa fa-barcode c-white m-r-5"></i>Boleto
+                    </button>
+                </div>
+                <div class="col-xs-4 col-xs-offset-8" style="text-align: right;">
+                    <button class="btn btn-primary btn-sm" routerLink="'/plano-contratacoes'">Voltar Para Contrações</button>
+                    <!--<button class="btn btn-primary btn-sm" [disabled]="validateForm()" (click)="activeIndex=3">Próximo</button>-->
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

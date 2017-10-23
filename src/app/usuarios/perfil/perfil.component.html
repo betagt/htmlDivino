@@ -1,0 +1,36 @@
+<div id="content">
+    <div class="container">
+        <app-buttons
+                [title]="'Minhas Configurações'"
+                [hidebuttons]="buttons"
+                [icon]="'zmdi zmdi-edit'">
+        </app-buttons>
+        <div class="">
+            <div class="">
+                <div class="row">
+                    <!--<div class="col-md-3">
+                        <ul class="main-menu">
+                            <li>
+                                <a [routerLink]="['meus-dados']" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Meus Dados</a>
+                                <ul>
+                                    <li class="sub-menu">
+                                        <a class="active" href="" data-ma-action="submenu-toggle">Permissões de Usuários</a>
+                                        <ul>
+                                            <li><a class="active" routerLink="/usuarios/list">Listar todas Permissões</a></li>
+                                            <li><a routerLink="/usuarios/new" routerLinkActive="active">Cadastrar Permissão</a></li>
+                                            <li><a routerLink="/usuarios/1" routerLinkActive="active" href="#">Detalhar Permissão</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Outros menus de Usuários</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>-->
+                    <div class="col-md-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

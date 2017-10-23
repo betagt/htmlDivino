@@ -1,0 +1,188 @@
+<div id="content">
+    <div class="container">
+        <app-buttons
+                [title]="'Configurações'"
+                [hidebuttons]="buttons"
+                [icon]="'zmdi zmdi-settings'"
+                (eventsave)="update(saveForm.value)">
+        </app-buttons>
+        <div class="card">
+            <div class="card-body card-padding">
+                <div class="row">
+                    <form role="form" [formGroup]="saveForm" (ngSubmit)="update(saveForm.value)">
+                        <div class="col-xs-12">
+                            <h3> Dados do Site</h3>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['titulo']"
+                                           class="form-control input-sm" placeholder="Titulo">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['titulo']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['email']"
+                                           class="form-control input-sm" placeholder="E-mail">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['email']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['url_site']"
+                                           class="form-control input-sm" placeholder="Url Site">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['url_site']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['horario_atendimento']"
+                                           class="form-control input-sm" placeholder="Horário de Atendimento">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['horario_atendimento']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['rodape']"
+                                           class="form-control input-sm" placeholder="Rodapé">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['rodape']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <h3> Redes Sociais</h3>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['facebook']"
+                                           class="form-control input-sm" placeholder="Facebook">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['facebook']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['twitter']"
+                                           class="form-control input-sm" placeholder="Twitter">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['twitter']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['google_plus']"
+                                           class="form-control input-sm" placeholder="Google">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['google_plus']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['youtube']"
+                                           class="form-control input-sm" placeholder="YouTube">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['youtube']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['instagram']"
+                                           class="form-control input-sm" placeholder="Instagram">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['instagram']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <h3> SEO</h3>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['palavra_chave']"
+                                           class="form-control input-sm" placeholder="Palavras Chave">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['palavra_chave']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['descricao_site']"
+                                           class="form-control input-sm" placeholder="Descrição Site">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['descricao_site']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['analytcs_code']"
+                                           class="form-control input-sm" placeholder="Analytcs ID">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['analytcs_code']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <h3> OG: Config</h3>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['og_tipo_app']"
+                                           class="form-control input-sm" placeholder="OG: Type">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['og_tipo_app']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['og_titulo_site']"
+                                           class="form-control input-sm" placeholder="OG: Title">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['og_titulo_site']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['od_url_site']"
+                                           class="form-control input-sm" placeholder="OG: Url Site">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['od_url_site']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['od_autor_site']"
+                                           class="form-control input-sm" placeholder="OG: Author">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['od_autor_site']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <h3> Integrações</h3>
+                        </div>
+                        <div class="row-large">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['facebook_id']"
+                                           class="form-control input-sm" placeholder="Facebook ID">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['facebook_id']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <input type="text" [formControl]="saveForm.controls['token']"
+                                           class="form-control input-sm" placeholder="Token">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['token']"></app-error-message>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

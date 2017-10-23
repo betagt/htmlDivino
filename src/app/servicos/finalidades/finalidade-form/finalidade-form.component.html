@@ -1,0 +1,40 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="(routeParams.id)?'Editar':'Cadastrar'"
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div class="row" >
+          <form #formSave [formGroup]="saveForm" (ngSubmit)="post(saveForm.value)">
+            <div class="row-large m-t-10">
+              <div class="col-xs-6" style="height: 56px;">
+                <div class="fg-line">
+                  <p-dropdown [options]="finalidades" formControlName="parent_id" placeholder="Selecione"></p-dropdown>
+                </div>
+                <app-error-message [erros]="saveForm.controls['parent_id']"></app-error-message>
+              </div>
+              <div class="col-xs-6" style="height: 56px;">
+                <div class="fg-line">
+                  <input type="text" [formControl]="saveForm.controls['titulo']" class="form-control input-sm" placeholder="Titulo">
+                </div>
+                <app-error-message [erros]="saveForm.controls['titulo']"></app-error-message>
+              </div>
+            </div>
+            <div class="row-large m-t-10">
+              <div class="col-xs-6" style="height: 56px;">
+                <div class="fg-line">
+                  <p-multiSelect [options]="caracteristicas" filter="filter" formControlName="caracteristicas" placeholder="Selecione"></p-multiSelect>
+                </div>
+                <app-error-message [erros]="saveForm.controls['caracteristicas']"></app-error-message>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

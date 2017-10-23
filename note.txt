@@ -1,0 +1,30 @@
+###### Aplicações ######
+https://github.com/scotch-io/angular2-http-course
+
+https://github.com/michaeloryl/angular2-bootstrap4-oauth2-webpack
+
+# Angular Modules (Final)
+https://embed.plnkr.co/?show=preview
+
+###### Plugins ###### 
+
+# Ng2 Breadcrumb
+https://github.com/gmostert/ng2-breadcrumb
+
+# oAuth2
+https://www.npmjs.com/package/angular2-oauth2
+http://whitepaper-achref.rhcloud.com/angular2-rest-api-oauth/
+
+# JSON server 
+https://github.com/typicode/json-server
+json-server -w db.json -p 4201
+
+#ng2 paginação
+http://michaelbromley.github.io/ng2-pagination/#/
+npm install ng2-pagination --save
+
+#loader
+https://github.com/akserg/ng2-slim-loading-bar
+
+#angular2-locker
+https://www.npmjs.com/package/angular2-locker
