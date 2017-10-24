@@ -1,0 +1,66 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="(routeParams.id)?'EDITAR ':'CADASTRAR ' + 'TIPO DE DOCUMENTO' "
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div id="documentos" class="pmb-block">
+          <div class="card-header pmbb-header" style="margin: 0;">
+            <h2><i class="zmdi zmdi-car m-r-10"></i> Veículo</h2>
+          </div>
+          <div class="card-body">
+            <div class="row-large m-t-10">
+              <form [formGroup]="_fbVeiculo"  (ngSubmit)="updateVeiculo(_fbVeiculo.value)">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Marca</label>
+                    <!--<input type="text" [formControl]="_fbVeiculo.controls['marca']" class="form-control" placeholder="Ex: Fiat">-->
+                    <p-dropdown [formControl]="_fbVeiculo.controls['transporte_marca_carro_id']" filter="filter" [options]="marcasCarro" (onChange)="loadModelos($event)" placeholder="Selecione a marca"></p-dropdown>
+                  </div>
+                  <app-error-message [erros]="_fbVeiculo.controls['transporte_marca_carro_id']"></app-error-message>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Modelo</label>
+                    <!--<input type="text" class="form-control" [formControl]="_fbVeiculo.controls['modelo']" placeholder="Ex: Uno">-->
+                    <p-dropdown [formControl]="_fbVeiculo.controls['transporte_modelo_carro_id']" filter="filter" [options]="modelosCarro" placeholder="Selecione o modelo"></p-dropdown>
+                  </div>
+                  <app-error-message [erros]="_fbVeiculo.controls['transporte_modelo_carro_id']"></app-error-message>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Ano</label>
+                    <input type="text" class="form-control" [formControl]="_fbVeiculo.controls['ano']" placeholder="Ex: 2010">
+                  </div>
+                  <app-error-message [erros]="_fbVeiculo.controls['ano']"></app-error-message>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Placa do veículo</label>
+                    <input type="text" [formControl]="_fbVeiculo.controls['placa']" class="form-control" placeholder="Ex: mmm000">
+                  </div>
+                  <app-error-message [erros]="_fbVeiculo.controls['placa']"></app-error-message>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Cor do veículo</label>
+                    <!--<input type="text" class="form-control" [formControl]="_fbVeiculo.controls['cor']" placeholder="Ex: preto">-->
+                    <p-dropdown [formControl]="_fbVeiculo.controls['cor']" [options]="cores" placeholder="Selecione a cor"></p-dropdown>
+                  </div>
+                  <app-error-message [erros]="_fbVeiculo.controls['cor']"></app-error-message>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-header pmbb-header" style="margin: 0;">
+            <h2><i class="zmdi zmdi-assignment m-r-10"></i> Documentos</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

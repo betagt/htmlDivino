@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClientService} from "../../core/http-client.service";
+import {HttpClientService} from "../../../../core/http-client.service";
 import {Observable} from "rxjs";
-import {BaseServiceService} from "../../core/base-service.service";
+import {BaseServiceService} from "../../../../core/base-service.service";
 
 @Injectable()
 export class VeiculoService extends BaseServiceService {
