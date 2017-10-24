@@ -23,5 +23,10 @@ const TRANSPORTE_ROUTES: Routes = [
         canActivate: [CanActivateViaOAuthGuard],
         canActivateChild: [ChecarRotaGuard],
     },
+    {
+        path: 'veiculos', loadChildren: 'app/transporte/veiculos/veiculos.module#VeiculosModule',
+        canActivate: [CanActivateViaOAuthGuard],
+        canActivateChild: [ChecarRotaGuard],
+    },
 ];
 export const TransporteRouting = RouterModule.forChild(TRANSPORTE_ROUTES);

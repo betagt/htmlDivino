@@ -8,7 +8,7 @@ import {DocumentoService} from "../../../transporte/documentos/service/documento
 import {TipoDocumentoService} from "../../../transporte/tipo-documento/service/tipo-documento.service";
 import {ServicoService} from "../../../transporte/servicos/service/servico.service";
 import {UtilService} from "../../../../core/services/util.service";
-import {VeiculoService} from "../../veiculo.service";
+import {VeiculoService} from "../../../transporte/veiculos/service/veiculo.service";
 import {MarcaCarroService} from "../../services/marca-carro.service";
 import {ModeloCarroService} from "../../services/modelo-carro.service";
 
