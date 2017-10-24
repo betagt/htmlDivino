@@ -1,4 +1,7 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {
+    ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild,
+    ViewContainerRef
+} from '@angular/core';
 import {CreateUpdateAbstract} from "../../../../core/abstract/create-update.abstract";
 import {DocumentoService} from "../service/documento.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -33,9 +36,16 @@ export class DocumentoFormComponent extends CreateUpdateAbstract implements OnIn
 
     @ViewChild('arquivo') inputValue: ElementRef;
 
+    // What to clone
+    @ViewChild('clone') template;
+
+    // Where to insert the cloned content
+    @ViewChild('container', {read: ViewContainerRef}) container;
+
     constructor(private documentoService: DocumentoService,
                 private tipoDocumento: TipoDocumentoService,
                 private usuarioService: UsuariosService,
+                private resolver: ComponentFactoryResolver,
                 formBuilder: FormBuilder,
                 ref: ChangeDetectorRef,
                 location: Location,
@@ -105,6 +115,11 @@ export class DocumentoFormComponent extends CreateUpdateAbstract implements OnIn
             return;
         }
     }
+
+    cloneTemplate() {
+        this.container.createEmbeddedView(this.template);
+    }
+
     search(event) {
         this.usuarioService
             .selectList(event.query).subscribe(usuarios => {
