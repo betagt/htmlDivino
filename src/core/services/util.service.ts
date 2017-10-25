@@ -34,6 +34,17 @@ export class UtilService {
         return myReader;
     }
 
+    readThisMultiple(inputValue: any) {
+        let myReader: FileReader = new FileReader();
+        const resultFile = [];
+        for (let i = 0; i < inputValue.files.length; i++) {
+            myReader = new FileReader();
+            myReader.readAsDataURL(inputValue.files[i]);
+            resultFile.push(myReader);
+        }
+        return resultFile;
+    }
+
     static numberMasc(cifrao = 'R$ ') {
         return createNumberMask({
             prefix: cifrao,

@@ -13978,3 +13978,17 @@ html:not(.ie9) .select.fg-line:before {
 .ui-dialog .ui-dialog-content {
     overflow: visible !important;
 }
+
+/* circle buttons*/
+.center-itens{
+    display: flex;
+    align-items: center;
+}
+
+h2.btn-clicle-middle, h2.btn-clicle-middle button{
+    display: flex;
+    align-items: center;
+}
+h2.btn-clicle-middle button{
+    margin-right: 10px;
+}

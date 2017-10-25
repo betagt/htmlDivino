@@ -13,4 +13,14 @@ export class TipoDocumentoService extends BaseServiceService {
             return res.json().data;
         }).catch(this.handleError);
     }
+    todosPessoa() {
+        return this.httpClienteSevice.get(this.url + '/todos-pessoa').map(res => {
+            return res.json().data;
+        }).catch(this.handleError);
+    }
+    todosVeiculo() {
+        return this.httpClienteSevice.get(this.url + '/todos-veiculo').map(res => {
+            return res.json().data;
+        }).catch(this.handleError);
+    }
 }

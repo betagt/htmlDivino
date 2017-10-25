@@ -4,7 +4,7 @@ import {VeiculosListComponent} from './veiculos-list/veiculos-list.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
-import {DropdownModule, TooltipModule} from "primeng/primeng";
+import {AutoCompleteModule, DropdownModule, TooltipModule} from "primeng/primeng";
 import {VeiculoService} from "./service/veiculo.service";
 import {VeiculosRouting} from "./veiculos.routing";
 import {VeiculosFormComponent} from './veiculos-form/veiculos-form.component';
@@ -12,6 +12,7 @@ import {TipoDocumentoService} from "../tipo-documento/service/tipo-documento.ser
 import {MarcaCarroService} from "../../usuarios/services/marca-carro.service";
 import {UtilService} from "../../../core/services/util.service";
 import {ModeloCarroService} from "../../usuarios/services/modelo-carro.service";
+import {UsuariosService} from "../../usuarios/usuarios.service";
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import {ModeloCarroService} from "../../usuarios/services/modelo-carro.service";
         Ng2PaginationModule,
         TooltipModule,
         DropdownModule,
+        AutoCompleteModule,
         VeiculosRouting
     ],
     declarations: [VeiculosListComponent, VeiculosFormComponent],
@@ -30,7 +32,8 @@ import {ModeloCarroService} from "../../usuarios/services/modelo-carro.service";
         TipoDocumentoService,
         MarcaCarroService,
         UtilService,
-        ModeloCarroService
+        ModeloCarroService,
+        UsuariosService
     ]
 })
 export class VeiculosModule {
