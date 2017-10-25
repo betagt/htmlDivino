@@ -57,11 +57,13 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
         }
         this.veiculoForm();
     }
+
     loadModelos($event) {
         this.modeloCarroService.todosByMarca($event.value, true).subscribe(marcas => {
             this.modelosCarro = marcas;
         });
     }
+
     veiculoForm() {
         this._fbVeiculo = this._fb.group({
             'transporte_marca_carro_id': [null, Validators.compose([])],
@@ -81,6 +83,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             this.cores = res;
         });
     }
+
     changeListenerVeiculo($event) {
         const file = this.utilService.readThis($event.target);
         file.onloadend = (e) => this._fbVeiculo.controls['arquivo'].setValue(file.result);

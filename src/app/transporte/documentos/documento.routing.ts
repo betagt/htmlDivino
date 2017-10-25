@@ -1,9 +1,8 @@
 import {Routes, RouterModule} from '@angular/router';
 import {TemplateComponent} from '../../shared/template/template.component';
 import {DocumentoListComponent} from './documento-list/documento-list.component';
-import {DocumentoFormComponent} from "./documento-form/documento-form.component";
-import {DocumentoDetailComponent} from "./documento-detail/documento-detail.component";
-
+import {DocumentoFormComponent} from './documento-form/documento-form.component';
+import {DocumentoDetailComponent} from './documento-detail/documento-detail.component';
 const DOCUMENTO_ROUTES: Routes = [
     {
         path: '',

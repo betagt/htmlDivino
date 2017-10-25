@@ -56,6 +56,7 @@
               <th (click)="orderby('habilidades.descricao')">Descricao</th>
               <th (click)="orderby('habilidades.observacao')">observacao</th>
               <th>Precisa de arquivo</th>
+              <th>Tipo</th>
               <th (click)="orderby('created_at')">Criado</th>
               <th (click)="orderby('updated_at')">Modificado</th>
             </tr>
@@ -69,6 +70,7 @@
               <td>{{item.descricao}}</td>
               <td>{{item.observacao}}</td>
               <td>{{(item.precisa_de_documento)?'Sim':'Não'}}</td>
+              <td>{{item.tipo}}</td>
               <td>{{item.created_at.date|date:'d-MM-y'}}</td>
               <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
             </tr>

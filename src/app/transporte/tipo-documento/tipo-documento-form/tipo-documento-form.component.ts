@@ -16,6 +16,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
 
   formaPagamento;
   status;
+  tipo;
 
   constructor(private tipoDocumentoService: TipoDocumentoService,
               formBuilder: FormBuilder,
@@ -34,14 +35,24 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
         value: false
       },
     ];
+    this.tipo = [
+      {
+        label: 'Pessoa',
+        value: 'pessoa'
+      },
+      {
+        label: 'Veículo',
+        value: 'veiculo'
+      },
+    ];
   }
 
   ngOnInit() {
     super.form({
       'nome': [null, Validators.compose([Validators.minLength(2), Validators.maxLength(255), Validators.required])],
-      'descricao': [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
-      'observacao': [null, Validators.compose([Validators.maxLength(255)])],
-      'precisa_de_documento': [true]
+      'descricao': [null, Validators.compose([Validators.maxLength(255)])],
+      'precisa_de_documento': [true],
+      'tipo': ['pessoa']
     });
     if (this.routeParams.id) {
       this.tipoDocumentoService.show(this.routeParams.id).subscribe(formaPagamento => {
