@@ -9,6 +9,7 @@ import {TipoDocumentoService} from "../../tipo-documento/service/tipo-documento.
 import {MarcaCarroService} from "../../../usuarios/services/marca-carro.service";
 import {ModeloCarroService} from "../../../usuarios/services/modelo-carro.service";
 import {UsuariosService} from "../../../usuarios/usuarios.service";
+import {AlertService} from "../../../../core/services/alert.service.com";
 
 @Component({
     selector: 'app-veiculos-form',
@@ -29,6 +30,8 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
     usuarios;
 
+    status;
+
     constructor(private veiculoService: VeiculoService,
                 formBuilder: FormBuilder,
                 private utilService: UtilService,
@@ -40,7 +43,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                 location: Location,
                 activatedRoute: ActivatedRoute,
                 router: Router) {
-        super(formBuilder, ref, location, activatedRoute, router, veiculoService, ['/transporte/tipo-documento']);
+        super(formBuilder, ref, location, activatedRoute, router, veiculoService, ['/transporte/veiculos']);
         this._fb = formBuilder;
     }
 
@@ -55,6 +58,20 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     }
 
     veiculoForm() {
+        this.status = [
+            {
+                label: 'Pendente',
+                value: 'pendente'
+            },
+            {
+                label: 'Aceito',
+                value: 'aceito'
+            },
+            {
+                label: 'Inválido',
+                value: 'invalido'
+            },
+        ];
         super.form({
             'transporte_marca_carro_id': [null, Validators.compose([Validators.required])],
             'transporte_modelo_carro_id': [null, Validators.compose([Validators.required])],
@@ -62,6 +79,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             'placa': [null, Validators.compose([Validators.required])],
             'user_id': [null, Validators.compose([Validators.required])],
             'cor': [null, Validators.compose([Validators.required])],
+            'status': ['pendente', Validators.compose([Validators.required])],
             'documentos': this._fb.array([])
         });
         this.addDocumento();
@@ -91,8 +109,8 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
     updateOrCreate(data) {
         console.log(data);
-        /*if (!this.saveForm.invalid) {
-            this.defaultService.updateOrCreate(data, this.routeParams.id).subscribe(res => {
+        if (!this.saveForm.invalid) {
+            this.veiculoService.updateOrCreate(data, this.routeParams.id).subscribe(res => {
                 if (this.redirect) {
                     this.router.navigate(this.redirect);
                 } else {
@@ -111,7 +129,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                     AlertService.errorTime(text);
                 }
             });
-        }*/
+        }
     }
 
     addDocumento() {
