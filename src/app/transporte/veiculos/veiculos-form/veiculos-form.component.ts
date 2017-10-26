@@ -11,10 +11,13 @@ import {ModeloCarroService} from "../../../usuarios/services/modelo-carro.servic
 import {UsuariosService} from "../../../usuarios/usuarios.service";
 import {AlertService} from "../../../../core/services/alert.service.com";
 
+import {URLSearchParams} from '@angular/http';
+import {DocumentoService} from "../../documentos/service/documento.service";
+
 @Component({
     selector: 'app-veiculos-form',
     templateUrl: './veiculos-form.component.html',
-    styleUrls: ['./veiculos-form.component.css']
+    styleUrls: ['./veiculos-form.component.css'],
 })
 export class VeiculosFormComponent extends CreateUpdateAbstract implements OnInit {
 
@@ -32,6 +35,8 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
     status;
 
+    veiculo;
+
     constructor(private veiculoService: VeiculoService,
                 formBuilder: FormBuilder,
                 private utilService: UtilService,
@@ -39,6 +44,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                 private usuarioService: UsuariosService,
                 private marcaCarroService: MarcaCarroService,
                 private modeloCarroService: ModeloCarroService,
+                private documentoService: DocumentoService,
                 ref: ChangeDetectorRef,
                 location: Location,
                 activatedRoute: ActivatedRoute,
@@ -50,11 +56,24 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     ngOnInit() {
         this.veiculoForm();
         if (this.routeParams.id) {
-            this.veiculoService.show(this.routeParams.id).subscribe(formaPagamento => {
-                this.saveForm.patchValue(formaPagamento);
+            const params = new URLSearchParams();
+            params.append('include', 'documentos,documentos.arquivos');
+            this.veiculoService.show(this.routeParams.id, params).subscribe(veiculo => {
+                this.veiculo = Object.assign({}, veiculo);
+                this.listaModelo(veiculo.transporte_modelo_carro_id);
+                delete veiculo.documentos;
+                this.saveForm.patchValue(veiculo);
             });
             return;
+
         }
+    }
+
+    removeDocumento(id, i) {
+        this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
+            AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
+            this.veiculo.documentos.data.splice(i, 1);
+        });
     }
 
     veiculoForm() {
@@ -82,7 +101,9 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             'status': ['pendente', Validators.compose([Validators.required])],
             'documentos': this._fb.array([])
         });
-        this.addDocumento();
+
+        //this.addDocumento();
+
         this.marcaCarroService.todos(true).subscribe(marcas => {
             this.marcasCarro = marcas;
         });
@@ -95,7 +116,11 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     }
 
     loadModelos($event) {
-        this.modeloCarroService.todosByMarca($event.value, true).subscribe(marcas => {
+        this.listaModelo($event.value);
+    }
+
+    listaModelo(id) {
+        this.modeloCarroService.todosByMarca(id, true).subscribe(marcas => {
             this.modelosCarro = marcas;
         });
     }
@@ -108,7 +133,6 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     }
 
     updateOrCreate(data) {
-        console.log(data);
         if (!this.saveForm.invalid) {
             this.veiculoService.updateOrCreate(data, this.routeParams.id).subscribe(res => {
                 if (this.redirect) {

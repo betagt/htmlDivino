@@ -13984,7 +13984,7 @@ html:not(.ie9) .select.fg-line:before {
     display: flex;
     align-items: center;
 }
-
+.center { text-align:center; }
 h2.btn-clicle-middle, h2.btn-clicle-middle button{
     display: flex;
     align-items: center;

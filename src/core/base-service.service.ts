@@ -108,7 +108,7 @@ export abstract class BaseServiceService {
     }
 
 
-    excluir(params, itens) {
+    excluir(params = null, itens) {
 
         if (itens.length == 1) {
             return this.httpClienteSevice.setSkypePreload(this.skyPreload).delete(this.url + '/' + itens[0]);

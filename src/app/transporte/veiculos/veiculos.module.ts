@@ -13,6 +13,7 @@ import {MarcaCarroService} from "../../usuarios/services/marca-carro.service";
 import {UtilService} from "../../../core/services/util.service";
 import {ModeloCarroService} from "../../usuarios/services/modelo-carro.service";
 import {UsuariosService} from "../../usuarios/usuarios.service";
+import {DocumentoService} from "../documentos/service/documento.service";
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import {UsuariosService} from "../../usuarios/usuarios.service";
         MarcaCarroService,
         UtilService,
         ModeloCarroService,
-        UsuariosService
+        UsuariosService,
+        DocumentoService
     ]
 })
 export class VeiculosModule {
