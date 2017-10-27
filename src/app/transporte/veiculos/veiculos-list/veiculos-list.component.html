@@ -15,10 +15,36 @@
         <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
           <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
           <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
-          <div class="header-search input-group">
-            <div class="col-md-7">
+          <div class="header-search input-group col-md-10">
+            <div class="col-md-5">
               <div class="fg-line">
-                <input type="text" [formControl]="pesquisaForm.controls['habilidades.nome']" id="name" class="form-control" placeholder="Nome">
+                <p-autoComplete
+                        placeholder="Proprietário"
+                        minLength="3"
+                        delay="600"
+                        field="name"
+                        [suggestions]="usuarios?.data"
+                        (completeMethod)="search($event)"
+                        [dropdown]="false"
+                        (onSelect)="selectdItem($event)"
+                        (onDropdownClick)="handleDropdown($event)">
+                  <ng-template let-usuario pTemplate="item">
+                    <div class="card-body">
+                      <div class="list-group">
+                        <a class="list-group-item media" style="padding: 0;">
+                          <div class="pull-left">
+                            <img class="lgi-img" src="{{usuario.imagem}}" alt="">
+                          </div>
+                          <div class="media-body">
+                            <div class="lgi-heading">{{usuario.name}}</div>
+                            <small class="lgi-text">{{usuario.cpf_cnpj}}</small>
+                            <small class="lgi-text">{{usuario.email}}</small>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete>
               </div>
             </div>
             <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
