@@ -4,7 +4,7 @@ import {VeiculosListComponent} from './veiculos-list/veiculos-list.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
-import {AutoCompleteModule, DropdownModule, TooltipModule} from "primeng/primeng";
+import {AutoCompleteModule, DialogModule, DropdownModule, TooltipModule} from "primeng/primeng";
 import {VeiculoService} from "./service/veiculo.service";
 import {VeiculosRouting} from "./veiculos.routing";
 import {VeiculosFormComponent} from './veiculos-form/veiculos-form.component';
@@ -25,7 +25,8 @@ import {DocumentoService} from "../documentos/service/documento.service";
         TooltipModule,
         DropdownModule,
         AutoCompleteModule,
-        VeiculosRouting
+        VeiculosRouting,
+        DialogModule
     ],
     declarations: [VeiculosListComponent, VeiculosFormComponent],
     providers: [

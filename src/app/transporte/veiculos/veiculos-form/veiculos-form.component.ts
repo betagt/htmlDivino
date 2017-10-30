@@ -18,6 +18,9 @@ import {DocumentoService} from "../../documentos/service/documento.service";
     selector: 'app-veiculos-form',
     templateUrl: './veiculos-form.component.html',
     styleUrls: ['./veiculos-form.component.css'],
+    providers: [
+        AlertService
+    ]
 })
 export class VeiculosFormComponent extends CreateUpdateAbstract implements OnInit {
 
@@ -37,8 +40,13 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
     veiculo;
 
+    display;
+
+    arquivos;
+
     constructor(private veiculoService: VeiculoService,
                 formBuilder: FormBuilder,
+                private alertService: AlertService,
                 private utilService: UtilService,
                 private tipoDocumento: TipoDocumentoService,
                 private usuarioService: UsuariosService,
@@ -67,13 +75,6 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             return;
 
         }
-    }
-
-    removeDocumento(id, i) {
-        this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
-            AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
-            this.veiculo.documentos.data.splice(i, 1);
-        });
     }
 
     veiculoForm() {
@@ -165,6 +166,21 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
         arrayControl.removeAt(index);
     }
 
+    removeDocumento(id, i) {
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente excluir este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
+                AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
+                this.veiculo.documentos.data.splice(i, 1);
+            });
+        }, error => {
+        });
+    }
+
     changeListenerVeiculo(documento: any, $event) {
         const file = this.utilService.readThisMultiple($event.target);
         const control = documento.controls['arquivos'];
@@ -175,6 +191,11 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                 control.setValue(array);
             };
         });
+    }
+
+    loadArquivos(arquivos) {
+        this.display = true;
+        this.arquivos = arquivos;
     }
 
     search(event) {
@@ -190,5 +211,36 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
     selectdItem(selectedItem) {
         this.saveForm.controls['user_id'].setValue(selectedItem.id);
+    }
+
+
+    aceitar(id, index) {
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente recusar este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.aceitar(id).subscribe(res => {
+                AlertService.sucess('sucesso!', 'documento aceito!');
+                this.veiculo.documentos.data[index].status = 'aceito';
+            });
+        }, error => {
+        });
+    }
+
+    recusar(id, index) {
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente recusar este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.recusar(id).subscribe(res => {
+                AlertService.sucess('sucesso!', 'documento recusado!');
+                this.veiculo.documentos.data[index].status = 'invalido';
+            });
+        }, error => {
+        });
     }
 }

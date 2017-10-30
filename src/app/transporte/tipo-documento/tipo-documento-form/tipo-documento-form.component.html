@@ -40,7 +40,7 @@
                 </div>
                 <app-error-message [erros]="saveForm.controls['precisa_de_documento']"></app-error-message>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-3">
                 <div class="fg-line">
                   <label>
                     Tipo
@@ -48,6 +48,16 @@
                   <p-dropdown [options]="tipo" formControlName="tipo"></p-dropdown>
                 </div>
                 <app-error-message [erros]="saveForm.controls['tipo']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label style="width: 100%;">
+                    Possui Vencimento
+                  </label>
+                  <!--<p-dropdown [options]="tipo" formControlName="possui_vencimento"></p-dropdown>-->
+                  <p-checkbox formControlName="possui_vencimento" binary="true"></p-checkbox>
+                </div>
+                <app-error-message [erros]="saveForm.controls['possui_vencimento']"></app-error-message>
               </div>
             </div>
           </form>

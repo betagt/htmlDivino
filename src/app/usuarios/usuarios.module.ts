@@ -25,7 +25,8 @@ import {DropdownModule} from 'primeng/primeng';
         Ng2PaginationModule,
         CalendarModule,
         DropdownModule,
-        DialogModule
+        DialogModule,
+        CalendarModule
     ],
     declarations: [
         UsuarioListComponent,

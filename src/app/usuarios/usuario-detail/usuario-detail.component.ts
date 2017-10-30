@@ -12,18 +12,20 @@ import {Location} from "@angular/common";
 })
 export class UsuarioDetailComponent extends DetailAbstract implements OnInit {
 
+    display;
+
+    arquivos;
 
     constructor(private usuarioService: UsuariosService,
                 ref: ChangeDetectorRef,
                 location: Location,
                 activatedRoute: ActivatedRoute,
-                router: Router
-                ) {
-        super( ref, location, activatedRoute, router, usuarioService);
+                router: Router) {
+        super(ref, location, activatedRoute, router, usuarioService);
     }
 
     ngOnInit() {
-        this.params.set('include', 'roles,endereco,telefones');
+        this.params.set('include', 'roles,endereco,telefones,documentos,documentos.arquivos');
         this.show(this.routeParams.id);
     }
 
@@ -39,6 +41,11 @@ export class UsuarioDetailComponent extends DetailAbstract implements OnInit {
         this.usuarioService.sendFile(id, formData).subscribe(res => {
             this.item.imagem = res.data.imagem;
         });
+    }
+
+    loadArquivos(arquivos) {
+        this.display = true;
+        this.arquivos = arquivos;
     }
 
 }

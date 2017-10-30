@@ -11,6 +11,7 @@ import {DocumentoService} from "../../transporte/documentos/service/documento.se
 import {TipoDocumentoService} from "../../transporte/tipo-documento/service/tipo-documento.service";
 import {UtilService} from "../../../core/services/util.service";
 import {URLSearchParams} from "@angular/http";
+import {isNullOrUndefined} from "util";
 
 declare var $: any;
 
@@ -41,6 +42,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 private ngZone: NgZone,
                 private documentoService: DocumentoService,
                 private tipoDocumento: TipoDocumentoService,
+                private alertService: AlertService,
                 private utilService: UtilService,
                 formBuilder: FormBuilder,
                 ref: ChangeDetectorRef,
@@ -75,7 +77,19 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             ])],
             'sexo': [1, Validators.compose([Validators.required])],
             'chk_newsletter': [0],
-            'documentos': this._fb.array([])
+            'documentos': this._fb.array([]),
+            'pessoa': this._fb.group({
+                'sexo': [null, Validators.compose([])],
+                'cpf_cnpf': [null, Validators.compose([])],
+                'nec_especial': [null, Validators.compose([])],
+                'data_nascimento': [null, Validators.compose([])],
+                'rg': [null, Validators.compose([])],
+                'orgao_emissor': [null, Validators.compose([])],
+                'escolaridade': [null, Validators.compose([])],
+                'estado_civil': [null, Validators.compose([])],
+                'fantasia': [null, Validators.compose([])],
+                'contato': [null, Validators.compose([])],
+            })
         });
         if (this.routeParams.id) {
             const params = new URLSearchParams();
@@ -83,6 +97,10 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             this.usuarioService.show(this.routeParams.id, params).subscribe(usuario => {
                 this.usuario = Object.assign({}, usuario);
                 delete usuario.documentos;
+                if (!isNullOrUndefined(usuario.pessoa)) {
+                    usuario.pessoa.data.data_nascimento = new Date(usuario.pessoa.data.data_nascimento);
+                    this.saveForm.controls['pessoa'].patchValue(usuario.pessoa.data);
+                }
                 this.saveForm.patchValue(usuario);
                 this.loadJquery();
             });
@@ -109,7 +127,6 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     addDocumento() {
         const control = < FormArray > this.saveForm.controls['documentos'];
         control.push(this.initDocumento());
-        console.log(control.controls['0'].controls.arquivos);
     }
 
     delDocumento(index: number): void {
@@ -118,9 +135,17 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     }
 
     removeDocumento(id, i) {
-        this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
-            AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
-            this.usuario.documentos.data.splice(i, 1);
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente excluir este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
+                AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
+                this.usuario.documentos.data.splice(i, 1);
+            });
+        }, error => {
         });
     }
 
@@ -159,4 +184,33 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
         });
     }
 
+    aceitar(id, index) {
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente recusar este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.aceitar(id).subscribe(res => {
+                AlertService.sucess('sucesso!', 'documento aceito!');
+                this.usuario.documentos.data[index].status = 'aceito';
+            });
+        }, error => {
+        });
+    }
+
+    recusar(id, index) {
+        this.alertService.confirm({
+            title: 'Confirmação!',
+            text: 'Deseja realmente recusar este documento?',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then(sucess => {
+            this.documentoService.recusar(id).subscribe(res => {
+                AlertService.sucess('sucesso!', 'documento recusado!');
+                this.usuario.documentos.data[index].status = 'invalido';
+            });
+        }, error => {
+        });
+    }
 }
