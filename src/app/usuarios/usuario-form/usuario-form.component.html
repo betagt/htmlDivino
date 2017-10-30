@@ -40,7 +40,7 @@
                                </div>
                                <div class="col-xs-6">
                                    <div class="fg-line">
-                                       <input type="text"  [formControl]="saveForm.controls['email']" class="form-control input-sm" placeholder="E-mail">
+                                       <input type="text" readonly [formControl]="saveForm.controls['email']" class="form-control input-sm" placeholder="E-mail">
                                    </div>
                                    <app-error-message [erros]="saveForm.controls['email']"></app-error-message>
                                </div>
@@ -94,9 +94,82 @@
                                </div>
                            </div>
                        </form>
+                       <div class="card-header pmbb-header" style="margin: 0;">
+                           <h2 class="btn-clicle-middle m-b-10">
+                               <button (click)="addDocumento()" class="btn bgm-green waves-circle" type="submit"><i class="zmdi zmdi-plus"></i></button>
+                               Documentos
+                           </h2>
+                           <div class="m-b-25" [formGroup]="saveForm">
+                               <div class="row-large m-t-25" *ngFor="let documento of saveForm.controls['documentos'].controls; let i=index">
+                                   <div class="col-xs-6">
+                                       <label>
+                                           Tipo do Documento:
+                                       </label>
+                                       <!--<input type="text" class="form-control input-sm" [formControl]="documento.controls['transporte_tipo_documento_id']" placeholder="Ex. 63">-->
+                                       <p-dropdown  placeholder="Selecione o Tipo do Documento" [options]="tipoDocumentos" [formControl]="documento.controls['transporte_tipo_documento_id']"></p-dropdown>
+                                       <app-error-message [erros]="documento.controls['transporte_tipo_documento_id']"></app-error-message>
+                                   </div>
+                                   <div class="col-xs-4">
+                                       <label>
+                                           Arquivo:
+                                       </label>
+                                       <input type="file" class="form-control input-sm" multiple accept="image/*" (change)="changeListenerVeiculo(documento, $event)" >
+                                       <app-error-message [erros]="documento.controls['arquivos']"></app-error-message>
+                                   </div>
+                                   <div class="col-xs-2 center-itens">
+                                       <button (click)="delDocumento(i)" class="btn bgm-green waves-effect" type="button"><i class="zmdi zmdi-close"></i></button>
+                                   </div>
+                               </div>
+                           </div>
+                           <h2 class="btn-clicle-middle m-b-10">
+                               <i class="zmdi zmdi-file m-r-10"></i>
+                               Documentos inseridos
+                           </h2>
+                           <div class="table-responsive">
+                               <table class="table table-striped">
+                                   <thead>
+                                   <tr>
+                                       <th>Tipo do Arquivo</th>
+                                       <th>Quantidade de Arquivos</th>
+                                       <th>Remover</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr *ngFor="let item of usuario?.documentos?.data; let i=index">
+                                       <td>{{item.tipo}}</td>
+                                       <td>{{item?.arquivos?.data.length}}</td>
+                                       <td class="center">
+                                           <button (click)="loadArquivos(item?.arquivos)" class="btn bgm-blue waves-effect" title="Visualizar Documentos" type="button"><i class="zmdi zmdi-search"></i></button>
+                                           <button (click)="removeDocumento(item.id, i)" class="btn bgm-green waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-close"></i></button>
+                                       </td>
+                                   </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
                    </div>
                </div>
            </div>
        </div>
    </div>
 </div>
+<p-dialog [modal]="'modal'" [(visible)]="display" >
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Arquivo</th>
+                <!--<th>Remover</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of arquivos?.data; let i=index">
+                <td><img src="{{item.img}}" width="400"></td>
+                <!--<td class="center">
+                    <button (click)="removeDocumento(item.id, i)" class="btn bgm-green waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-close"></i></button>
+                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</p-dialog>

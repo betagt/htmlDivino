@@ -102,8 +102,6 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             'documentos': this._fb.array([])
         });
 
-        //this.addDocumento();
-
         this.marcaCarroService.todos(true).subscribe(marcas => {
             this.marcasCarro = marcas;
         });
@@ -122,13 +120,6 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     listaModelo(id) {
         this.modeloCarroService.todosByMarca(id, true).subscribe(marcas => {
             this.modelosCarro = marcas;
-        });
-    }
-
-    initDocumento(): FormGroup {
-        return this._fb.group({
-            'transporte_tipo_documento_id': [null, Validators.compose([Validators.required])],
-            'arquivos': [null, Validators.compose([Validators.required])],
         });
     }
 
@@ -154,6 +145,13 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                 }
             });
         }
+    }
+
+    initDocumento(): FormGroup {
+        return this._fb.group({
+            'transporte_tipo_documento_id': [null, Validators.compose([Validators.required])],
+            'arquivos': [null, Validators.compose([Validators.required])],
+        });
     }
 
     addDocumento() {

@@ -12,7 +12,7 @@ import {SharedModule} from '../shared/shared.module';
 import {Ng2PaginationModule} from 'ng2-pagination';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MeusDadosDetailComponent } from './perfil/meus-dados-detail/meus-dados-detail.component';
-import {CalendarModule} from 'primeng/primeng';
+import {CalendarModule, DialogModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/primeng';
 
 @NgModule({
@@ -24,7 +24,8 @@ import {DropdownModule} from 'primeng/primeng';
         SharedModule,
         Ng2PaginationModule,
         CalendarModule,
-        DropdownModule
+        DropdownModule,
+        DialogModule
     ],
     declarations: [
         UsuarioListComponent,
