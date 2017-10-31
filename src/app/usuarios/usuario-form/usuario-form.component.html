@@ -109,9 +109,9 @@
                                        <div class="col-md-6">
                                            <div class="form-group">
                                                <label>CPF/CNPJ</label>
-                                               <input type="text" [formControl]="saveForm.controls['pessoa']?.controls['sexo']" class="form-control" placeholder="Ex: 999.999.999-99">
+                                               <input type="text" maxlength="20" [formControl]="saveForm.controls['pessoa']?.controls['cpf_cnpj']" class="form-control" placeholder="Ex: 99999999999 ou 99999999999999">
                                            </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa']?.controls['sexo']"></app-error-message>
+                                           <app-error-message [erros]="saveForm.controls['pessoa']?.controls['cpf_cnpj']"></app-error-message>
                                        </div>
                                        <div class="col-md-6">
                                            <div class="form-group">
@@ -132,7 +132,7 @@
                                        <div class="col-md-6">
                                            <div class="form-group">
                                                <label>Escolaridade</label>
-                                               <input type="text" [formControl]="saveForm.controls['pessoa'].controls['escolaridade']" class="form-control" placeholder="Ex: 04/09/1990">
+                                               <input type="text" [formControl]="saveForm.controls['pessoa'].controls['escolaridade']" class="form-control" placeholder="Superior">
                                            </div>
                                            <app-error-message [erros]="saveForm.controls['pessoa'].controls['escolaridade']"></app-error-message>
                                        </div>

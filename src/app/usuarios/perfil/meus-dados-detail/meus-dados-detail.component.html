@@ -175,9 +175,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>CPF/CNPJ</label>
-                            <input type="text" [formControl]="_fbPessoa.controls['cpf_cnpf']" class="form-control" placeholder="Ex: 999.999.999-99">
+                            <input type="text" [formControl]="_fbPessoa.controls['cpf_cnpj']" class="form-control" placeholder="Ex: 999.999.999-99">
                         </div>
-                        <app-error-message [erros]="_fbPessoa.controls['sexo']"></app-error-message>
+                        <app-error-message [erros]="_fbPessoa.controls['cpf_cnpj']"></app-error-message>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">

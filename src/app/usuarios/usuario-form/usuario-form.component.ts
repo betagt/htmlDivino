@@ -80,7 +80,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             'documentos': this._fb.array([]),
             'pessoa': this._fb.group({
                 'sexo': [null, Validators.compose([])],
-                'cpf_cnpf': [null, Validators.compose([])],
+                'cpf_cnpj': [null, Validators.compose([])],
                 'nec_especial': [null, Validators.compose([])],
                 'data_nascimento': [null, Validators.compose([])],
                 'rg': [null, Validators.compose([])],
