@@ -1,5 +1,5 @@
 <small [hidden]="!(erros.hasError('required') && erros.invalid)" class="text-danger">
-    Campo obrigatório.
+    *
 </small>
 <small [hidden]="!(erros.hasError('minlength') && erros.invalid)" class="text-danger">
     Campo precisa ter no Min. {{erros.errors?.minlength?.requiredLength}} e possui {{erros.errors?.minlength?.actualLength}}.
