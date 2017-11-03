@@ -10,6 +10,10 @@ export class SwitchDocumentoComponent implements OnInit {
 
     documento;
 
+    catcnh;
+
+    estados;
+
     @Output() documentoformChange = new EventEmitter();
 
     @Input()
@@ -19,14 +23,35 @@ export class SwitchDocumentoComponent implements OnInit {
 
     set documentoform(formanuncio) {
         this.documento = formanuncio;
-        //this.documentoformChange.emit(this.documento);
+        this.documentoformChange.emit(this.documento);
     }
 
     constructor() {
+        this.catcnh = [
+            {
+                label: 'A',
+                value: 'A'
+            },
+            {
+                label: 'AB',
+                value: 'AB'
+            },
+            {
+                label: 'C',
+                value: 'C'
+            },
+            {
+                label: 'D',
+                value: 'D'
+            },
+            {
+                label: 'E',
+                value: 'E'
+            },
+        ];
     }
 
     ngOnInit() {
-        console.log(this.documento);
     }
 
 }
