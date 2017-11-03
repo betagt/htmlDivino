@@ -116,6 +116,18 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
         return this._fb.group({
             'transporte_tipo_documento_id': [null, Validators.compose([Validators.required])],
             'arquivos': [null, Validators.compose([Validators.required])],
+            'nome': [null],
+            'numero': [null],
+            'data_vigencia_inicial': [null],
+            'data_vigencia_fim': [null],
+            'categoria_cnh': [null],
+            'data_emissao': [null],
+            'orgao_amissor': [null],
+            'cnae': [null],
+            'uf': [null],
+            'curso': [null],
+            'carga_horaria': [null],
+            'data_conclusao': [null],
         });
     }
 

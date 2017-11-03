@@ -181,8 +181,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of arquivos?.data; let i=index">
-                <td><img src="{{item.img}}" width="150"></td>
+            <tr>
+                <td *ngFor="let item of arquivos?.data; let i=index">
+                    <img src="{{item.img}}" width="150">
+                </td>
                 <!--<td class="center">
                     <button (click)="removeDocumento(item.id, i)" class="btn bgm-green waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-close"></i></button>
                 </td>-->

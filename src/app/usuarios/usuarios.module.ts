@@ -14,6 +14,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { MeusDadosDetailComponent } from './perfil/meus-dados-detail/meus-dados-detail.component';
 import {CalendarModule, DialogModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/primeng';
+import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/documento-switch-form/documento-switch-form.module";
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {DropdownModule} from 'primeng/primeng';
         CalendarModule,
         DropdownModule,
         DialogModule,
-        CalendarModule
+        CalendarModule,
+        DocumentoSwitchFormModule
     ],
     declarations: [
         UsuarioListComponent,
