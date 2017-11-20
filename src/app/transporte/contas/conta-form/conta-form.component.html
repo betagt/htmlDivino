@@ -1,0 +1,121 @@
+<div id="content">
+  <div class="container">
+    <app-buttons
+            [title]="(routeParams.id)?'EDITAR ':'CADASTRAR ' + 'CONTA' "
+            [hidebuttons]="buttons"
+            [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+    <div class="card" >
+      <div class="card-body card-padding" >
+        <div class="row" >
+          <form #formSave [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm.value)">
+            <div class="row-large m-t-10">
+              <div class="col-xs-6" >
+                <div class="fg-line">
+                  <label>Usuário - Atualmente ({{conta?.nome}})</label>
+                  <p-autoComplete
+                          placeholder="Contratante"
+                          minLength="3"
+                          delay="600"
+                          field="name"
+                          [suggestions]="usuarios?.data"
+                          (completeMethod)="search($event)"
+                          [dropdown]="false"
+                          (onSelect)="selectdItem($event)"
+                          (onDropdownClick)="handleDropdown($event)">
+                    <ng-template let-usuario pTemplate="item">
+                      <div class="card-body">
+                        <div class="list-group">
+                          <a class="list-group-item media" style="padding: 0;">
+                            <div class="pull-left">
+                              <img class="lgi-img" src="{{usuario.imagem}}" alt="">
+                            </div>
+                            <div class="media-body">
+                              <div class="lgi-heading">{{usuario.name}}</div>
+                              <small class="lgi-text">{{usuario.cpf_cnpj}}</small>
+                              <small class="lgi-text">{{usuario.email}}</small>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </p-autoComplete>
+                </div>
+                <app-error-message [erros]="saveForm.controls['user_id']"></app-error-message>
+              </div>
+              <div class="col-xs-6">
+                <div class="fg-line">
+                  <label>
+                    Código do banco
+                  </label>
+                  <p-dropdown [options]="bancos" formControlName="codigo"></p-dropdown>
+                </div>
+                <app-error-message [erros]="saveForm.controls['codigo']"></app-error-message>
+              </div>
+            </div>
+            <div class="row-large m-t-10">
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label>
+                    Nº Agencia
+                  </label>
+                  <input type="text" [formControl]="saveForm.controls['agencia']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                </div>
+                <app-error-message [erros]="saveForm.controls['agencia']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label>
+                    Nº Conta
+                  </label>
+                  <input type="text" [formControl]="saveForm.controls['conta']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                </div>
+                <app-error-message [erros]="saveForm.controls['conta']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label style="width: 100%;">
+                    Tipo
+                  </label>
+                  <p-dropdown [options]="tipo" formControlName="tipo"></p-dropdown>
+                </div>
+                <app-error-message [erros]="saveForm.controls['tipo']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label style="width: 100%;">
+                    Principal
+                  </label>
+                  <!--<p-dropdown [options]="tipo" formControlName="possui_vencimento"></p-dropdown>-->
+                  <p-checkbox formControlName="principal" binary="true"></p-checkbox>
+                </div>
+                <app-error-message [erros]="saveForm.controls['principal']"></app-error-message>
+              </div>
+            </div>
+            <div class="row-large m-t-10">
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label>
+                    Beneficiário
+                  </label>
+                  <input type="text" [formControl]="saveForm.controls['beneficiario']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                </div>
+                <app-error-message [erros]="saveForm.controls['beneficiario']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label>
+                    CPF
+                  </label>
+                  <input type="text" [formControl]="saveForm.controls['cpf']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                </div>
+                <app-error-message [erros]="saveForm.controls['cpf']"></app-error-message>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

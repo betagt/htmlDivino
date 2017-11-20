@@ -1,264 +1,366 @@
 <div id="content">
-   <div class="container">
-       <app-buttons
-               [title]="(routeParams.id)?'Editar':'Cadastrar'"
-               [hidebuttons]="buttons"
-               [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
-               (eventsave)="updateOrCreate(saveForm.value)">
-       </app-buttons>
-       <div class="card" >
-           <div class="card-body card-padding" >
-               <div class="row">
-                   <div *ngIf="(routeParams.id != null)" class="col-xs-2" id="profile-main">
-                       <div class="pmo-pic">
-                           <div class="p-relative">
-                               <a>
+    <div class="container">
+        <app-buttons
+                [title]="(routeParams.id)?'Editar':'Cadastrar'"
+                [hidebuttons]="buttons"
+                [icon]="(routeParams.id)?'zmdi zmdi-edit':'zmdi zmdi-assignment'"
+                (eventsave)="updateOrCreate(saveForm.value)">
+        </app-buttons>
+        <div class="card">
+            <div class="card-body card-padding">
+                <div class="row">
+                    <div *ngIf="(routeParams.id != null)" class="col-xs-2" id="profile-main">
+                        <div class="pmo-pic">
+                            <div class="p-relative">
+                                <a>
 
-                                   <img class="img-responsive" [src]="usuario?.imagem" alt="">
-                               </a>
-                               <div class="dropdown pmop-message">
-                                   <input type="file" style="display: none;" #fileEvent (change)="changeListener($event)">
-                                   <a (click)="fileEvent.click()" style="font-size: 14px;" class="btn bgm-white btn-float z-depth-1">
-                                       <i class="zmdi zmdi-camera"></i>
-                                   </a>
-                               </div>
-                           </div>
-                           <div class="pmo-stat" style="font-size: 14px;">
-                               <h2 class="m-0 c-white">{{usuario?.name}}</h2>
-                               {{usuario?.status}}
-                           </div>
-                       </div>
-                   </div>
-                   <div [ngClass]="(routeParams.id != null)?'col-xs-10':''">
-                       <div id="usuario" class="pmb-block">
-                           <div class="card-header pmbb-header">
-                               <h2><i class="zmdi zmdi-image-o m-r-10"></i> Dados do Usuário</h2>
-                           </div>
-                           <form role="form" [formGroup]="saveForm"  (ngSubmit)="updateOrCreate(saveForm.value)">
-                               <div class="row-large m-t-10">
-                                   <div class="col-xs-6">
-                                       <div class="fg-line">
-                                           <input type="text"  [formControl]="saveForm.controls['name']" class="form-control input-sm" placeholder="Nome">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['name']"></app-error-message>
-                                   </div>
-                                   <div class="col-xs-6">
-                                       <div class="fg-line">
-                                           <input type="text" [readonly]="!(routeParams.id == null)" [formControl]="saveForm.controls['email']" class="form-control input-sm" placeholder="E-mail">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['email']"></app-error-message>
-                                   </div>
-                               </div>
-                               <div class="row-large m-t-10">
-                                   <div class="col-xs-6" *ngIf="!usuario?.email_confirmation">
-                                       <div class="fg-line">
-                                           <input type="text"  [formControl]="saveForm.controls['email_confirmation']" class="form-control input-sm" placeholder="Confirmar Email">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['email_confirmation']"></app-error-message>
-                                   </div>
-                                   <div class="col-xs-6" >
-                                       <div class="fg-line">
-                                           <input type="text"  [formControl]="saveForm.controls['email_alternativo']" class="form-control input-sm" placeholder="Email Alternativo">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['email_alternativo']"></app-error-message>
-                                   </div>
-                               </div>
-                               <div class="row-large m-t-10">
-                                   <div class="col-sm-6">
-                                       <div class="fg-line">
-                                           <select [formControl]="saveForm.controls['sexo']" class="form-control selectpickerAr">
-                                               <option value="">Sexo</option>
-                                               <option value="1">Masculino</option>
-                                               <option value="2">Feminino</option>
-                                           </select>
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['sexo']"></app-error-message>
-                                   </div>
-                                   <div class="col-xs-6">
-                                       <div class="toggle-switch toggle-switch-demo" style="margin-top: 9px !important;">
-                                           <label for="ts1" class="ts-label">Newsletter</label>
-                                           <input id="ts1" [formControl]="saveForm.controls['chk_newsletter']"  [value]=""  type="checkbox" hidden="hidden">
-                                           <label for="ts1" class="ts-helper"></label>
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['chk_newsletter']"></app-error-message>
-                                   </div>
-                               </div>
-                               <div class="row-large m-t-5">
-                                   <div class="col-xs-6">
-                                       <div class="fg-line">
-                                           <input type="password" [formControl]="saveForm.controls['password']" class="form-control input-sm" placeholder="Senha">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['password']"></app-error-message>
-                                   </div>
-                                   <div class="col-xs-6">
-                                       <div class="fg-line">
-                                           <input type="password" [formControl]="saveForm.controls['password_confirmation']" class="form-control input-sm" placeholder="Confirmar senha">
-                                       </div>
-                                       <app-error-message [erros]="saveForm.controls['password_confirmation']"></app-error-message>
-                                   </div>
-                               </div>
-                           </form>
-                       </div>
-                       <div id="dados-pessoais" class="pmb-block">
-                           <div class="card-header pmbb-header">
-                               <h2><i class="zmdi zmdi-image-o m-r-10"></i> Dados Pessoais</h2>
-                           </div>
-                           <div class="card-body">
-                               <form [formGroup]="saveForm.controls['pessoa']">
-                                   <div class="row-large m-t-10">
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>CPF/CNPJ</label>
-                                               <input type="text" maxlength="20" [formControl]="saveForm.controls['pessoa']?.controls['cpf_cnpj']" class="form-control" placeholder="Ex: 99999999999 ou 99999999999999">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa']?.controls['cpf_cnpj']"></app-error-message>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Necessidade Especial</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['nec_especial']" placeholder="Ex: Cadeirante">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['nec_especial']"></app-error-message>
-                                       </div>
-                                   </div>
-                                   <div class="row-large m-t-10">
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Data de Nascimento</label>
-                                               <p-calendar formControlName="data_nascimento" [monthNavigator]="true" yearRange="1949:2009" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['data_nascimento']"></app-error-message>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Escolaridade</label>
-                                               <input type="text" [formControl]="saveForm.controls['pessoa'].controls['escolaridade']" class="form-control" placeholder="Superior">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['escolaridade']"></app-error-message>
-                                       </div>
-                                   </div>
-                                   <div class="row-large m-t-10">
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>RG</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['rg']" placeholder="Ex: 827.852">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['rg']"></app-error-message>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Orgão Emissor</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['orgao_emissor']" placeholder="Ex: SSP/TO">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['orgao_emissor']"></app-error-message>
-                                       </div>
-                                   </div>
-                                   <div class="row-large m-t-10">
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Estado Civil</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['estado_civil']" placeholder="Ex: Casado">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['estado_civil']"></app-error-message>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Nome Fantasia</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['fantasia']" placeholder="Ex: Empresa texte">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['fantasia']"></app-error-message>
-                                       </div>
-                                   </div>
-                                   <div class="row-large m-t-10">
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Contato</label>
-                                               <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa'].controls['contato']" placeholder="Ex: Contato">
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['contato']"></app-error-message>
-                                       </div>
-                                       <div class="col-md-6">
-                                           <div class="form-group">
-                                               <label>Sexo</label>
-                                               <select [formControl]="saveForm.controls['pessoa'].controls['sexo']" class="form-control selectpickerAr">
-                                                   <option [value]="">Selecione o Sexo</option>
-                                                   <option [value]="1">Masculino</option>
-                                                   <option [value]="2">Feminino</option>
-                                               </select>
-                                           </div>
-                                           <app-error-message [erros]="saveForm.controls['pessoa'].controls['sexo']"></app-error-message>
-                                       </div>
-                                   </div>
-                               </form>
-                           </div>
-                       </div>
-                       <div class="card-header pmbb-header no-padding" style="margin: 0;">
-                           <h2 class="btn-clicle-middle m-b-10">
-                               <button (click)="addDocumento()" class="btn bgm-green waves-circle" type="submit"><i class="zmdi zmdi-plus"></i></button>
-                               Documentos
-                           </h2>
-                           <div class="m-b-25" [formGroup]="saveForm">
-                               <div *ngFor="let documento of saveForm.controls['documentos'].controls; let i=index">
-                                   <div class="row-large m-t-25">
-                                       <div class="col-xs-6">
-                                           <label>
-                                               Tipo do Documento:
-                                           </label>
-                                           <!--<input type="text" class="form-control input-sm" [formControl]="documento.controls['transporte_tipo_documento_id']" placeholder="Ex. 63">-->
-                                           <p-dropdown  placeholder="Selecione" [options]="tipoDocumentos" [formControl]="documento.controls['transporte_tipo_documento_id']"></p-dropdown>
-                                           <app-error-message [erros]="documento.controls['transporte_tipo_documento_id']"></app-error-message>
-                                       </div>
-                                       <div class="col-xs-4">
-                                           <label>
-                                               Arquivo:
-                                           </label>
-                                           <input type="file" class="form-control input-sm" multiple accept="image/*" (change)="changeListenerVeiculo(documento, $event)" >
-                                           <app-error-message [erros]="documento.controls['arquivos']"></app-error-message>
-                                       </div>
-                                       <div class="col-xs-2 center-itens">
-                                           <button (click)="delDocumento(i)" class="btn bgm-green waves-effect" type="button"><i class="zmdi zmdi-close"></i></button>
-                                       </div>
-                                   </div>
-                                   <app-switch-documento *ngIf="documento" (documentoformChange)="documento" [documentoform]="documento"></app-switch-documento>
-                               </div>
-                           </div>
-                           <h2 class="btn-clicle-middle m-b-10">
-                               <i class="zmdi zmdi-file m-r-10"></i>
-                               Documentos inseridos
-                           </h2>
-                           <div class="table-responsive">
-                               <table class="table table-striped">
-                                   <thead>
-                                   <tr>
-                                       <th>Tipo do Arquivo</th>
-                                       <th>Quantidade de Arquivos</th>
-                                       <th>Status</th>
-                                       <th>Ações</th>
-                                   </tr>
-                                   </thead>
-                                   <tbody>
-                                   <tr *ngFor="let item of usuario?.documentos?.data; let i=index">
-                                       <td>{{item.tipo}}</td>
-                                       <td>{{item?.arquivos?.data.length}}</td>
-                                       <td>{{item.status}}</td>
-                                       <td class="center">
-                                           <button (click)="aceitar(item.id, i)" class="btn bgm-green waves-effect" title="Aceitar Documentos" type="button"><i class="zmdi zmdi-check"></i></button>
-                                           <button (click)="recusar(item.id, i)" class="btn bgm-red waves-effect" title="Cancelar Documentos" type="button"><i class="zmdi zmdi-close"></i></button>
-                                           <button (click)="loadArquivos(item?.arquivos)" class="btn bgm-blue waves-effect" title="Visualizar Documentos" type="button"><i class="zmdi zmdi-search"></i></button>
-                                           <button (click)="removeDocumento(item.id, i)" class="btn bgm-red waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-delete"></i></button>
-                                       </td>
-                                   </tr>
-                                   </tbody>
-                               </table>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                                    <img class="img-responsive" [src]="usuario?.imagem" alt="">
+                                </a>
+                                <div class="dropdown pmop-message">
+                                    <input type="file" style="display: none;" #fileEvent
+                                           (change)="changeListener($event)">
+                                    <a (click)="fileEvent.click()" style="font-size: 14px;"
+                                       class="btn bgm-white btn-float z-depth-1">
+                                        <i class="zmdi zmdi-camera"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pmo-stat" style="font-size: 14px;">
+                                <h2 class="m-0 c-white">{{usuario?.name}}</h2>
+                                {{usuario?.status}}
+                            </div>
+                        </div>
+                    </div>
+                    <div [ngClass]="(routeParams.id != null)?'col-xs-10':''">
+                        <div id="usuario" class="pmb-block">
+                            <div class="card-header pmbb-header">
+                                <h2><i class="zmdi zmdi-image-o m-r-10"></i> Dados do Usuário</h2>
+                            </div>
+                            <form role="form" [formGroup]="saveForm" (ngSubmit)="updateOrCreate(saveForm.value)">
+                                <div class="row-large m-t-10">
+                                    <div class="col-xs-6">
+                                        <div class="fg-line">
+                                            <input type="text" [formControl]="saveForm.controls['name']"
+                                                   class="form-control input-sm" placeholder="Nome">
+                                        </div>
+                                        <app-error-message [erros]="saveForm.controls['name']"></app-error-message>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="fg-line">
+                                            <input type="text" [readonly]="!(routeParams.id == null)"
+                                                   [formControl]="saveForm.controls['email']"
+                                                   class="form-control input-sm" placeholder="E-mail">
+                                        </div>
+                                        <app-error-message [erros]="saveForm.controls['email']"></app-error-message>
+                                    </div>
+                                </div>
+                                <div class="row-large m-t-10">
+                                    <div class="col-xs-6" *ngIf="!usuario?.email_confirmation">
+                                        <div class="fg-line">
+                                            <input type="text" [formControl]="saveForm.controls['email_confirmation']"
+                                                   class="form-control input-sm" placeholder="Confirmar Email">
+                                        </div>
+                                        <app-error-message
+                                                [erros]="saveForm.controls['email_confirmation']"></app-error-message>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="fg-line">
+                                            <input type="text" [formControl]="saveForm.controls['email_alternativo']"
+                                                   class="form-control input-sm" placeholder="Email Alternativo">
+                                        </div>
+                                        <app-error-message
+                                                [erros]="saveForm.controls['email_alternativo']"></app-error-message>
+                                    </div>
+                                </div>
+                                <div class="row-large m-t-10">
+                                    <div class="col-sm-6">
+                                        <div class="fg-line">
+                                            <select [formControl]="saveForm.controls['sexo']"
+                                                    class="form-control selectpickerAr">
+                                                <option value="">Sexo</option>
+                                                <option value="1">Masculino</option>
+                                                <option value="2">Feminino</option>
+                                            </select>
+                                        </div>
+                                        <app-error-message [erros]="saveForm.controls['sexo']"></app-error-message>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="toggle-switch toggle-switch-demo"
+                                             style="margin-top: 9px !important;">
+                                            <label for="ts1" class="ts-label">Newsletter</label>
+                                            <input id="ts1" [formControl]="saveForm.controls['chk_newsletter']"
+                                                   [value]="" type="checkbox" hidden="hidden">
+                                            <label for="ts1" class="ts-helper"></label>
+                                        </div>
+                                        <app-error-message
+                                                [erros]="saveForm.controls['chk_newsletter']"></app-error-message>
+                                    </div>
+                                </div>
+                                <div class="row-large m-t-5">
+                                    <div class="col-xs-6">
+                                        <div class="fg-line">
+                                            <input type="password" [formControl]="saveForm.controls['password']"
+                                                   class="form-control input-sm" placeholder="Senha">
+                                        </div>
+                                        <app-error-message [erros]="saveForm.controls['password']"></app-error-message>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="fg-line">
+                                            <input type="password"
+                                                   [formControl]="saveForm.controls['password_confirmation']"
+                                                   class="form-control input-sm" placeholder="Confirmar senha">
+                                        </div>
+                                        <app-error-message
+                                                [erros]="saveForm.controls['password_confirmation']"></app-error-message>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="dados-pessoais" class="pmb-block">
+                            <div class="card-header pmbb-header">
+                                <h2><i class="zmdi zmdi-image-o m-r-10"></i> Dados Pessoais</h2>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="saveForm.controls['pessoa']">
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>CPF/CNPJ</label>
+                                                <input type="text" maxlength="20"
+                                                       [formControl]="saveForm.controls['pessoa']?.controls['cpf_cnpj']"
+                                                       class="form-control"
+                                                       placeholder="Ex: 99999999999 ou 99999999999999">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa']?.controls['cpf_cnpj']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Necessidade Especial</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['nec_especial']"
+                                                       placeholder="Ex: Cadeirante">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['nec_especial']"></app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Data de Nascimento</label>
+                                                <p-calendar formControlName="data_nascimento" [monthNavigator]="true"
+                                                            yearRange="1949:2009" [yearNavigator]="true"
+                                                            dateFormat="dd/mm/yy"></p-calendar>
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['data_nascimento']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Escolaridade</label>
+                                                <input type="text"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['escolaridade']"
+                                                       class="form-control" placeholder="Superior">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['escolaridade']"></app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>RG</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['rg']"
+                                                       placeholder="Ex: 827.852">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['rg']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Orgão Emissor</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['orgao_emissor']"
+                                                       placeholder="Ex: SSP/TO">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['orgao_emissor']"></app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Estado Civil</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['estado_civil']"
+                                                       placeholder="Ex: Casado">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['estado_civil']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome Fantasia</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['fantasia']"
+                                                       placeholder="Ex: Empresa texte">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['fantasia']"></app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contato</label>
+                                                <input type="text" class="form-control"
+                                                       [formControl]="saveForm.controls['pessoa'].controls['contato']"
+                                                       placeholder="Ex: Contato">
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['contato']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Sexo</label>
+                                                <select [formControl]="saveForm.controls['pessoa'].controls['sexo']"
+                                                        class="form-control selectpickerAr">
+                                                    <option [value]="">Selecione o Sexo</option>
+                                                    <option [value]="1">Masculino</option>
+                                                    <option [value]="2">Feminino</option>
+                                                </select>
+                                            </div>
+                                            <app-error-message
+                                                    [erros]="saveForm.controls['pessoa'].controls['sexo']"></app-error-message>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-header pmbb-header no-padding" style="margin: 0;">
+                            <h2 class="btn-clicle-middle m-b-10">
+                                <button (click)="addDocumento()" class="btn bgm-green waves-circle" type="submit"><i
+                                        class="zmdi zmdi-plus"></i></button>
+                                Documentos
+                            </h2>
+                            <div class="m-b-25" [formGroup]="saveForm">
+                                <div *ngFor="let documento of saveForm.controls['documentos'].controls; let i=index">
+                                    <div class="row-large m-t-25">
+                                        <div class="col-xs-6">
+                                            <label>
+                                                Tipo do Documento:
+                                            </label>
+                                            <p-dropdown placeholder="Selecione" [options]="tipoDocumentos"
+                                                        [formControl]="documento.controls['transporte_tipo_documento_id']"></p-dropdown>
+                                            <app-error-message
+                                                    [erros]="documento.controls['transporte_tipo_documento_id']"></app-error-message>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label>
+                                                Arquivo:
+                                            </label>
+                                            <input type="file" class="form-control input-sm" multiple accept="image/*"
+                                                   (change)="changeListenerVeiculo(documento, $event)">
+                                            <app-error-message
+                                                    [erros]="documento.controls['arquivos']"></app-error-message>
+                                        </div>
+                                        <div class="col-xs-2 center-itens">
+                                            <button (click)="delDocumento(i)" class="btn bgm-green waves-effect"
+                                                    type="button"><i class="zmdi zmdi-close"></i></button>
+                                        </div>
+                                    </div>
+                                    <app-switch-documento *ngIf="documento" (documentoformChange)="documento"
+                                                          [documentoform]="documento"></app-switch-documento>
+                                </div>
+                            </div>
+                            <h2 class="btn-clicle-middle m-b-10">
+                                <i class="zmdi zmdi-file m-r-10"></i>
+                                Documentos inseridos
+                            </h2>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Tipo do Arquivo</th>
+                                        <th>Quantidade de Arquivos</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let item of usuario?.documentos?.data; let i=index">
+                                        <td>{{item.tipo}}</td>
+                                        <td>{{item?.arquivos?.data.length}}</td>
+                                        <td>{{item.status}}</td>
+                                        <td class="center">
+                                            <button (click)="aceitar(item.id, i)" class="btn bgm-green waves-effect"
+                                                    title="Aceitar Documentos" type="button"><i
+                                                    class="zmdi zmdi-check"></i></button>
+                                            <button (click)="recusar(item.id, i)" class="btn bgm-red waves-effect"
+                                                    title="Cancelar Documentos" type="button"><i
+                                                    class="zmdi zmdi-close"></i></button>
+                                            <button (click)="loadArquivos(item?.arquivos)"
+                                                    class="btn bgm-blue waves-effect" title="Visualizar Documentos"
+                                                    type="button"><i class="zmdi zmdi-search"></i></button>
+                                            <button (click)="removeDocumento(item.id, i)"
+                                                    class="btn bgm-red waves-effect" title="Excluir Documentos"
+                                                    type="button"><i class="zmdi zmdi-delete"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-header pmbb-header no-padding m-t-15" style="margin: 0;">
+                            <h2 class="btn-clicle-middle m-b-10">
+                                <i class="zmdi zmdi-money-box m-r-10"></i> Contas
+                            </h2>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Banco</th>
+                                        <th>Agencia</th>
+                                        <th>Conta</th>
+                                        <th>Variação</th>
+                                        <th>Tipo</th>
+                                        <th>Beneficiario</th>
+                                        <th>Cpf</th>
+                                        <th>Conta Principal</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let item of usuario?.contas?.data; let i=index">
+                                        <td>{{item.nome}}</td>
+                                        <td>{{item.codigo}}</td>
+                                        <td>{{item.agencia}}</td>
+                                        <td>{{item.conta}}</td>
+                                        <td>{{item.variacao}}</td>
+                                        <td>{{item.tipo}}</td>
+                                        <td>{{item.beneficiario}}</td>
+                                        <td>{{item.cpf}}</td>
+                                        <td>{{item.principal?'sim':'não'}}</td>
+                                        <td class="center">
+                                            <button (click)="contaPrincipal(item.id)" class="btn bgm-green waves-effect"
+                                                    title="Marcar a Principal" type="button"><i
+                                                    class="zmdi zmdi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p-dialog [modal]="'modal'" [(visible)]="display" >
+<p-dialog [modal]="'modal'" [(visible)]="display">
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>

@@ -171,6 +171,41 @@
                         </table>
                     </div>
                 </div>
+                <div class="card-header pmbb-header no-padding m-t-15" style="margin: 0;">
+                    <h2 class="btn-clicle-middle m-b-10">
+                        <i class="zmdi zmdi-money-box m-r-10"></i> Contas
+                    </h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Banco</th>
+                                <th>Agencia</th>
+                                <th>Conta</th>
+                                <th>Variação</th>
+                                <th>Tipo</th>
+                                <th>Beneficiario</th>
+                                <th>Cpf</th>
+                                <th>Conta Principal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let conta of item?.contas?.data; let i=index">
+                                    <td>{{conta.nome}}</td>
+                                    <td>{{conta.codigo}}</td>
+                                    <td>{{conta.agencia}}</td>
+                                    <td>{{conta.conta}}</td>
+                                    <td>{{conta.variacao}}</td>
+                                    <td>{{conta.tipo}}</td>
+                                    <td>{{conta.beneficiario}}</td>
+                                    <td>{{conta.cpf}}</td>
+                                    <td>{{conta.principal?'sim':'não'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 </section>

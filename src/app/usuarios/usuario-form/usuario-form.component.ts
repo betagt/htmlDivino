@@ -12,6 +12,7 @@ import {TipoDocumentoService} from "../../transporte/tipo-documento/service/tipo
 import {UtilService} from "../../../core/services/util.service";
 import {URLSearchParams} from "@angular/http";
 import {isNullOrUndefined} from "util";
+import {ContaService} from "../../transporte/contas/service/conta.service";
 
 declare var $: any;
 
@@ -23,12 +24,13 @@ declare var $: any;
         AlertService,
         DocumentoService,
         TipoDocumentoService,
-        UtilService
+        UtilService,
+        ContaService
     ]
 })
 export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit {
 
-    usuario;
+    usuario: any;
 
     tipoDocumentos;
 
@@ -43,6 +45,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 private documentoService: DocumentoService,
                 private tipoDocumento: TipoDocumentoService,
                 private alertService: AlertService,
+                private contaService: ContaService,
                 private utilService: UtilService,
                 formBuilder: FormBuilder,
                 ref: ChangeDetectorRef,
@@ -224,6 +227,12 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 this.usuario.documentos.data[index].status = 'invalido';
             });
         }, error => {
+        });
+    }
+
+    contaPrincipal(id) {
+        this.contaService.principal(this.routeParams.id, id).subscribe(contas => {
+            this.usuario.contas = contas;
         });
     }
 }

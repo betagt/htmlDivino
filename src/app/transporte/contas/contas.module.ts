@@ -5,8 +5,9 @@ import {ContaService} from "./service/conta.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
-import {DropdownModule, TooltipModule} from "primeng/primeng";
+import {AutoCompleteModule, CheckboxModule, DropdownModule, TooltipModule} from "primeng/primeng";
 import {ContasRouting} from "./contas.routing";
+import { ContaFormComponent } from './conta-form/conta-form.component';
 
 @NgModule({
     imports: [
@@ -17,9 +18,11 @@ import {ContasRouting} from "./contas.routing";
         Ng2PaginationModule,
         TooltipModule,
         DropdownModule,
+        CheckboxModule,
+        AutoCompleteModule,
         ContasRouting
     ],
-    declarations: [ContaListComponent],
+    declarations: [ContaListComponent, ContaFormComponent],
     providers: [
         ContaService
     ]
