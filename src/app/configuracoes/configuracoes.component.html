@@ -180,6 +180,135 @@
                                 <app-error-message [erros]="saveForm.controls['token']"></app-error-message>
                             </div>
                         </div>
+                        <div class="col-xs-12">
+                            <h3> Configurações de Calculo do sistema</h3>
+                        </div>
+                        <div class="row-large m-t-20">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor base</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlbas']"
+                                           class="form-control input-sm" placeholder="Valor base">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlbas']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor por KM</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlkm']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlkm']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor por Minuto</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlmin']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlbas']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor do Seguro passageiro</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlsegp']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlsegp']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor por KM Rodado</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlkmr']"
+                                           class="form-control input-sm" placeholder="Valor por KM Rodado">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlkmr']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Numero mínimo de KM</label>
+                                    <input type="text" [formControl]="saveForm.controls['nmkm']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['nmkm']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Numero mínimo de minutos</label>
+                                    <input type="text" [formControl]="saveForm.controls['nmmin']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['nmmin']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>%KM madrugada</label>
+                                    <input type="text" [formControl]="saveForm.controls['pkmm']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['pkmm']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Taxa operacional</label>
+                                    <input type="text" [formControl]="saveForm.controls['ptxoper']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['ptxoper']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Bônus operacional por motorista</label>
+                                    <input type="text" [formControl]="saveForm.controls['bonusm']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['bonusm']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor da taxa publica por motorista</label>
+                                    <input type="text" [formControl]="saveForm.controls['vltgo']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vltgo']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor da apólice do seguro</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlapseg']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlapseg']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Valor do bônus para o passageiro</label>
+                                    <input type="text" [formControl]="saveForm.controls['vlbonusp']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['vlbonusp']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>%Bônus para o passageiro</label>
+                                    <input type="text" [formControl]="saveForm.controls['pbonusp']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['pbonusp']"></app-error-message>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

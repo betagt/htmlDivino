@@ -54,6 +54,20 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
             'facebook_id': [null],
             'token': [null],
             'analytcs_code': [null],
+            'vlbas': [null],
+            'vlkm': [null],
+            'vlmin': [null],
+            'vlsegp': [null],
+            'vlkmr': [null],
+            'nmkm': [null],
+            'nmmin': [null],
+            'pkmm': [null],
+            'ptxoper': [null],
+            'bonusm': [null],
+            'vltgo': [null],
+            'vlapseg': [null],
+            'vlbonusp': [null],
+            'pbonusp': [null]
         });
         this.configuracoesService.view().subscribe(configuracoes => {
             this.saveForm.patchValue(configuracoes);
