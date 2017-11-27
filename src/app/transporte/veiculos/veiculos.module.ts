@@ -14,6 +14,7 @@ import {UtilService} from "../../../core/services/util.service";
 import {ModeloCarroService} from "../../usuarios/services/modelo-carro.service";
 import {UsuariosService} from "../../usuarios/usuarios.service";
 import {DocumentoService} from "../documentos/service/documento.service";
+import {DocumentoSwitchFormModule} from "../documentos/componentes/documento-switch-form/documento-switch-form.module";
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {DocumentoService} from "../documentos/service/documento.service";
         DropdownModule,
         AutoCompleteModule,
         VeiculosRouting,
-        DialogModule
+        DialogModule,
+        DocumentoSwitchFormModule
     ],
     declarations: [VeiculosListComponent, VeiculosFormComponent],
     providers: [

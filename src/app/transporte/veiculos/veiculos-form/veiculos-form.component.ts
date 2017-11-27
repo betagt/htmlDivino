@@ -84,11 +84,11 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
                 value: 'pendente'
             },
             {
-                label: 'Aceito',
+                label: 'Ativo',
                 value: 'aceito'
             },
             {
-                label: 'Inválido',
+                label: 'Inativo',
                 value: 'invalido'
             },
         ];
@@ -96,6 +96,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             'transporte_marca_carro_id': [null, Validators.compose([Validators.required])],
             'transporte_modelo_carro_id': [null, Validators.compose([Validators.required])],
             'ano': [null, Validators.compose([Validators.required])],
+            'ano_modelo_fab': [null, Validators.compose([Validators.required])],
             'placa': [null, Validators.compose([Validators.required])],
             'user_id': [null, Validators.compose([Validators.required])],
             'cor': [null, Validators.compose([Validators.required])],
@@ -152,6 +153,22 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
         return this._fb.group({
             'transporte_tipo_documento_id': [null, Validators.compose([Validators.required])],
             'arquivos': [null, Validators.compose([Validators.required])],
+            'nome': [null],
+            'numero': [null],
+            'data_vigencia_inicial': [null],
+            'data_vigencia_fim': [null],
+            'categoria_cnh': [null],
+            'data_emissao': [null],
+            'orgao_amissor': [null],
+            'cnae': [null],
+            'uf': [null],
+            'curso': [null],
+            'carga_horaria': [null],
+            'data_conclusao': [null],
+            'nit': [null],
+            'seguradora': [null],
+            'cobertura_de_vidas': ['sim'],
+            'cobertura_de_terceiros': ['nao'],
         });
     }
 

@@ -40,6 +40,10 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
 
     arquivos = [];
 
+    perfil: any;
+
+    status: any;
+
     constructor(private usuarioService: UsuariosService,
                 private ngZone: NgZone,
                 private documentoService: DocumentoService,
@@ -57,6 +61,30 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     }
 
     ngOnInit() {
+        this.perfil = [
+            {
+                label: 'Cliente',
+                value: 'cliente'
+            },
+            {
+                label: 'Fornecedor',
+                value: 'fornecedor'
+            }
+        ];
+        this.status = [
+            {
+                label: 'Ativo',
+                value: 'ativo'
+            },
+            {
+                label: 'Inativo',
+                value: 'inativo'
+            },
+            {
+                label: 'Bloqueado',
+                value: 'bloqueado'
+            }
+        ];
         super.form({
             'name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
             'email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
@@ -80,6 +108,8 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             ])],
             'sexo': [1, Validators.compose([Validators.required])],
             'chk_newsletter': [0],
+            'perfil': ['cliente'],
+            'status': ['inativo'],
             'documentos': this._fb.array([]),
             'pessoa': this._fb.group({
                 'sexo': [null, Validators.compose([])],

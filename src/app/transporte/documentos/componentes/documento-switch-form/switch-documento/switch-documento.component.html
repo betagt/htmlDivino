@@ -263,4 +263,87 @@
             </div>
         </div>
     </div>
+    <div class="row-large" *ngSwitchCase="12">
+        <div class="col-xs-3">
+            <div class="fg-line">
+                <label>
+                    Numero
+                </label>
+                <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
+                <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-xs-3" >
+            <div class="fg-line">
+                <label>
+                    Data de Vencimento
+                </label>
+                <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                <p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>
+                <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
+            </div>
+        </div>
+    </div>
+    <div class="row-large" *ngSwitchCase="15">
+        <div class="col-xs-3">
+            <div class="fg-line">
+                <label>
+                    Numero
+                </label>
+                <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
+                <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-xs-3" >
+            <div class="fg-line">
+                <label>
+                    Data de Vencimento
+                </label>
+                <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                <p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>
+                <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
+            </div>
+        </div>
+    </div>
+    <div class="row-large" *ngSwitchCase="13">
+        <div class="col-xs-3">
+            <div class="fg-line">
+                <label>
+                    Seguradora
+                </label>
+                <input type="text"  [formControl]="documentoform.controls['seguradora']" required class="form-control input-sm" placeholder="Ex: 123456789">
+                <app-error-message [erros]="documentoform.controls['seguradora']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="fg-line">
+                <label>
+                    Cobertura de Vidas
+                </label>
+                <p-dropdown placeholder="Selecione" [options]="coberturaVidas"
+                            [formControl]="documento.controls['cobertura_de_vidas']"></p-dropdown>
+                <app-error-message [erros]="documentoform.controls['cobertura_de_vidas']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="fg-line">
+                <label>
+                    Cobertura de Terceiros
+                </label>
+                <p-dropdown placeholder="Selecione" [options]="coberturaTerceiros"
+                            [formControl]="documento.controls['cobertura_de_terceiros']"></p-dropdown>
+                <app-error-message [erros]="documentoform.controls['cobertura_de_terceiros']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-xs-3" >
+            <div class="fg-line">
+                <label>
+                    Data de Vencimento
+                </label>
+                <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                <p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>
+                <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
+            </div>
+        </div>
+    </div>
 </div>

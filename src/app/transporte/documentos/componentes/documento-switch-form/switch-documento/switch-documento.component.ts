@@ -14,6 +14,10 @@ export class SwitchDocumentoComponent implements OnInit {
 
     estados;
 
+    coberturaVidas;
+
+    coberturaTerceiros;
+
     @Output() documentoformChange = new EventEmitter();
 
     @Input()
@@ -47,6 +51,26 @@ export class SwitchDocumentoComponent implements OnInit {
             {
                 label: 'E',
                 value: 'E'
+            },
+        ];
+        this.coberturaVidas = [
+            {
+                label: 'Sim',
+                value: 'sim'
+            },
+            {
+                label: 'Não',
+                value: 'nao'
+            },
+        ];
+        this.coberturaTerceiros = [
+            {
+                label: 'Sim',
+                value: 'sim'
+            },
+            {
+                label: 'Não',
+                value: 'nao'
             },
         ];
     }

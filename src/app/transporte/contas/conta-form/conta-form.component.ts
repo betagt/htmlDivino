@@ -58,12 +58,13 @@ export class ContaFormComponent extends CreateUpdateAbstract implements OnInit {
         super.form({
             'codigo': [1, Validators.compose([Validators.maxLength(255)])],
             'user_id': [null, Validators.compose([Validators.required])],
-            'agencia': [null],
-            'conta': [null],
+            'agencia': [null, Validators.compose([Validators.required])],
+            'conta': [null, Validators.compose([Validators.required])],
+            'variacao': [null],
             'principal': [false],
             'tipo': ['cc'],
             'beneficiario': [null],
-            'cpf':  [null, Validators.compose([Validators.required])],
+            'cpf':  [null],
         });
         if (this.routeParams.id) {
             this.contaService.show(this.routeParams.id).subscribe(conta => {
