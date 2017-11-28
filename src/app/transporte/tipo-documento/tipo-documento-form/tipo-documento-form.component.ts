@@ -50,7 +50,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
     ngOnInit() {
         super.form({
             'nome': [null, Validators.compose([Validators.minLength(2), Validators.maxLength(255), Validators.required])],
-            'descricao': [null, Validators.compose([Validators.maxLength(255)])],
+            'descricao': [null, Validators.compose([Validators.maxLength(255), Validators.required])],
             'precisa_de_documento': [true],
             'possui_vencimento': false,
             'tipo': ['pessoa']

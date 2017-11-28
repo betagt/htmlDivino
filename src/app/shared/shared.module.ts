@@ -11,13 +11,17 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import {ConfiguracoesComponent} from "../configuracoes/configuracoes.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageComponent} from "../../core/component/error-message/error-message.component";
+import {CurrencyMaskModule} from "ng2-currency-mask";
+import {DropdownModule} from "primeng/primeng";
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CurrencyMaskModule,
+        DropdownModule
     ],
     declarations: [
         HeaderComponent,

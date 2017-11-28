@@ -6,13 +6,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {PatternHelper} from "../../core/services/parrtern.service";
 import {AlertService} from "../../core/services/alert.service.com";
+import {UtilService} from "../../core/services/util.service";
 
 @Component({
     selector: 'app-configuracoes',
     templateUrl: './configuracoes.component.html',
     styleUrls: ['./configuracoes.component.css'],
     providers: [
-        ConfiguracoesService
+        ConfiguracoesService,
+        UtilService
     ]
 })
 export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnInit {
@@ -20,6 +22,10 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
     private configuracoes;
 
     icon = 'zmdi zmdi-account';
+
+    numberMask;
+
+    bonus;
 
     constructor(private configuracoesService: ConfiguracoesService,
                 private ngZone: NgZone,
@@ -29,9 +35,36 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
                 activatedRoute: ActivatedRoute,
                 router: Router) {
         super(formBuilder, ref, location, activatedRoute, router, configuracoesService);
+        this.numberMask = UtilService.numberMasc();
     }
 
     ngOnInit() {
+        this.bonus = [
+            {
+                label: '0',
+                value: 0
+            },
+            {
+                label: '1',
+                value: 1
+            },
+            {
+                label: '2',
+                value: 2
+            },
+            {
+                label: '3',
+                value: 3
+            },
+            {
+                label: '4',
+                value: 4
+            },
+            {
+                label: '5',
+                value: 5
+            },
+        ];
         super.form({
             'titulo': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
             'email': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
@@ -67,7 +100,9 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
             'vltgo': [null],
             'vlapseg': [null],
             'vlbonusp': [null],
-            'pbonusp': [null]
+            'pbonusp': [null],
+            'tempo_cancel_fornecedor_min': [null],
+            'tempo_cancel_cliente_min': [null],
         });
         this.configuracoesService.view().subscribe(configuracoes => {
             this.saveForm.patchValue(configuracoes);

@@ -48,11 +48,14 @@ export class UtilService {
     static numberMasc(cifrao = 'R$ ') {
         return createNumberMask({
             prefix: cifrao,
-            suffix: '', // This will put the dollar sign at the end, with a space.
+            suffix: '',
+            decimalLimit: 2,
             allowDecimal: true,
+            // decimalSymbol: ',',
+            // thousandsSeparatorSymbol: '.',
+            // includeThousandsSeparator: true
         });
     }
-
     constructor() {
         this.urlSearchParams = new URLSearchParams();
     }

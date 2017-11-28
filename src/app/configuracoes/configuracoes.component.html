@@ -180,14 +180,35 @@
                                 <app-error-message [erros]="saveForm.controls['token']"></app-error-message>
                             </div>
                         </div>
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 m-b-15">
+                            <h3> Configurações de Tempo de cancelamento</h3>
+                        </div>
+                        <div class="row-large m-t-10">
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Tempo maximo de cancelamento fornecedor (minutos)</label>
+                                    <input type="number" [formControl]="saveForm.controls['tempo_cancel_fornecedor_min']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['tempo_cancel_fornecedor_min']"></app-error-message>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="fg-line">
+                                    <label>Tempo maximo de cancelamento cliente (minutos)</label>
+                                    <input type="number" [formControl]="saveForm.controls['tempo_cancel_cliente_min']"
+                                           class="form-control input-sm" placeholder="0.00">
+                                </div>
+                                <app-error-message [erros]="saveForm.controls['tempo_cancel_cliente_min']"></app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-xs-12  m-b-15">
                             <h3> Configurações de Calculo do sistema</h3>
                         </div>
                         <div class="row-large m-t-20">
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor base</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlbas']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }"  [formControl]="saveForm.controls['vlbas']"
                                            class="form-control input-sm" placeholder="Valor base">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlbas']"></app-error-message>
@@ -195,7 +216,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor por KM</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlkm']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlkm']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlkm']"></app-error-message>
@@ -205,7 +226,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor por Minuto</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlmin']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlmin']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlbas']"></app-error-message>
@@ -213,7 +234,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor do Seguro passageiro</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlsegp']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlsegp']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlsegp']"></app-error-message>
@@ -223,7 +244,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor por KM Rodado</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlkmr']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlkmr']"
                                            class="form-control input-sm" placeholder="Valor por KM Rodado">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlkmr']"></app-error-message>
@@ -231,7 +252,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Numero mínimo de KM</label>
-                                    <input type="text" [formControl]="saveForm.controls['nmkm']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['nmkm']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['nmkm']"></app-error-message>
@@ -241,7 +262,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Numero mínimo de minutos</label>
-                                    <input type="text" [formControl]="saveForm.controls['nmmin']"
+                                    <input type="number" [formControl]="saveForm.controls['nmmin']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['nmmin']"></app-error-message>
@@ -249,7 +270,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>%KM madrugada</label>
-                                    <input type="text" [formControl]="saveForm.controls['pkmm']"
+                                    <input type="text"  currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',align:'left', suffix:'%' }" [formControl]="saveForm.controls['pkmm']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['pkmm']"></app-error-message>
@@ -259,7 +280,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Taxa operacional</label>
-                                    <input type="text" [formControl]="saveForm.controls['ptxoper']"
+                                    <input type="text" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',align:'left', sufix:'%' }" [formControl]="saveForm.controls['ptxoper']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['ptxoper']"></app-error-message>
@@ -267,8 +288,8 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Bônus operacional por motorista</label>
-                                    <input type="text" [formControl]="saveForm.controls['bonusm']"
-                                           class="form-control input-sm" placeholder="0.00">
+                                    <p-dropdown [formControl]="saveForm.controls['bonusm']" [options]="bonus"
+                                                placeholder="Selecione"></p-dropdown>
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['bonusm']"></app-error-message>
                             </div>
@@ -277,7 +298,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor da taxa publica por motorista</label>
-                                    <input type="text" [formControl]="saveForm.controls['vltgo']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vltgo']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vltgo']"></app-error-message>
@@ -285,7 +306,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor da apólice do seguro</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlapseg']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlapseg']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlapseg']"></app-error-message>
@@ -295,7 +316,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>Valor do bônus para o passageiro</label>
-                                    <input type="text" [formControl]="saveForm.controls['vlbonusp']"
+                                    <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',',align:'left' }" [formControl]="saveForm.controls['vlbonusp']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['vlbonusp']"></app-error-message>
@@ -303,7 +324,7 @@
                             <div class="col-xs-6">
                                 <div class="fg-line">
                                     <label>%Bônus para o passageiro</label>
-                                    <input type="text" [formControl]="saveForm.controls['pbonusp']"
+                                    <input type="text" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',',align:'left', suffix:'%' }" [formControl]="saveForm.controls['pbonusp']"
                                            class="form-control input-sm" placeholder="0.00">
                                 </div>
                                 <app-error-message [erros]="saveForm.controls['pbonusp']"></app-error-message>

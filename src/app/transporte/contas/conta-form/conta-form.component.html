@@ -13,8 +13,9 @@
             <div class="row-large m-t-10">
               <div class="col-xs-6" >
                 <div class="fg-line">
-                  <label>Correntista - Atualmente ({{conta?.nome}})</label>
+                  <label>Fornecedor - Atualmente ({{conta?.nome}})</label>
                   <p-autoComplete
+                          [disabled]="(routeParams.id)"
                           placeholder="Contratante"
                           minLength="3"
                           delay="600"
@@ -49,7 +50,7 @@
                   <label>
                     Código do banco
                   </label>
-                  <p-dropdown [options]="bancos" formControlName="codigo"></p-dropdown>
+                  <p-dropdown [disabled]="(routeParams.id)" [options]="bancos" formControlName="codigo"></p-dropdown>
                 </div>
                 <app-error-message [erros]="saveForm.controls['codigo']"></app-error-message>
               </div>
@@ -60,7 +61,7 @@
                   <label>
                     Nº Agencia
                   </label>
-                  <input type="text" [formControl]="saveForm.controls['agencia']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                  <input type="text" [readonly]="(routeParams.id)" [formControl]="saveForm.controls['agencia']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
                 </div>
                 <app-error-message [erros]="saveForm.controls['agencia']"></app-error-message>
               </div>
@@ -69,7 +70,7 @@
                   <label>
                     Nº Conta
                   </label>
-                  <input type="text" [formControl]="saveForm.controls['conta']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                  <input type="text" [readonly]="(routeParams.id)" [formControl]="saveForm.controls['conta']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
                 </div>
                 <app-error-message [erros]="saveForm.controls['conta']"></app-error-message>
               </div>
@@ -78,7 +79,7 @@
                   <label>
                     Variacao
                   </label>
-                  <input type="text" [formControl]="saveForm.controls['variacao']" class="form-control swal2-textarea" placeholder="Ex: 00" />
+                  <input type="text" [readonly]="(routeParams.id)" [formControl]="saveForm.controls['variacao']" class="form-control swal2-textarea" placeholder="Ex: 00" />
                 </div>
                 <app-error-message [erros]="saveForm.controls['variacao']"></app-error-message>
               </div>
@@ -87,7 +88,7 @@
                   <label style="width: 100%;">
                     Tipo
                   </label>
-                  <p-dropdown [options]="tipo" formControlName="tipo"></p-dropdown>
+                  <p-dropdown [disabled]="(routeParams.id)" [options]="tipo" formControlName="tipo"></p-dropdown>
                 </div>
                 <app-error-message [erros]="saveForm.controls['tipo']"></app-error-message>
               </div>
@@ -97,7 +98,7 @@
                     Principal
                   </label>
                   <!--<p-dropdown [options]="tipo" formControlName="possui_vencimento"></p-dropdown>-->
-                  <p-checkbox formControlName="principal" binary="true"></p-checkbox>
+                  <p-checkbox [disabled]="(routeParams.id)" formControlName="principal" binary="true"></p-checkbox>
                 </div>
                 <app-error-message [erros]="saveForm.controls['principal']"></app-error-message>
               </div>
@@ -108,7 +109,7 @@
                   <label>
                     Beneficiário
                   </label>
-                  <input type="text" [formControl]="saveForm.controls['beneficiario']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                  <input type="text" [readonly]="(routeParams.id)" [formControl]="saveForm.controls['beneficiario']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
                 </div>
                 <app-error-message [erros]="saveForm.controls['beneficiario']"></app-error-message>
               </div>
@@ -117,7 +118,7 @@
                   <label>
                     CPF
                   </label>
-                  <input type="text" [formControl]="saveForm.controls['cpf']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
+                  <input type="text" [readonly]="(routeParams.id)" [formControl]="saveForm.controls['cpf']" class="form-control swal2-textarea" placeholder="Ex: 0000-0" />
                 </div>
                 <app-error-message [erros]="saveForm.controls['cpf']"></app-error-message>
               </div>

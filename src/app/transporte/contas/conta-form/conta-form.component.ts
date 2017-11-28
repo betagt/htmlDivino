@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CreateUpdateAbstract} from "../../../../core/abstract/create-update.abstract";
 import {UsuariosService} from "../../../usuarios/usuarios.service";
 import {BancoService} from "../../bancos/service/banco.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
     selector: 'app-conta-form',
@@ -87,7 +88,11 @@ export class ContaFormComponent extends CreateUpdateAbstract implements OnInit {
     }
 
     selectdItem(selectedItem) {
-        this.saveForm.controls['beneficiario'].setValue(selectedItem.nome);
+        console.log(selectedItem);
+        this.saveForm.controls['beneficiario'].setValue(selectedItem.name);
+        if(!isNullOrUndefined(selectedItem.pessoa)) {
+            this.saveForm.controls['cpf'].setValue(selectedItem.pessoa.data.cpf_cnpj);
+        }
         this.saveForm.controls['user_id'].setValue(selectedItem.id);
     }
 }
