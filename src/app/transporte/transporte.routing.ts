@@ -24,6 +24,11 @@ const TRANSPORTE_ROUTES: Routes = [
         canActivateChild: [ChecarRotaGuard],
     },
     {
+        path: 'controle-fornecedores', loadChildren: 'app/transporte/fornecedores/fornecedores.module#FornecedoresModule',
+        canActivate: [CanActivateViaOAuthGuard],
+        canActivateChild: [ChecarRotaGuard],
+    },
+    {
         path: 'veiculos', loadChildren: 'app/transporte/veiculos/veiculos.module#VeiculosModule',
         canActivate: [CanActivateViaOAuthGuard],
         canActivateChild: [ChecarRotaGuard],

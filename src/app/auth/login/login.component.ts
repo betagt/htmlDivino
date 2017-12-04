@@ -64,14 +64,19 @@ export class LoginComponent implements OnInit {
                     return this.usuariosService.getUserPerfil().subscribe(userResponse => {
                         this.authService.setAuthenticated(userResponse);
                         this.usuariosService.getRotaAcessos().subscribe(rotas => {
+
                             this.authService.setRotas(rotas);
-                            if (userResponse.roles.data.some(x => x.slug == 'fornecedor')) {
-                                this.router.navigate(['/transporte/chamadas/minhas-corridas']);
-                                return;
-                            } else if (userResponse.roles.data.some(x => x.slug == 'cliente')) {
+
+                            if (userResponse.roles.data.some(x => x.slug == 'cliente')) {
                                 AlertService.flashMessage('você não tem permissão para acessar essa area!');
                                 this.authService.logout();
                                 return;
+                            }
+                            if (userResponse.roles.data.some(x => x.slug == 'fornecedor')) {
+                                this.router.navigate(['/transporte/chamadas/minhas-corridas']);
+                                return;
+                            } else if (userResponse.roles.data.some(x => x.slug == 'agencia-reguladora')) {
+                                this.router.navigate(['/transporte/controle-fornecedores']);
                             } else {
                                 this.router.navigate(['/home']);
                             }

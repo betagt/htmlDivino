@@ -216,4 +216,15 @@ export class UsuariosService extends BaseServiceService {
             return res.json();
         }).catch(this.handleError);
     }
+
+    /**
+     * Get all users
+     **/
+    getFornecedores(params: URLSearchParams): Observable<any> {
+        return this.httpClienteSevice.setSkypePreload(this.skyPreload).get('/api/v1/admin/user/lista-fornecedores', params)
+            .map(res => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
 }
