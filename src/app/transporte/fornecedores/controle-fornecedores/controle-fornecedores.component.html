@@ -108,12 +108,16 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('habilidades.id')">#</th>
-            <th (click)="orderby('habilidades.nome')">Nome</th>
-            <th (click)="orderby('habilidades.descricao')">Tipo</th>
-            <th (click)="orderby('habilidades.descricao')">Valor</th>
-            <th (click)="orderby('created_at')">Realizada</th>
-            <th (click)="orderby('updated_at')">status</th>
+            <th (click)="orderby('habilidades.id')">Código</th>
+            <th>Motorista</th>
+            <th>Sit. Operação</th>
+            <th>Dt. Cadastro</th>
+            <th>Sit. Cadastro</th>
+            <th>Nº Corridas</th>
+            <th>Avaliação</th>
+            <th>Km Rodados</th>
+            <th>Veiculo</th>
+            <th>Situação Veic.</th>
           </tr>
           </thead>
           <tbody>
@@ -121,11 +125,18 @@
             <td>
               <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
             <td>{{item.id}}</td>
-            <td>{{item.nome}}</td>
-            <td>{{item.tipo}}</td>
-            <td>{{item.valor|currency:"BRL":true}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.disponivel?"Disponível":"Indisponivel"}}</td>
             <td>{{item.created_at.date|date:'d-MM-y'}}</td>
             <td>{{item.status}}</td>
+            <td>{{item.contagem_chamadas}},00</td>
+            <td>
+              <!--<rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>-->
+              {{item.nota_fornecedor==0?'---':item.nota_fornecedor| number:'1.1-2':'br'}}
+            </td>
+            <td>{{item.km_mes_rodado==0?'---':'Km '+(item.km_mes_rodado| number:'1.1-2':'br')}}</td>
+            <td>{{item.veiculo_modelo?item.veiculo_modelo:"---"}}</td>
+            <td>{{item.veiculo_status?item.veiculo_status:"---"}}</td>
           </tr>
           </tbody>
         </table>

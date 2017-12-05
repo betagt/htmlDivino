@@ -105,6 +105,9 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
             'tempo_cancel_cliente_min': [null],
         });
         this.configuracoesService.view().subscribe(configuracoes => {
+            configuracoes.ptxoper *= 100;
+            configuracoes.pkmm *= 100;
+            configuracoes.pbonusp *= 100;
             this.saveForm.patchValue(configuracoes);
             this.configuracoes = configuracoes;
         });

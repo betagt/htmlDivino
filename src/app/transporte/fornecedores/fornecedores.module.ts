@@ -7,6 +7,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {AutoCompleteModule, CheckboxModule, DropdownModule, TooltipModule} from "primeng/primeng";
 import { ControleFornecedoresDetailComponent } from './controle-fornecedores-detail/controle-fornecedores-detail.component';
+import {RatingModule} from "ngx-rating";
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { ControleFornecedoresDetailComponent } from './controle-fornecedores-det
         DropdownModule,
         CheckboxModule,
         AutoCompleteModule,
+        RatingModule,
         FornecedoresRouting
     ],
     declarations: [ControleFornecedoresComponent, ControleFornecedoresDetailComponent]

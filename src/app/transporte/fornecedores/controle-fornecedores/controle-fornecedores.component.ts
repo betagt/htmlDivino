@@ -10,6 +10,13 @@ declare var $: any;
     styleUrls: ['./controle-fornecedores.component.css'],
     providers: [
         UsuariosService
+    ],
+    styles: [
+        `
+            i.star-icon.half0{
+                font-size: 1em !important;
+            } 
+        `
     ]
 })
 export class ControleFornecedoresComponent extends ListAbstract implements OnInit {
