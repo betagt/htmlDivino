@@ -1,13 +1,14 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {UsuariosService} from "../../../usuarios/usuarios.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DetailAbstract} from "../../../../core/abstract/detail.abstract";
 import {Location} from "@angular/common";
 
 @Component({
-  selector: 'app-controle-fornecedores-detail',
-  templateUrl: './controle-fornecedores-detail.component.html',
-  styleUrls: ['./controle-fornecedores-detail.component.css']
+    selector: 'app-controle-fornecedores-detail',
+    templateUrl: './controle-fornecedores-detail.component.html',
+    styleUrls: ['./controle-fornecedores-detail.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ControleFornecedoresDetailComponent extends DetailAbstract implements OnInit {
 

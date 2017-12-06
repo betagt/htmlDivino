@@ -11,6 +11,7 @@ import {
 } from "primeng/primeng";
 import { ControleFornecedoresDetailComponent } from './controle-fornecedores-detail/controle-fornecedores-detail.component';
 import {RatingModule} from "ngx-rating";
+import { FragListComponent } from './frag-list/frag-list.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,7 @@ import {RatingModule} from "ngx-rating";
         RatingModule,
         FornecedoresRouting
     ],
-    declarations: [ControleFornecedoresComponent, ControleFornecedoresDetailComponent]
+    declarations: [ControleFornecedoresComponent, ControleFornecedoresDetailComponent, FragListComponent]
 })
 export class FornecedoresModule {
 }
