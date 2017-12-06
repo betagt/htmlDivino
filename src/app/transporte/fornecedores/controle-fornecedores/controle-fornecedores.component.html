@@ -108,15 +108,16 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('habilidades.id')">Código</th>
+            <th (click)="orderby('habilidades.id')" title="Código">#</th>
             <th>Motorista</th>
             <th>Sit. Operação</th>
-            <th>Dt. Cadastro</th>
+            <th>Dt. Ativação</th>
             <th>Sit. Cadastro</th>
             <th>Nº Corridas</th>
-            <th>Avaliação</th>
-            <th>Km Rodados</th>
+            <th>Aval.</th>
+            <th>Km Mês Rodados</th>
             <th>Veiculo</th>
+            <th>Placa</th>
             <th>Situação Veic.</th>
           </tr>
           </thead>
@@ -135,7 +136,8 @@
               {{item.nota_fornecedor==0?'---':item.nota_fornecedor| number:'1.1-2':'br'}}
             </td>
             <td>{{item.km_mes_rodado==0?'---':'Km '+(item.km_mes_rodado| number:'1.1-2':'br')}}</td>
-            <td>{{item.veiculo_modelo?item.veiculo_modelo:"---"}}</td>
+            <td>{{item.veiculo_modelo?item.veiculo_marca+'/'+item.veiculo_modelo:"---"}}</td>
+            <td>{{item.veiculo_placa}}</td>
             <td>{{item.veiculo_status?item.veiculo_status:"---"}}</td>
           </tr>
           </tbody>

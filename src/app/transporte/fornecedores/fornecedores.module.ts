@@ -5,7 +5,10 @@ import {FornecedoresRouting} from "./fornecedores.routing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
-import {AutoCompleteModule, CheckboxModule, DropdownModule, TooltipModule} from "primeng/primeng";
+import {
+    AutoCompleteModule, CalendarModule, CheckboxModule, DialogModule, DropdownModule,
+    TooltipModule
+} from "primeng/primeng";
 import { ControleFornecedoresDetailComponent } from './controle-fornecedores-detail/controle-fornecedores-detail.component';
 import {RatingModule} from "ngx-rating";
 
@@ -19,6 +22,8 @@ import {RatingModule} from "ngx-rating";
         TooltipModule,
         DropdownModule,
         CheckboxModule,
+        CalendarModule,
+        DialogModule,
         AutoCompleteModule,
         RatingModule,
         FornecedoresRouting

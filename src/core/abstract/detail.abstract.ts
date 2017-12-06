@@ -9,7 +9,7 @@ export abstract class DetailAbstract {
     routeParams: any;
     params: URLSearchParams;
     item:any;
-    private buttons = {
+    protected buttons = {
         new: true,
         view: true,
         edit: false,

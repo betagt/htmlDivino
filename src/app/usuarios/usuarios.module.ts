@@ -25,9 +25,8 @@ import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/do
         SharedModule,
         Ng2PaginationModule,
         CalendarModule,
-        DropdownModule,
         DialogModule,
-        CalendarModule,
+        DropdownModule,
         DocumentoSwitchFormModule
     ],
     declarations: [

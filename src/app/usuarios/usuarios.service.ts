@@ -93,6 +93,14 @@ export class UsuariosService extends BaseServiceService {
             .catch(this.handleError);
     }
 
+    showFornecedor(id: number, params: URLSearchParams = null): Observable<any> {
+        return this.httpClienteSevice.get('/api/v1/admin/user/vizualizar-fornecedor/' + id, params)
+            .map(res => {
+                return res.json().data;
+            })
+            .catch(this.handleError);
+    }
+
     delete(url) {
         return this.httpClienteSevice.delete(url).map(res => {
             return res.json();
