@@ -16,4 +16,12 @@ export class ChamadasService extends BaseServiceService {
             })
             .catch(this.handleError);
     }
+
+    listarByUserAgencia(id, params: URLSearchParams): Observable<any> {
+        return this.httpClienteSevice.setSkypePreload(this.skyPreload).get(this.url + '/chamadas-agencia/' + id, params)
+            .map(res => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
 }
