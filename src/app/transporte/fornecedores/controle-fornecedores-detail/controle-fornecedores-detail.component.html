@@ -76,120 +76,153 @@
             <!--<ul class="tab-nav tn-justified">
                 <li class="active"><a >Detalhes</a></li>
             </ul>-->
-            <div class="pmb-block col-md-6">
-                <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
-                </div>
-                <div class="pmbb-body p-l-30">
-                    <div class="pmbb-view">
-                        <dl class="dl-horizontal">
-                            <dt>Nome</dt>
-                            <dd>{{item?.name}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Sexo</dt>
-                            <dd>{{item?.sexo_label}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Recebe Newsletter</dt>
-                            <dd>{{item?.chk_newsletter?'sim':'não'}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Avaliação</dt>
-                            <dd *ngIf="item?.nota_fornecedor">
-                                <rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Status</dt>
-                            <dd>{{item?.status}}</dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-            <div class="pmb-block col-md-6">
-                <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-car-taxi m-r-10"></i> Veiculo</h2>
-                </div>
-                <div class="pmbb-body p-l-30">
-                    <div class="pmbb-view">
-                        <dl class="dl-horizontal">
-                            <dt>Marca/Modelo</dt>
-                            <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Placa</dt>
-                            <dd>{{item?.veiculo_placa}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Cor</dt>
-                            <dd>{{item?.veiculo_cor}}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Situação</dt>
-                            <dd>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-            <div class="pmb-block col-md-12">
-                <div class="pmbb-header">
-                    <h2><i class="zmdi zmdi-file m-r-10"></i>
-                        Dados do motorista</h2>
-                </div>
-                <div class="pmbb-body p-l-30">
-                    <div class="col-md-6" style="text-transform: capitalize;">
-                        <b>CPF/CNPJ:</b> {{item?.pessoa?.data?.cpf_cnpj}} <br>
-                        <b>RG:</b> {{item?.pessoa?.data?.rg}} - {{item?.pessoa?.data?.orgao_emissor}} <br>
-                        <b>Nec. Especial:</b> {{item?.pessoa?.data?.nec_especial}} <br>
-                        <b>Contato:</b> {{item?.pessoa?.data?.nec_especial}} <br>
-                    </div>
-                    <div class="col-md-6" style="text-transform: capitalize;">
-                        <b>Escolaridade:</b> {{item?.pessoa?.data?.escolaridade}} <br>
-                        <b>Estado Civil:</b> {{item?.pessoa?.data?.estado_civil}} <br>
-                        <b>Sexo:</b> {{item?.pessoa?.data?.sexo_label}} <br>
-                        <b>Nome Fantasia:</b> {{item?.pessoa?.data?.sexo_label}} <br>
-                    </div>
-                </div>
-            </div>
-            <div class="card-header pmbb-header col-md-12" style="margin: 0;">
-                <h2 class="btn-clicle-middle m-b-10">
-                    <i class="zmdi zmdi-file m-r-10"></i>
-                    Documentos
-                </h2>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Tipo do Arquivo</th>
-                                <th>Quantidade de Arquivos</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let doc of item?.documentos?.data; let i=index">
-                                <td>{{doc?.tipo}}</td>
-                                <td>{{doc?.arquivos?.data.length}}</td>
-                                <td>{{doc?.status}}</td>
-                                <td class="center">
-                                    <button (click)="loadArquivos(doc?.arquivos)" class="btn bgm-blue waves-effect"
-                                            title="Visualizar Documentos" type="button"><i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-header col-md-12">
-                <h2 class="btn-clicle-middle m-b-10">
-                    <i class="zmdi zmdi-file m-r-10"></i>
-                    Chamadas
-                </h2>
+            <div class="card-body">
+                <ul class="tab-nav tn-justified tn-icon" role="tablist">
+                    <li role="presentation" class="active">
+                        <a class="col-sx-4" href="#tab-1" aria-controls="tab-1" role="tab" data-toggle="tab">
+                            Dados do motorista
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="col-xs-4" href="#tab-2" aria-controls="tab-2" role="tab" data-toggle="tab">
+                            Documentos
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="col-xs-4" href="#tab-3" aria-controls="tab-3" role="tab" data-toggle="tab">
+                            Chamadas
+                        </a>
+                    </li>
+                </ul>
 
-                <div class="card-body col-md-12 no-padding m-b-20">
-                    <app-frag-list [idMotorista]="routeParams.id"></app-frag-list>
+                <div class="tab-content p-20">
+                    <div role="tabpanel" class="tab-pane animated fadeIn in active" id="tab-1">
+                        <div class="pmb-block col-md-6">
+                            <div class="pmbb-header">
+                                <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
+                            </div>
+                            <div class="pmbb-body p-l-30">
+                                <div class="pmbb-view">
+                                    <dl class="dl-horizontal">
+                                        <dt>Nome</dt>
+                                        <dd>{{item?.name}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Sexo</dt>
+                                        <dd>{{item?.sexo_label}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Recebe Newsletter</dt>
+                                        <dd>{{item?.chk_newsletter?'sim':'não'}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Avaliação</dt>
+                                        <dd *ngIf="item?.nota_fornecedor">
+                                            <rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>
+                                        </dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status</dt>
+                                        <dd>{{item?.status}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pmb-block col-md-6">
+                            <div class="pmbb-header">
+                                <h2><i class="zmdi zmdi-car-taxi m-r-10"></i> Veiculo</h2>
+                            </div>
+                            <div class="pmbb-body p-l-30">
+                                <div class="pmbb-view">
+                                    <dl class="dl-horizontal">
+                                        <dt>Marca/Modelo</dt>
+                                        <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Placa</dt>
+                                        <dd>{{item?.veiculo_placa}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Cor</dt>
+                                        <dd>{{item?.veiculo_cor}}</dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Situação</dt>
+                                        <dd>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pmb-block col-md-12">
+                            <div class="pmbb-header">
+                                <h2><i class="zmdi zmdi-file m-r-10"></i>
+                                    Dados do motorista</h2>
+                            </div>
+                            <div class="pmbb-body p-l-30">
+                                <div class="col-md-6" style="text-transform: capitalize;">
+                                    <b>CPF/CNPJ:</b> {{item?.pessoa?.data?.cpf_cnpj}} <br>
+                                    <b>RG:</b> {{item?.pessoa?.data?.rg}} - {{item?.pessoa?.data?.orgao_emissor}} <br>
+                                    <b>Nec. Especial:</b> {{item?.pessoa?.data?.nec_especial}} <br>
+                                    <b>Contato:</b> {{item?.pessoa?.data?.nec_especial}} <br>
+                                </div>
+                                <div class="col-md-6" style="text-transform: capitalize;">
+                                    <b>Escolaridade:</b> {{item?.pessoa?.data?.escolaridade}} <br>
+                                    <b>Estado Civil:</b> {{item?.pessoa?.data?.estado_civil}} <br>
+                                    <b>Sexo:</b> {{item?.pessoa?.data?.sexo_label}} <br>
+                                    <b>Nome Fantasia:</b> {{item?.pessoa?.data?.sexo_label}} <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab-2">
+                        <div class="pmb-block col-md-12" style="margin: 0;">
+                            <!--<div class="pmbb-header">
+                                <h2 class="btn-clicle-middle m-b-10">
+                                    <i class="zmdi zmdi-file m-r-10"></i>
+                                    Documentos
+                                </h2>
+                            </div>-->
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Tipo do Arquivo</th>
+                                        <th>Quantidade de Arquivos</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let doc of item?.documentos?.data; let i=index">
+                                        <td>{{doc?.tipo}}</td>
+                                        <td>{{doc?.arquivos?.data.length}}</td>
+                                        <td>{{doc?.status}}</td>
+                                        <td class="center">
+                                            <button (click)="loadArquivos(doc?.arquivos)" class="btn bgm-blue waves-effect"
+                                                    title="Visualizar Documentos" type="button"><i class="zmdi zmdi-search"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab-3">
+                        <div class="pmb-block col-md-12">
+                            <!--<div class="pmbb-header">
+                                <h2 class="">
+                                    <i class="zmdi zmdi-file m-r-10"></i>
+                                    Chamadas
+                                </h2>
+                            </div>-->
+                            <div class="card-body col-md-12 no-padding m-b-20">
+                                <app-frag-list [idMotorista]="routeParams.id"></app-frag-list>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
