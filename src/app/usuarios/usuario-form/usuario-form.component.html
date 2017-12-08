@@ -268,10 +268,9 @@
                         </div>
                         <div class="card-header pmbb-header no-padding" style="margin: 0;">
                             <h2 class="btn-clicle-middle m-b-10">
-                                <button (click)="addDocumento()" class="btn bgm-green waves-circle" type="submit"><i
-                                        class="zmdi zmdi-plus"></i></button>
-                                Documentos
+                                <b>Documentos</b><br/>
                             </h2>
+                            <button (click)="addDocumento()" class="btn bgm-green" type="submit"><i class="zmdi zmdi-plus"></i> Adicionar</button>
                             <div class="m-b-25" [formGroup]="saveForm">
                                 <div *ngFor="let documento of saveForm.controls['documentos'].controls; let i=index">
                                     <div class="row-large m-t-25">
@@ -279,23 +278,19 @@
                                             <label>
                                                 Tipo do Documento:
                                             </label>
-                                            <p-dropdown placeholder="Selecione" [options]="tipoDocumentos"
-                                                        [formControl]="documento.controls['transporte_tipo_documento_id']"></p-dropdown>
-                                            <app-error-message
-                                                    [erros]="documento.controls['transporte_tipo_documento_id']"></app-error-message>
+                                            <!--<input type="text" class="form-control input-sm" [formControl]="documento.controls['transporte_tipo_documento_id']" placeholder="Ex. 63">-->
+                                            <p-dropdown  placeholder="Selecione o Tipo do Documento" [options]="tipoDocumentos" [formControl]="documento.controls['transporte_tipo_documento_id']"></p-dropdown>
+                                            <app-error-message [erros]="documento.controls['transporte_tipo_documento_id']"></app-error-message>
                                         </div>
                                         <div class="col-xs-4">
                                             <label>
                                                 Arquivo:
                                             </label>
-                                            <input type="file" class="form-control input-sm" multiple accept="image/*"
-                                                   (change)="changeListenerVeiculo(documento, $event)">
-                                            <app-error-message
-                                                    [erros]="documento.controls['arquivos']"></app-error-message>
+                                            <input type="file" class="form-control input-sm" multiple accept="image/*" (change)="changeListenerVeiculo(documento, $event)" >
+                                            <app-error-message [erros]="documento.controls['arquivos']"></app-error-message>
                                         </div>
                                         <div class="col-xs-2 center-itens">
-                                            <button (click)="delDocumento(i)" class="btn bgm-green waves-effect"
-                                                    type="button"><i class="zmdi zmdi-close"></i></button>
+                                            <button (click)="delDocumento(i)" class="btn bgm-green waves-effect" type="button"><i class="zmdi zmdi-close"></i></button>
                                         </div>
                                     </div>
                                     <app-switch-documento *ngIf="documento" (documentoformChange)="documento"

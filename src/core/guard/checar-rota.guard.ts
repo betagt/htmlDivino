@@ -3,6 +3,7 @@ import {CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router} f
 import {Observable} from 'rxjs';
 import {Permissions} from './permissions';
 import {AuthService} from "../services/auth.service";
+import {isNullOrUndefined} from "util";
 
 @Injectable()
 export class ChecarRotaGuard implements CanActivateChild {
@@ -16,7 +17,7 @@ export class ChecarRotaGuard implements CanActivateChild {
         const response = this.permissions.canActivate(state.url, childRoute.params);
         if (response instanceof Observable) {
             return response.map((auth) => {
-              return this.checkresponse(auth);
+                return this.checkresponse(auth);
             }).first();
         }
         return this.checkresponse(response);
@@ -26,7 +27,15 @@ export class ChecarRotaGuard implements CanActivateChild {
         if (auth) {
             return true;
         }
-        if (this.authService.getUser().roles.data.some(x => x.slug == 'fornecedor')) {
+        const user: any = this.authService.getUser();
+
+        if (isNullOrUndefined(user)) {
+            console.log('eetetet');
+            this.router.navigate(['/login']);
+            return false;
+        }
+
+        if (user.roles.data.some(x => x.slug == 'fornecedor')) {
             this.router.navigate(['/transporte/chamadas/minhas-corridas']);
             return;
         } else {

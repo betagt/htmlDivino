@@ -39,7 +39,7 @@
                 <div class="pmo-pic">
                     <div class="p-relative">
                         <a>
-                            <img class="img-responsive" [src]="item?.imagem" alt="">
+                            <img class="img-responsive" onError="this.src='../../../assets/img/null-user.jpg'" [src]="item?.imagem" alt="">
                         </a>
                         <div class="dropdown pmop-message">
                             <input type="file" style="display: none;" #fileEvent (change)="changeListener($event)">

@@ -9,6 +9,7 @@ import {escape} from "querystring";
 import {StorageService} from "./storage.service";
 import {AlertService} from "./alert.service.com";
 import {ConfigService} from "./config.service";
+import {isNullOrUndefined} from "util";
 
 const CLIENT_ID: number = ConfigService.config().client_id;
 const SECRET: string = ConfigService.config().secret;
@@ -142,7 +143,7 @@ export class AuthService {
     }
 
     private baseDecodeObj(key) {
-        return JSON.parse(decodeURIComponent(atob(this.get(key))));
+        return isNullOrUndefined(this.get(key)) ? null : JSON.parse(decodeURIComponent(atob(this.get(key))));
     }
 
     removeToken() {
@@ -165,7 +166,7 @@ export class AuthService {
         this.set(key, obj);
     }
 
-    getUser(): Usuario {
+    getUser() {
         return this.baseDecodeObj('u');
     }
 
@@ -192,11 +193,11 @@ export class AuthService {
         return this.storageService;
     }
 
-    private get(key) {
+    private get (key) {
         return this.localStorage().get(key);
     }
 
-    private set(key, value: any, expiry?: any) {
+    private set (key, value: any, expiry?: any) {
         this.localStorage().set(key, value, expiry);
         return this;
     }

@@ -1,7 +1,7 @@
 <section id="content">
   <div class="container">
     <app-buttons
-            [title]="'Lista de motoristas'"
+            [title]="'Lista de LEVEZ-MOTORISTAS'"
             [smalltext]="_total + ' Itens'"
             [subtitle]="'Aqui você gerencia todas as suas corridas realizadas.'"
             [itemSelected]="itemSelected"
@@ -65,7 +65,7 @@
           <div class="header-search input-group">
             <div class="col-md-7">
               <div class="fg-line">
-                <input type="text" [formControl]="pesquisaForm.controls['habilidades.nome']" id="name" class="form-control" placeholder="Nome">
+                <input type="text" [formControl]="pesquisaForm.controls['users.name']" id="name" class="form-control" placeholder="Nome">
               </div>
             </div>
             <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
@@ -108,7 +108,7 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('habilidades.id')" title="Código">#</th>
+            <th (click)="orderby('habilidades.id')" title="Código">Cod.</th>
             <th>Motorista</th>
             <th>Sit. Operação</th>
             <th>Dt. Ativação</th>
@@ -116,7 +116,7 @@
             <th>Nº Corridas</th>
             <th>Aval.</th>
             <th>Km Mês Rodados</th>
-            <th>Veiculo</th>
+            <th>Veiculo/Modelo</th>
             <th>Placa</th>
             <th>Situação Veic.</th>
           </tr>

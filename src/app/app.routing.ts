@@ -42,7 +42,7 @@ const APP_ROUTES: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
-    {path: 'notfound', component: NotFoundComponent},
+    {path: 'notfound', canActivate: [CanActivateViaOAuthGuard], canActivateChild: [ChecarRotaGuard], component: NotFoundComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: '**', redirectTo: 'notfound'}
 ];

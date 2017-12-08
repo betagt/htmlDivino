@@ -30,7 +30,7 @@ export class ControleFornecedoresComponent extends ListAbstract implements OnIni
 
     ngOnInit(): void {
         super.form({
-            'habilidades.nome': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+            'users.name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'field': ['id'],
             'order': ['dec']
         });

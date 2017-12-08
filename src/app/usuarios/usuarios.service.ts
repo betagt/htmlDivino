@@ -140,7 +140,7 @@ export class UsuariosService extends BaseServiceService {
     }
 
     updateOrCreate(params: FormData, id: number = null): Observable<any> {
-        let url = '/api/v1/admin/user/';
+        let url = '/api/v1/admin/user';
 
         if (id) {
             url = '/api/v1/admin/user/' + id;

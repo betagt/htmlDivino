@@ -6,7 +6,7 @@
         <div class="s-profile">
             <a href="" data-ma-action="profile-menu-toggle">
                 <div class="sp-pic">
-                    <img src="{{usuario.imagem}}" alt="">
+                    <img src="{{usuario.imagem}}" onError="this.src='../../../assets/img/null-user.jpg'" alt="">
                 </div>
 
                 <div class="sp-info">
@@ -20,7 +20,7 @@
                     <a [routerLink]="['/usuarios/perfil']"><i class="zmdi zmdi-account"></i> Perfil</a>
                 </li>
                 <li>
-                    <a (click)="logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                    <a (click)="logout()"><i class="zmdi zmdi-time-restore"></i> Sair</a>
                 </li>
             </ul>
         </div>
