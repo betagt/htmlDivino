@@ -133,7 +133,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 this.usuario = Object.assign({}, usuario);
                 delete usuario.documentos;
                 if (!isNullOrUndefined(usuario.pessoa)) {
-                    usuario.pessoa.data.data_nascimento = new Date(usuario.pessoa.data.data_nascimento);
+                    usuario.pessoa.data.data_nascimento = UtilService.converterData(new Date(usuario.pessoa.data.data_nascimento));
                     this.saveForm.controls['pessoa'].patchValue(usuario.pessoa.data);
                 }
                 this.saveForm.patchValue(usuario);

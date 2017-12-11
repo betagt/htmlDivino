@@ -71,4 +71,12 @@ export class UtilService {
         }
         return this.urlSearchParams;
     }
+
+    static converterData(data: Date) {
+        return data.toLocaleDateString('en-GB', {
+            day : 'numeric',
+            month : 'numeric',
+            year : 'numeric'
+        }).split(' ').join('/');
+    }
 }
