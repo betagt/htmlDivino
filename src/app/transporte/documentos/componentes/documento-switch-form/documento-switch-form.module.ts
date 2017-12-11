@@ -4,6 +4,7 @@ import {SwitchDocumentoComponent} from './switch-documento/switch-documento.comp
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../../../shared/shared.module";
 import {CalendarModule, DropdownModule} from "primeng/primeng";
+import {TextMaskModule} from "angular2-text-mask";
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import {CalendarModule, DropdownModule} from "primeng/primeng";
         ReactiveFormsModule,
         SharedModule,
         CalendarModule,
-        DropdownModule
+        DropdownModule,
+        TextMaskModule
     ],
     declarations: [SwitchDocumentoComponent],
     exports: [

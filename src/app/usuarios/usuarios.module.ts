@@ -15,6 +15,7 @@ import { MeusDadosDetailComponent } from './perfil/meus-dados-detail/meus-dados-
 import {CalendarModule, DialogModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/primeng';
 import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/documento-switch-form/documento-switch-form.module";
+import {TextMaskModule} from "angular2-text-mask";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/do
         CalendarModule,
         DialogModule,
         DropdownModule,
-        DocumentoSwitchFormModule
+        DocumentoSwitchFormModule,
+        TextMaskModule
     ],
     declarations: [
         UsuarioListComponent,

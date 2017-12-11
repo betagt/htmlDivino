@@ -1,10 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
+import {UtilService} from "../../../../../../core/services/util.service";
 
 @Component({
     selector: 'app-switch-documento',
     templateUrl: './switch-documento.component.html',
-    styleUrls: ['./switch-documento.component.css']
+    styleUrls: ['./switch-documento.component.css'],
+    providers: [
+        UtilService
+    ]
 })
 export class SwitchDocumentoComponent implements OnInit {
 
@@ -17,6 +21,8 @@ export class SwitchDocumentoComponent implements OnInit {
     coberturaVidas;
 
     coberturaTerceiros;
+
+    maskData;
 
     @Output() documentoformChange = new EventEmitter();
 
@@ -31,6 +37,7 @@ export class SwitchDocumentoComponent implements OnInit {
     }
 
     constructor() {
+        this.maskData = UtilService.maskData();
         this.catcnh = [
             {
                 label: 'A',

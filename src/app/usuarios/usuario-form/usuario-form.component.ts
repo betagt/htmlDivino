@@ -44,6 +44,8 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
 
     status: any;
 
+    maskData: any;
+
     constructor(private usuarioService: UsuariosService,
                 private ngZone: NgZone,
                 private documentoService: DocumentoService,
@@ -57,6 +59,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 activatedRoute: ActivatedRoute,
                 router: Router) {
         super(formBuilder, ref, location, activatedRoute, router, usuarioService, ['/usuarios']);
+        this.maskData = UtilService.maskData();
         this._fb = formBuilder;
     }
 
@@ -106,22 +109,21 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                     Validators.required
                 ),
             ])],
-            'sexo': [1, Validators.compose([Validators.required])],
             'chk_newsletter': [0],
             'perfil': ['cliente'],
             'status': ['inativo'],
             'documentos': this._fb.array([]),
             'pessoa': this._fb.group({
-                'sexo': [null, Validators.compose([])],
-                'cpf_cnpj': [null, Validators.compose([])],
-                'nec_especial': [null, Validators.compose([])],
-                'data_nascimento': [null, Validators.compose([])],
-                'rg': [null, Validators.compose([])],
-                'orgao_emissor': [null, Validators.compose([])],
-                'escolaridade': [null, Validators.compose([])],
-                'estado_civil': [null, Validators.compose([])],
-                'fantasia': [null, Validators.compose([])],
-                'contato': [null, Validators.compose([])],
+                'sexo': [null],
+                'cpf_cnpj': [null, Validators.compose([Validators.required])],
+                'nec_especial': [null],
+                'data_nascimento': [null, Validators.compose([Validators.required])],
+                'rg': [null, Validators.compose([Validators.required])],
+                'orgao_emissor': [null, Validators.compose([Validators.required])],
+                'escolaridade': [null, Validators.compose([Validators.required])],
+                'estado_civil': [null, Validators.compose([Validators.required])],
+                'fantasia': [null],
+                'contato': [null],
             })
         });
         if (this.routeParams.id) {

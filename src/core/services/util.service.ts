@@ -56,6 +56,11 @@ export class UtilService {
             // includeThousandsSeparator: true
         });
     }
+
+    static maskData() {
+        return [/[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/];
+    }
+
     constructor() {
         this.urlSearchParams = new URLSearchParams();
     }
