@@ -3389,6 +3389,7 @@ html.ie9 .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dragger_b
 
 input.form-control {
     padding: 0 10px !important;
+    background-color: #eee;
 }
 
 .breadcrumb {

@@ -44,6 +44,8 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
 
     status: any;
 
+    estado_civil: any;
+
     maskData: any;
 
     constructor(private usuarioService: UsuariosService,
@@ -86,6 +88,25 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             {
                 label: 'Bloqueado',
                 value: 'bloqueado'
+            }
+        ];
+
+        this.estado_civil = [
+            {
+                label: 'Solteiro',
+                value: 'Solteiro'
+            },
+            {
+                label: 'Casado',
+                value: 'Casado'
+            },
+            {
+                label: 'União Estável',
+                value: 'União Estável'
+            },
+            {
+                label: 'Divorciado/Separado',
+                value: 'Divorciado/Separado'
             }
         ];
         super.form({

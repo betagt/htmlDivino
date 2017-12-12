@@ -43,6 +43,7 @@ export class MeusDadosDetailComponent implements OnInit {
     tipoDocumentos;
     marcasCarro;
     modelosCarro;
+    estado_civil;
     cores;
     @ViewChild('senhaButton') selectRef: ElementRef;
     @ViewChild('perfilButton') selectRefPerfil: ElementRef;
@@ -58,10 +59,29 @@ export class MeusDadosDetailComponent implements OnInit {
                 private veiculoService: VeiculoService,
                 private formBuilder: FormBuilder,
                 private ngZone: NgZone) {
+
+
+        this.estado_civil = [
+            {
+                label: 'Solteiro',
+                value: 'Solteiro'
+            },
+            {
+                label: 'Casado',
+                value: 'Casado'
+            },
+            {
+                label: 'União Estável',
+                value: 'União Estável'
+            },
+            {
+                label: 'Divorciado/Separado',
+                value: 'Divorciado/Separado'
+            }
+        ];
     }
 
     ngOnInit() {
-
         this.saveForm = this.formBuilder.group({
             'name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
             'email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],

@@ -40,7 +40,7 @@
                                 <div class="row-large m-t-10">
                                     <div class="col-xs-6">
                                         <div class="fg-line">
-                                            <label for="ts1" class="ts-label">Nome</label>
+                                            <label for="ts1" class="ts-label">Nome Completo</label>
                                             <input type="text" [formControl]="saveForm.controls['name']"
                                                    class="form-control input-sm" placeholder="Ex: fulano de tal ">
                                         </div>
@@ -190,13 +190,15 @@
                                         <div class="col-md-6">
                                             <div >
                                                 <label>Estado Civil</label>
-                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['estado_civil']" placeholder="Ex: Casado">
+                                                <!--<input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['estado_civil']" placeholder="Ex: Casado">-->
+                                                <p-dropdown [formControl]="saveForm.controls['pessoa'].controls['estado_civil']" [options]="estado_civil"
+                                                            placeholder="selecione"></p-dropdown>
                                             </div>
                                             <app-error-message [erros]="saveForm.controls['pessoa']?.controls['estado_civil']"></app-error-message>
                                         </div>
                                         <div class="col-md-6">
                                         <div >
-                                            <label>Nome Fantasia</label>
+                                            <label>Nome fantasia/Apelido</label>
                                             <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['fantasia']" placeholder="Ex: Empresa texte">
                                         </div>
                                         <app-error-message [erros]="saveForm.controls['pessoa']?.controls['fantasia']"></app-error-message>

@@ -217,7 +217,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Estado Civil</label>
-                            <input type="text" class="form-control" [formControl]="_fbPessoa.controls['estado_civil']" placeholder="Ex: Casado">
+                            <!--<input type="text" class="form-control" [formControl]="_fbPessoa.controls['estado_civil']" placeholder="Ex: Casado">-->
+                            <p-dropdown [formControl]="_fbPessoa.controls['estado_civil']" [options]="estado_civil"
+                                        placeholder="selecione"></p-dropdown>
                         </div>
                         <app-error-message [erros]="_fbPessoa.controls['estado_civil']"></app-error-message>
                     </div>
