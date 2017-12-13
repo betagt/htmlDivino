@@ -14,7 +14,7 @@
                             <div class="p-relative">
                                 <a>
 
-                                    <img class="img-responsive" [src]="usuario?.imagem" alt="">
+                                    <img class="img-responsive" onError="this.src='../../../assets/img/null-user.jpg'" [src]="usuario?.imagem" alt="">
                                 </a>
                                 <div class="dropdown pmop-message">
                                     <input type="file" style="display: none;" #fileEvent

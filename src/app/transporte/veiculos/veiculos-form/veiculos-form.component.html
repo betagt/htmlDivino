@@ -116,6 +116,24 @@
                                     <app-error-message [erros]="saveForm.controls['status']"></app-error-message>
                                 </div>
                             </div>
+                            <div class="row-large m-t-10">
+                                <div class="col-md-3">
+                                    <div class="">
+                                        <label>Renavan</label>
+                                        <input type="text" class="form-control"
+                                               [formControl]="saveForm.controls['renavam']" placeholder="Ex: 00000">
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['renavam']"></app-error-message>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="">
+                                        <label>Chassi</label>
+                                        <input type="text" class="form-control"
+                                               [formControl]="saveForm.controls['chassi']" placeholder="Ex: 00000">
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['chassi']"></app-error-message>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="card-header pmbb-header" style="margin: 0;">

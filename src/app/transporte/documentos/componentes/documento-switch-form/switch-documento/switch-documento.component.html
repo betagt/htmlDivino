@@ -1,6 +1,6 @@
 <div class="row-large" [ngSwitch]="documentoform.controls['transporte_tipo_documento_id'].value">
     <div class="row-large" *ngSwitchCase="1">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Numero
@@ -9,7 +9,7 @@
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Emissão
@@ -20,7 +20,7 @@
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Orgão Emissor
@@ -29,7 +29,7 @@
                 <app-error-message [erros]="documentoform.controls['orgao_amissor']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label style="width: 100%;">
                     Estado
@@ -67,28 +67,40 @@
             </div>
         </div>
     </div>
-    <div class="row-large" *ngSwitchCase="3">
-        <div class="col-xs-2">
-            <div class="fg-line">
-                <label>
-                    Numero
-                </label>
-                <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
-                <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
+    <div class="row-large" style="display: block;" *ngSwitchCase="3">
+        <div class="row-large">
+            <div class="col-md-3">
+                <div class="fg-line">
+                    <label>
+                        Numero
+                    </label>
+                    <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
+                    <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
+                </div>
             </div>
-        </div>
-        <div class="col-xs-3" >
-            <div class="fg-line">
-                <label>
-                    Data de Emissão
-                </label>
-                <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
-                <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
-                <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
+            <div class="col-md-3" >
+                <div class="fg-line">
+                    <label>
+                        Data de Emissão
+                    </label>
+                    <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                    <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
+                    <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                    <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
+                </div>
             </div>
-        </div>
-        <div class="col-xs-3">
+            <div class="col-md-3" >
+                <div class="fg-line">
+                    <label>
+                        Data de Vencimento
+                    </label>
+                    <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                    <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
+                    <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
+                    <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
+                </div>
+            </div>
+            <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Orgão Emissor
@@ -97,55 +109,39 @@
                 <app-error-message [erros]="documentoform.controls['orgao_amissor']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="fg-line">
-                <label style="width: 100%;">
-                    Estado
-                </label>
-                <select [formControl]="documentoform.controls['uf']">
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO" [selected]="true">Tocantins</option>
-                </select>
-                <app-error-message [erros]="documentoform.controls['uf']"></app-error-message>
-            </div>
         </div>
-        <div class="col-xs-2">
+        <div class="row-large">
+            <div class="col-md-2">
+                <div class="fg-line ">
+                    <label style="width: 100%;">
+                        Estado
+                    </label>
+                    <p-dropdown [options]="estados" [formControl]="documentoform.controls['uf']"></p-dropdown>
+                    <app-error-message [erros]="documentoform.controls['uf']"></app-error-message>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="fg-line">
+                    <label>
+                        Categoria CNH
+                    </label>
+                    <p-dropdown  [options]="catcnh" [formControl]="documentoform.controls['categoria_cnh']"></p-dropdown>
+                </div>
+                <app-error-message [erros]="documentoform.controls['categoria_cnh']"></app-error-message>
+            </div>
+            <div class="col-md-3">
             <div class="fg-line">
                 <label>
-                    Categoria CNH
+                    Exerce Atividade Remunerada
                 </label>
-                <p-dropdown [options]="catcnh" [formControl]="documentoform.controls['categoria_cnh']"></p-dropdown>
+                <p-dropdown [options]="atividadeRemunerada" [formControl]="documentoform.controls['atividade_remunerada']"></p-dropdown>
             </div>
-            <app-error-message [erros]="documentoform.controls['categoria_cnh']"></app-error-message>
+            <app-error-message [erros]="documentoform.controls['atividade_remunerada']"></app-error-message>
+        </div>
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="6">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Numero CNPJ (opcional)
@@ -154,7 +150,7 @@
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     CNAE principal (opcional)
@@ -165,7 +161,7 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="7">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Nome do Curso
@@ -174,7 +170,7 @@
                 <app-error-message [erros]="documentoform.controls['nome']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Emissão
@@ -185,7 +181,7 @@
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Carga Horaria
@@ -196,7 +192,7 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="9">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     NIT
@@ -205,7 +201,7 @@
                 <app-error-message [erros]="documentoform.controls['nit']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Código da ocupação
@@ -214,7 +210,7 @@
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data inicio
@@ -224,7 +220,7 @@
                 <app-error-message [erros]="documentoform.controls['data_vigencia_inicial']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Data da emissão
@@ -236,7 +232,7 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="10">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Numero
@@ -245,7 +241,7 @@
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Emissão
@@ -258,7 +254,7 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="11">
-        <div class="col-xs-3" >
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Emissão
@@ -271,19 +267,37 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="12">
-        <div class="col-xs-3">
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
-                    Numero
+                    N. Vistoria
                 </label>
                 <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
-                    Data de Vencimento
+                    Vistoriador
+                </label>
+                <p-dropdown [options]="vistoriador" placeholder="Selecione" [formControl]="documentoform.controls['vistoriador']"></p-dropdown>
+                <app-error-message [erros]="documentoform.controls['vistoriador']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="fg-line">
+                <label>
+                    Alienado
+                </label>
+                <p-dropdown [options]="alienado" placeholder="Selecione" [formControl]="documentoform.controls['alienado']"></p-dropdown>
+                <app-error-message [erros]="documentoform.controls['alienado']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3" >
+            <div class="fg-line">
+                <label>
+                    Data Emissão
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
@@ -293,7 +307,16 @@
         </div>
     </div>
     <div class="row-large" *ngSwitchCase="15">
-        <div class="col-xs-3">
+        <div class="col-md-3">
+            <div class="fg-line">
+                <label>
+                    Nome do proprietário
+                </label>
+                <input type="text"  [formControl]="documentoform.controls['nome']" required class="form-control input-sm">
+                <app-error-message [erros]="documentoform.controls['nome']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="fg-line">
                 <label>
                     Numero
@@ -302,7 +325,25 @@
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
-        <div class="col-xs-3" >
+        <div class="col-md-3">
+            <div class="fg-line ">
+                <label style="width: 100%;">
+                    Estado
+                </label>
+                <p-dropdown [options]="estados" placeholder="Selecione" [formControl]="documentoform.controls['uf']"></p-dropdown>
+                <app-error-message [erros]="documentoform.controls['uf']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="fg-line">
+                <label>
+                    Cidade
+                </label>
+                <input type="text"  [formControl]="documentoform.controls['cidade']" required class="form-control input-sm" placeholder="Ex: Palmas">
+                <app-error-message [erros]="documentoform.controls['cidade']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Vencimento
@@ -314,37 +355,49 @@
             </div>
         </div>
     </div>
-    <div class="row-large" *ngSwitchCase="13">
-        <div class="col-xs-3">
-            <div class="fg-line">
-                <label>
-                    Seguradora
-                </label>
-                <input type="text"  [formControl]="documentoform.controls['seguradora']" required class="form-control input-sm" placeholder="Ex: 123456789">
-                <app-error-message [erros]="documentoform.controls['seguradora']"></app-error-message>
+    <div class="row-large" style="display: block;" *ngSwitchCase="13">
+        <div class="row-large">
+            <div class="col-md-3">
+                <div class="fg-line">
+                    <label>
+                        N. Seguro
+                    </label>
+                    <input type="text"  [formControl]="documentoform.controls['numero']" required class="form-control input-sm" placeholder="Ex: 123456789">
+                    <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="fg-line">
+                    <label>
+                        Seguradora
+                    </label>
+                    <input type="text"  [formControl]="documentoform.controls['seguradora']" required class="form-control input-sm" placeholder="Nome da seguradora">
+                    <app-error-message [erros]="documentoform.controls['seguradora']"></app-error-message>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="fg-line">
+                    <label>
+                        Cobertura de Vidas
+                    </label>
+                    <p-dropdown placeholder="Selecione" [options]="coberturaVidas"
+                                [formControl]="documento.controls['cobertura_de_vidas']"></p-dropdown>
+                    <app-error-message [erros]="documentoform.controls['cobertura_de_vidas']"></app-error-message>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="fg-line">
+                    <label>
+                        Cobertura de Terceiros
+                    </label>
+                    <p-dropdown placeholder="Selecione" [options]="coberturaTerceiros"
+                                [formControl]="documento.controls['cobertura_de_terceiros']"></p-dropdown>
+                    <app-error-message [erros]="documentoform.controls['cobertura_de_terceiros']"></app-error-message>
+                </div>
             </div>
         </div>
-        <div class="col-xs-3">
-            <div class="fg-line">
-                <label>
-                    Cobertura de Vidas
-                </label>
-                <p-dropdown placeholder="Selecione" [options]="coberturaVidas"
-                            [formControl]="documento.controls['cobertura_de_vidas']"></p-dropdown>
-                <app-error-message [erros]="documentoform.controls['cobertura_de_vidas']"></app-error-message>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="fg-line">
-                <label>
-                    Cobertura de Terceiros
-                </label>
-                <p-dropdown placeholder="Selecione" [options]="coberturaTerceiros"
-                            [formControl]="documento.controls['cobertura_de_terceiros']"></p-dropdown>
-                <app-error-message [erros]="documentoform.controls['cobertura_de_terceiros']"></app-error-message>
-            </div>
-        </div>
-        <div class="col-xs-3" >
+        <div class="row-large">
+            <div class="col-md-3" >
             <div class="fg-line">
                 <label>
                     Data de Vencimento
@@ -354,6 +407,7 @@
                 <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
                 <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
             </div>
+        </div>
         </div>
     </div>
 </div>

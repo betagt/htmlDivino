@@ -16,11 +16,17 @@ export class SwitchDocumentoComponent implements OnInit {
 
     catcnh;
 
+    atividadeRemunerada;
+
     estados;
 
     coberturaVidas;
 
     coberturaTerceiros;
+
+    vistoriador;
+
+    alienado;
 
     maskData;
 
@@ -38,6 +44,7 @@ export class SwitchDocumentoComponent implements OnInit {
 
     constructor() {
         this.maskData = UtilService.maskData();
+        this.estados = UtilService.getEstados();
         this.catcnh = [
             {
                 label: 'A',
@@ -58,6 +65,36 @@ export class SwitchDocumentoComponent implements OnInit {
             {
                 label: 'E',
                 value: 'E'
+            },
+        ];
+        this.atividadeRemunerada = [
+            {
+                label: 'Sim',
+                value: true
+            },
+            {
+                label: 'Não',
+                value: false
+            },
+        ];
+        this.vistoriador = [
+            {
+                label: 'Aliança',
+                value: 'Aliança'
+            },
+            {
+                label: 'Tocantins',
+                value: 'Tocantins'
+            },
+        ];
+        this.alienado = [
+            {
+                label: 'Sim',
+                value: true
+            },
+            {
+                label: 'Não Alienante',
+                value: false
             },
         ];
         this.coberturaVidas = [

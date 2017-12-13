@@ -184,6 +184,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             'curso': [null],
             'carga_horaria': [null],
             'data_conclusao': [null],
+            'atividade_remunerada': [false],
             'nit': [null],
         });
     }
