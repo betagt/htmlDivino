@@ -228,6 +228,88 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="endereco" class="pmb-block col-md-12 no-padding">
+                            <div class="col-xs-12  m-b-15" >
+                                <h2 class="custom-title"><i class="zmdi zmdi-pin-drop m-r-10"></i> Endereço</h2>
+                            </div>
+                            <div class="row-large m-t-10">
+                                <div class="col-xs-4">
+                                    <div class="fg-line">
+                                        <label style="width: 100%;">CEP</label>
+                                        <input type="text" style="float: left;width: 73%;"  [textMask]="{mask: cepMask}" class="form-control input-sm"
+                                               maxlength="16"
+                                               [formControl]="saveForm.controls['endereco'].controls['cep']">
+                                        <button style="float: right;width: 23%;" class="btn btn-primary btn-input-form btn-block" (click)="pesquisaLocalidade()">Ok
+                                        </button>
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['cep']"></app-error-message>
+                                </div>
+                                <div class="col-xs-4" >
+                                    <div class="fg-line">
+                                        <label>Estado</label>
+                                        <input type="text"  readonly  [formControl]="saveForm.controls['endereco'].controls['estado_name']" class="form-control input-sm" >
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['estado_name']"></app-error-message>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="fg-line">
+                                        <label>Cidade</label>
+                                        <input type="text"  readonly [formControl]="saveForm.controls['endereco'].controls['cidade_name']" class="form-control input-sm" >
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['cidade_name']"></app-error-message>
+                                </div>
+                            </div>
+                            <div class="row-large m-t-10">
+                                <div class="col-xs-6" >
+                                    <div class="fg-line">
+                                        <label>Endereço</label>
+                                        <input type="text"  placeholder="Ex: Rua 00"  [formControl]="saveForm.controls['endereco'].controls['endereco']" class="form-control input-sm" >
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['endereco']"></app-error-message>
+                                </div>
+                                <div class="col-xs-6" >
+                                    <div class="fg-line">
+                                        <label>Numero</label>
+                                        <input type="text" placeholder="Nº"  [formControl]="saveForm.controls['endereco'].controls['numero']" class="form-control input-sm" >
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['numero']"></app-error-message>
+                                </div>
+                            </div>
+                            <div class="row-large m-t-10">
+                                <div class="col-xs-6" >
+                                    <div class="fg-line">
+                                        <label>Complemento</label>
+                                        <input type="text" placeholder="Ex: Casa, Apartamento..."  [formControl]="saveForm.controls['endereco'].controls['complemento']" class="form-control input-sm" >
+                                    </div>
+                                    <app-error-message [erros]="saveForm.controls['endereco'].controls['complemento']"></app-error-message>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="telefone" class="pmb-block col-md-12 no-padding">
+                            <div class="col-xs-12  m-b-15" >
+                                <h2 class="custom-title">
+                                    <i class="zmdi zmdi-phone m-r-10"></i>Telefones
+                                </h2>
+                            </div>
+                            <div style="width: 100%;" [formGroup]="saveForm.controls['telefone']">
+                                <div class="row-large m-t-10" *ngFor="let address of saveForm.controls['telefone'].controls['ddd'].controls; let i=index">
+                                    <div class="col-xs-6" formArrayName="ddd" >
+                                        <label>
+                                            DDD:
+                                        </label>
+                                        <input type="text" class="form-control input-sm" [formControlName]="i" placeholder="Ex. 63">
+                                        <app-error-message [erros]="saveForm.controls['telefone'].controls['ddd'].controls[i]"></app-error-message>
+                                    </div>
+                                    <div class="col-xs-6" formArrayName="numero">
+                                        <label>
+                                            Telefone
+                                        </label>
+                                        <input type="text"  class="form-control input-sm" [formControlName]="i" placeholder="Ex. 0000-0000">
+                                        <app-error-message [erros]="saveForm.controls['telefone'].controls['numero'].controls[i]"></app-error-message>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-header pmbb-header col-md-12 no-padding m-t-15" style="margin: 0;">
                             <h2 class="btn-clicle-middle m-b-10">
                                 <b>Documentos</b><br/>

@@ -13,6 +13,9 @@ import {UtilService} from "../../../core/services/util.service";
 import {URLSearchParams} from "@angular/http";
 import {isNullOrUndefined} from "util";
 import {ContaService} from "../../transporte/contas/service/conta.service";
+import {EstadosService} from "../../localidades/service/estados.service";
+import {CidadesService} from "../../localidades/service/cidades.service";
+import {GeoService} from "../../localidades/service/geo.service";
 
 declare var $: any;
 
@@ -25,7 +28,10 @@ declare var $: any;
         DocumentoService,
         TipoDocumentoService,
         UtilService,
-        ContaService
+        ContaService,
+        EstadosService,
+        CidadesService,
+        GeoService
     ]
 })
 export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit {
@@ -48,6 +54,16 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
 
     maskData: any;
 
+    enderecoForm;
+
+    cidades;
+
+    estados;
+
+    cepMask;
+
+    dddMask;
+
     constructor(private usuarioService: UsuariosService,
                 private ngZone: NgZone,
                 private documentoService: DocumentoService,
@@ -55,6 +71,9 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 private alertService: AlertService,
                 private contaService: ContaService,
                 private utilService: UtilService,
+                private estadosService: EstadosService,
+                private cidadesService: CidadesService,
+                private geoService: GeoService,
                 formBuilder: FormBuilder,
                 ref: ChangeDetectorRef,
                 location: Location,
@@ -90,7 +109,6 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 value: 'bloqueado'
             }
         ];
-
         this.estado_civil = [
             {
                 label: 'Solteiro',
@@ -145,7 +163,40 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 'estado_civil': [null, Validators.compose([Validators.required])],
                 'fantasia': [null],
                 'contato': [null],
-            })
+            }),
+            'endereco': this._fb.group({
+                'estado_id': [null, Validators.compose([Validators.required])],
+                'cidade_id': [null, Validators.compose([Validators.required])],
+                'cidade_name': [null, Validators.compose([Validators.required])],
+                'estado_name': [null, Validators.compose([Validators.required])],
+                'bairro_id': [null, Validators.compose([Validators.required])],
+                'endereco': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+                'cep': [null, Validators.compose([Validators.required])],
+                'numero': [null, Validators.compose([Validators.required])],
+                'complemento': [null],
+            }),
+            'telefone': this._fb.group({
+                'id': this._fb.array([
+                    [null],
+                    [null],
+                ]),
+                'ddd': this._fb.array([
+                    [null, Validators.compose([Validators.required])],
+                    [null],
+                ]),
+                'numero': this._fb.array([
+                    [null, Validators.compose([Validators.required])],
+                    [null],
+                ]),
+                'principal': this._fb.array([
+                    true,
+                    false,
+                ]),
+                'tipo': this._fb.array([
+                    'celular',
+                    'fixo',
+                ]),
+            }),
         });
         if (this.routeParams.id) {
             const params = new URLSearchParams();
@@ -162,10 +213,13 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             });
         }
 
+        this.cepMask = UtilService.cepMasc();
+        this.dddMask = UtilService.dddMasc();
         this.loadJquery();
         this.tipoDocumento.todosPessoa().subscribe(res => {
             this.tipoDocumentos = this.tipoDocumento.formatSelect(res, 'nome', 'id');
         });
+        //this.loadEstados();
     }
 
     initDocumento(): FormGroup {
@@ -288,5 +342,47 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
         this.contaService.principal(this.routeParams.id, id).subscribe(contas => {
             this.usuario.contas = contas;
         });
+    }
+
+    chageEstado(estadoId: number) {
+        //this.localizacao.estado = this.estados.filter(x => x.value == estadoId)[0];
+        this.cidadesService
+            .selectCidades(estadoId)
+            .subscribe(cidades => {
+                this.cidades = cidades;
+            });
+    }
+
+    loadEstados() {
+        this.estadosService.selectEstados().subscribe(estados => {
+            this.estados = estados;
+        });
+    }
+
+    chageCidade(cidadeId: number) {
+        /*this.localizacao.cidade = this.cidades.filter(x => x.value == cidadeId)[0];
+        this.bairroService
+            .selectBairros(cidadeId)
+            .subscribe(bairros => {
+                this.bairros = bairros;
+            });*/
+    }
+
+    pesquisaLocalidade() {
+        const endereco: any = this.saveForm.controls['endereco'];
+        const cep = endereco.controls['cep'].value;
+        if (cep) {
+            this.geoService.localidadeByCep(cep).subscribe(res => {
+                endereco.controls['cidade_id'].setValue(res.cidade_id);
+                endereco.controls['estado_id'].setValue(res.estado_id);
+                endereco.controls['endereco'].setValue(res.logradouro);
+                endereco.controls['estado_name'].setValue(res.estado_titulo);
+                endereco.controls['cidade_name'].setValue(res.cidade_titulo);
+                this.chageCidade(res.cidade_id);
+            }, error => {
+                AlertService.error('Não encontramos seu CEP ☹!', 'Use os correios para achar seu CEP click <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm" target="_blank">aqui!</a>');
+            });
+        }
+        return false;
     }
 }

@@ -78,21 +78,21 @@
                     <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
                 </div>
             </div>
-            <div class="col-md-3" >
+            <!--<div class="col-md-3" >
                 <div class="fg-line">
                     <label>
                         Data de Emissão
                     </label>
-                    <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
-                    <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
+                    &lt;!&ndash;<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">&ndash;&gt;
+                    &lt;!&ndash;<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>&ndash;&gt;
                     <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                     <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
                 </div>
-            </div>
+            </div>-->
             <div class="col-md-3" >
                 <div class="fg-line">
                     <label>
-                        Data de Vencimento
+                        Validade
                     </label>
                     <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                     <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
@@ -101,17 +101,15 @@
                 </div>
             </div>
             <div class="col-md-3">
-            <div class="fg-line">
-                <label>
-                    Orgão Emissor
-                </label>
-                <input type="text"  [formControl]="documentoform.controls['orgao_amissor']" required class="form-control input-sm" placeholder="Ex: SSP">
-                <app-error-message [erros]="documentoform.controls['orgao_amissor']"></app-error-message>
+                <div class="fg-line">
+                    <label>
+                        Orgão Emissor
+                    </label>
+                    <input type="text"  [formControl]="documentoform.controls['orgao_amissor']" required class="form-control input-sm" placeholder="Ex: SSP">
+                    <app-error-message [erros]="documentoform.controls['orgao_amissor']"></app-error-message>
+                </div>
             </div>
-        </div>
-        </div>
-        <div class="row-large">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="fg-line ">
                     <label style="width: 100%;">
                         Estado
@@ -120,7 +118,9 @@
                     <app-error-message [erros]="documentoform.controls['uf']"></app-error-message>
                 </div>
             </div>
-            <div class="col-md-2">
+        </div>
+        <div class="row-large">
+            <div class="col-md-3">
                 <div class="fg-line">
                     <label>
                         Categoria CNH

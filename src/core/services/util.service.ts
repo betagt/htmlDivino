@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {URLSearchParams} from "@angular/http";
 import {createNumberMask} from "text-mask-addons/dist/textMaskAddons";
+import {conformToMask} from "text-mask-core/dist/textMaskCore";
 
 @Injectable()
 export class UtilService {
@@ -60,7 +61,79 @@ export class UtilService {
     static maskData() {
         return [/[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/];
     }
+    static cepMasc() {
+        return [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+    }
 
+    static dataMasc() {
+        return [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+    }
+
+    static cpfMasc() {
+        return [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+    }
+
+    static cnpjMasc() {
+        return [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+    }
+
+    static dddMasc() {
+        return ['(', /[1-9]/, /[1-9]/, ')'];
+    }
+
+    static phoneMask(value, self = null) {
+        if (value == null) {
+            return value;
+        }
+        if (value.length < 5)
+            return value;
+
+
+        const phoneNumberMask9 = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+        const phoneNumberMask8 = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+        let conformedPhoneNumber: any;
+        if (value.length >= 9) {
+            conformedPhoneNumber = conformToMask(
+                value,
+                phoneNumberMask9,
+                {guide: false}
+            );
+        } else {
+            conformedPhoneNumber = conformToMask(
+                value,
+                phoneNumberMask8,
+                {guide: false}
+            );
+        }
+
+        return conformedPhoneNumber.conformedValue;
+
+    }
+
+    static phoneMaskWithDdd(value, self = null) {
+        if (value == null) {
+            return value;
+        }
+        const phoneNumberMask9 = ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+        const phoneNumberMask8 = ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+        let conformedPhoneNumber: any;
+        if (value.length > 9) {
+            conformedPhoneNumber = conformToMask(
+                value,
+                phoneNumberMask9,
+                {guide: false}
+            );
+        } else {
+            conformedPhoneNumber = conformToMask(
+                value,
+                phoneNumberMask8,
+                {guide: false}
+            );
+        }
+
+        return conformedPhoneNumber.conformedValue;
+
+    }
     constructor() {
         this.urlSearchParams = new URLSearchParams();
     }
