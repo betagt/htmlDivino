@@ -165,11 +165,11 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 'contato': [null],
             }),
             'endereco': this._fb.group({
+                'id': [null],
                 'estado_id': [null, Validators.compose([Validators.required])],
                 'cidade_id': [null, Validators.compose([Validators.required])],
                 'cidade_name': [null, Validators.compose([Validators.required])],
                 'estado_name': [null, Validators.compose([Validators.required])],
-                'bairro_id': [null, Validators.compose([Validators.required])],
                 'endereco': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
                 'cep': [null, Validators.compose([Validators.required])],
                 'numero': [null, Validators.compose([Validators.required])],
