@@ -3,7 +3,9 @@ import {ChamadasService} from "../../chamadas/services/chamadas.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ListAbstract} from "../../../../core/abstract/list.abstract";
 import {UsuariosService} from "../../../usuarios/usuarios.service";
+
 declare var $: any;
+
 @Component({
     selector: 'app-controle-fornecedores',
     templateUrl: './controle-fornecedores.component.html',
@@ -12,10 +14,14 @@ declare var $: any;
         UsuariosService
     ],
     styles: [
-        `
-            i.star-icon.half0{
+            `
+            i.star-icon.half0 {
                 font-size: 1em !important;
-            } 
+            }
+
+            #controle-fornecedores td {
+                white-space: nowrap;
+            }
         `
     ]
 })
@@ -25,7 +31,9 @@ export class ControleFornecedoresComponent extends ListAbstract implements OnIni
                 formBuilder: FormBuilder,
                 private ngZone: NgZone,
                 ref: ChangeDetectorRef) {
+
         super(formBuilder, ref, usuariosService);
+
     }
 
     ngOnInit(): void {

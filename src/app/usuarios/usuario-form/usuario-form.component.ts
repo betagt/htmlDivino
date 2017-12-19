@@ -54,7 +54,9 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
 
     maskData: any;
 
-    enderecoForm;
+    sexo;
+
+    tipoSanguineo;
 
     cidades;
 
@@ -109,6 +111,34 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 value: 'bloqueado'
             }
         ];
+        this.tipoSanguineo = [
+            {
+                label: 'A',
+                value: 'A'
+            },
+            {
+                label: 'B',
+                value: 'B'
+            },
+            {
+                label: 'AB',
+                value: 'AB'
+            },
+            {
+                label: 'O',
+                value: 'O'
+            },
+        ];
+        this.sexo = [
+            {
+                label: 'Masculino',
+                value: 1
+            },
+            {
+                label: 'Feminino',
+                value: 2
+            }
+        ];
         this.estado_civil = [
             {
                 label: 'Solteiro',
@@ -128,10 +158,10 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             }
         ];
         super.form({
-            'name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
+            'name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
             'email_confirmation': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
-            'email_alternativo': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+            'email_alternativo': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255), Validators.required])],
             'password': [null, Validators.compose([
                 Validators.minLength(8),
                 Validators.maxLength(255),
@@ -161,6 +191,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 'orgao_emissor': [null, Validators.compose([Validators.required])],
                 'escolaridade': [null, Validators.compose([Validators.required])],
                 'estado_civil': [null, Validators.compose([Validators.required])],
+                'tipo_sanguineo': [null, Validators.compose([Validators.required])],
                 'fantasia': [null],
                 'contato': [null],
             }),
@@ -207,6 +238,19 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 if (!isNullOrUndefined(usuario.pessoa)) {
                     usuario.pessoa.data.data_nascimento = UtilService.converterData(new Date(usuario.pessoa.data.data_nascimento));
                     this.saveForm.controls['pessoa'].patchValue(usuario.pessoa.data);
+                }
+                if (!isNullOrUndefined(usuario.endereco)) {
+                    this.saveForm.controls['endereco'].patchValue(usuario.endereco.data);
+                }
+                if (!isNullOrUndefined(usuario.telefones)) {
+                    usuario.telefones.data.forEach((x, index) => {
+                        const telefone: any = this.saveForm.controls['telefone'];
+                        telefone.controls['id']['controls'][index].setValue(x.id);
+                        telefone.controls['ddd']['controls'][index].setValue(x.ddd);
+                        telefone.controls['numero']['controls'][index].setValue(UtilService.phoneMask(x.numero));
+                        telefone.controls['principal']['controls'][index].setValue(x.principal);
+                        telefone.controls['tipo']['controls'][index].setValue(x.tipo);
+                    });
                 }
                 this.saveForm.patchValue(usuario);
                 this.loadJquery();

@@ -1,3 +1,7 @@
 address, dl {
     margin-bottom: 0px;
 }
+#profile-main .pm-overview{
+    position: relative !important;
+    float: left;
+}

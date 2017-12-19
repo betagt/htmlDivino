@@ -108,38 +108,42 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('habilidades.id')" title="Código">Cod.</th>
-            <th>Motorista</th>
-            <th>Sit. Operação</th>
-            <th>Dt. Ativação</th>
-            <th>Sit. Cadastro</th>
-            <th>Nº Corridas</th>
-            <th>Aval.</th>
-            <th>Km Mês Rodados</th>
-            <th>Veiculo/Modelo</th>
-            <th>Placa</th>
-            <th>Situação Veic.</th>
+            <th (click)="orderby('habilidades.id')" pTooltip="Cod" tooltipPosition="top">#</th>
+            <th pTooltip="Motorista" tooltipPosition="top">Motorista</th>
+            <th pTooltip="Status" tooltipPosition="top">Sit. Operação</th>
+            <th pTooltip="CPF" tooltipPosition="top">CPF</th>
+            <th pTooltip="Dt.Inicio" tooltipPosition="top">Dt. Ativação</th>
+            <th pTooltip="Cadastro" tooltipPosition="top">Sit. Cadastro</th>
+            <th pTooltip="Corridas (T)" tooltipPosition="top">Nº Corridas</th>
+            <th pTooltip="Aval." tooltipPosition="top">Aval.</th>
+            <th pTooltip="Km produtivo (mês)" tooltipPosition="top">Km Mês Rodados</th>
+            <th pTooltip="Marca" tooltipPosition="top">Veiculo</th>
+            <th pTooltip="Modelo" tooltipPosition="top">Modelo</th>
+            <th pTooltip="Placa" tooltipPosition="top">Placa</th>
+            <th pTooltip="Documento" tooltipPosition="top">Situação Veic.</th>
           </tr>
           </thead>
-          <tbody>
-          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
-            <td>
-              <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.disponivel?"Disponível":"Indisponivel"}}</td>
-            <td>{{item.created_at.date|date:'d-MM-y'}}</td>
-            <td>{{item.status}}</td>
-            <td>{{item.contagem_chamadas}},00</td>
-            <td>
-              <!--<rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>-->
-              {{item.nota_fornecedor==0?'---':item.nota_fornecedor| number:'1.1-2':'br'}}
-            </td>
-            <td>{{item.km_mes_rodado==0?'---':'Km '+(item.km_mes_rodado| number:'1.1-2':'br')}}</td>
-            <td>{{item.veiculo_modelo?item.veiculo_marca+'/'+item.veiculo_modelo:"---"}}</td>
-            <td>{{item.veiculo_placa}}</td>
-            <td>{{item.veiculo_status?item.veiculo_status:"---"}}</td>
-          </tr>
+          <tbody id="controle-fornecedores">
+            <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+              <td>
+                <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.disponivel?"Disponível":"Indisponivel"}}</td>
+              <td>{{item?.pessoa?.data?.cpf_cnpj}}</td>
+              <td>{{item.created_at.date|date:'d-MM-y'}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.contagem_chamadas}},00</td>
+              <td>
+                <!--<rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>-->
+                {{item.nota_fornecedor==0?'---':item.nota_fornecedor| number:'1.1-2':'br'}}
+              </td>
+              <td>{{item.km_mes_rodado==0?'---':'Km '+(item.km_mes_rodado| number:'1.1-2':'br')}}</td>
+              <td>{{item.veiculo_marca?item.veiculo_marca:"---"}}</td>
+              <td>{{item.veiculo_modelo?item.veiculo_modelo:"---"}}</td>
+              <td>{{item.veiculo_placa}}</td>
+              <td>{{item.veiculo_status?item.veiculo_status:"---"}}</td>
+            </tr>
           </tbody>
         </table>
         <div class="pagination" >

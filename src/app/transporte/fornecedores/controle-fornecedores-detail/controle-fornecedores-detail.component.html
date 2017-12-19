@@ -57,15 +57,15 @@
                     <li *ngFor="let telfone of item?.telefones.data">
                         <i class="zmdi zmdi-phone"></i> {{telfone.ddd}} {{telfone.numero}}
                     </li>
-                    <li><i class="zmdi zmdi-email"></i> {{item?.email}}</li>
+                    <!--<li><i class="zmdi zmdi-email"></i> {{item?.email}}</li>-->
                     <!-- <li><i class="zmdi zmdi-facebook-box"></i> malinda.hollaway</li>
                      <li><i class="zmdi zmdi-twitter"></i> @malinda (twitter.com/malinda)</li>-->
                     <li *ngIf="item?.endereco?.data">
                         <i class="zmdi zmdi-pin"></i>
                         <address class="m-b-0 ng-binding">
-                            {{item?.endereco.data.endereco}}, {{item?.endereco.data.complemento+','}}
+                            {{item?.endereco.data.endereco+','}}, {{item?.endereco.data.complemento?item?.endereco.data.complemento+',':''}}
                             {{item?.endereco.data.numero+','}} <br>
-                            {{item?.endereco.data.cep+','}}
+                            {{item?.endereco.data.cep}}
                         </address>
                     </li>
                 </ul>
@@ -97,81 +97,142 @@
 
                 <div class="tab-content p-20">
                     <div role="tabpanel" class="tab-pane animated fadeIn in active" id="tab-1">
-                        <div class="pmb-block col-md-6">
-                            <div class="pmbb-header">
-                                <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
+                        <div class="row-large">
+                            <div class="pmb-block col-md-6">
+                                <div class="pmbb-header">
+                                    <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
+                                </div>
+                                <div class="pmbb-body p-l-30">
+                                    <div class="pmbb-view">
+                                        <dl class="dl-horizontal">
+                                            <dt>Nome</dt>
+                                            <dd>{{item?.name}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Email</dt>
+                                            <dd>{{item?.email}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Data de Nascimento</dt>
+                                            <dd>{{item?.pessoa?.data?.data_nascimento|date:'dd/MM/y'}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Tipo Sanguineo</dt>
+                                            <dd>{{item?.pessoa?.data?.tipo_sanguineo}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Recebe Newsletter</dt>
+                                            <dd>{{item?.chk_newsletter?'sim':'não'}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Avaliação</dt>
+                                            <dd *ngIf="item?.nota_fornecedor">
+                                                <rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>
+                                            </dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Status</dt>
+                                            <dd>{{item?.status}}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="pmbb-body p-l-30">
-                                <div class="pmbb-view">
-                                    <dl class="dl-horizontal">
-                                        <dt>Nome</dt>
-                                        <dd>{{item?.name}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Sexo</dt>
-                                        <dd>{{item?.sexo_label}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Recebe Newsletter</dt>
-                                        <dd>{{item?.chk_newsletter?'sim':'não'}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Avaliação</dt>
-                                        <dd *ngIf="item?.nota_fornecedor">
-                                            <rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Status</dt>
-                                        <dd>{{item?.status}}</dd>
-                                    </dl>
+                            <div class="pmb-block col-md-6" *ngIf="item?.veiculo_marca">
+                                <div class="pmbb-header">
+                                    <h2><i class="zmdi zmdi-car-taxi m-r-10"></i> Veiculo</h2>
+                                </div>
+                                <div class="pmbb-body p-l-30">
+                                    <div class="pmbb-view">
+                                        <dl class="dl-horizontal">
+                                            <dt>Marca/Modelo</dt>
+                                            <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Placa</dt>
+                                            <dd>{{item?.veiculo_placa}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Cor</dt>
+                                            <dd>{{item?.veiculo_cor}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Situação</dt>
+                                            <dd>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</dd>
+                                        </dl>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="pmb-block col-md-6">
-                            <div class="pmbb-header">
-                                <h2><i class="zmdi zmdi-car-taxi m-r-10"></i> Veiculo</h2>
-                            </div>
-                            <div class="pmbb-body p-l-30">
-                                <div class="pmbb-view">
-                                    <dl class="dl-horizontal">
-                                        <dt>Marca/Modelo</dt>
-                                        <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Placa</dt>
-                                        <dd>{{item?.veiculo_placa}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Cor</dt>
-                                        <dd>{{item?.veiculo_cor}}</dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt>Situação</dt>
-                                        <dd>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</dd>
-                                    </dl>
+                        <div class="row-large">
+                            <div *ngIf="item?.pessoa?.data?.cpf_cnpj" class="pmb-block col-md-6">
+                                <div class="pmbb-header">
+                                    <h2><i class="zmdi zmdi-file m-r-10"></i>
+                                        Dados do motorista</h2>
+                                </div>
+                                <div class="pmbb-body p-l-30">
+                                    <div class="pmbb-view">
+                                        <dl class="dl-horizontal">
+                                            <dt>CPF/CNPJ</dt>
+                                            <dd>{{item?.pessoa?.data?.cpf_cnpj}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>RG</dt>
+                                            <dd>{{item?.pessoa?.data?.rg}} - {{item?.pessoa?.data?.orgao_emissor}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Nec. Especial</dt>
+                                            <dd>{{item?.pessoa?.data?.nec_especial}} </dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Contato</dt>
+                                            <dd *ngIf="item?.pessoa?.data?.nec_especial">
+                                                {{item?.pessoa?.data?.nec_especial}}
+                                            </dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Escolaridade</dt>
+                                            <dd>{{item?.pessoa?.data?.escolaridade}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Estado Civil</dt>
+                                            <dd>{{item?.pessoa?.data?.estado_civil}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Sexo</dt>
+                                            <dd>{{item?.pessoa?.data?.sexo_label}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Nome Fantasia</dt>
+                                            <dd>{{item?.pessoa?.data?.fantasia}}</dd>
+                                        </dl>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="pmb-block col-md-12">
-                            <div class="pmbb-header">
-                                <h2><i class="zmdi zmdi-file m-r-10"></i>
-                                    Dados do motorista</h2>
-                            </div>
-                            <div class="pmbb-body p-l-30">
-                                <div class="col-md-6" style="text-transform: capitalize;">
-                                    <b>CPF/CNPJ:</b> {{item?.pessoa?.data?.cpf_cnpj}} <br>
-                                    <b>RG:</b> {{item?.pessoa?.data?.rg}} - {{item?.pessoa?.data?.orgao_emissor}} <br>
-                                    <b>Nec. Especial:</b> {{item?.pessoa?.data?.nec_especial}} <br>
-                                    <b>Contato:</b> {{item?.pessoa?.data?.nec_especial}} <br>
+                            <!--<div class="pmb-block col-md-6">
+                                <div class="pmbb-header">
+                                    <h2><i class="zmdi zmdi-car-taxi m-r-10"></i> Veiculo</h2>
                                 </div>
-                                <div class="col-md-6" style="text-transform: capitalize;">
-                                    <b>Escolaridade:</b> {{item?.pessoa?.data?.escolaridade}} <br>
-                                    <b>Estado Civil:</b> {{item?.pessoa?.data?.estado_civil}} <br>
-                                    <b>Sexo:</b> {{item?.pessoa?.data?.sexo_label}} <br>
-                                    <b>Nome Fantasia:</b> {{item?.pessoa?.data?.sexo_label}} <br>
+                                <div class="pmbb-body p-l-30">
+                                    <div class="pmbb-view">
+                                        <dl class="dl-horizontal">
+                                            <dt>Marca/Modelo</dt>
+                                            <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Placa</dt>
+                                            <dd>{{item?.veiculo_placa}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Cor</dt>
+                                            <dd>{{item?.veiculo_cor}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Situação</dt>
+                                            <dd>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</dd>
+                                        </dl>
+                                    </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
 

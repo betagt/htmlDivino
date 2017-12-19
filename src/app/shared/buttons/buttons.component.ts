@@ -36,7 +36,7 @@ export class ButtonsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.hidebuttons);
+        //console.log(this.hidebuttons);
     }
 
     voltar() {
