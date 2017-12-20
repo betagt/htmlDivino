@@ -213,7 +213,16 @@
             <tbody>
             <tr>
                 <td *ngFor="let item of arquivos?.data; let i=index">
-                    <img src="{{item.img}}" width="150">
+                    <a href="{{item.img}}" *ngIf="item.img.indexOf('png') !== -1" target="_blank">
+                        <img *ngIf="item.img.indexOf('png') !== -1" src="{{item.img}}" width="150">
+                    </a>
+                    <a href="{{item.img}}" *ngIf="item.img.indexOf('jpg') !== -1" target="_blank">
+                        <img *ngIf="item.img.indexOf('jpg') !== -1" src="{{item.img}}" width="150">
+                    </a>
+                    <a href="{{item.img}}" *ngIf="item.img.indexOf('jpeg') !== -1" target="_blank">
+                        <img *ngIf="item.img.indexOf('jpeg') !== -1" src="{{item.img}}" width="150">
+                    </a>
+                    <a [href]="item.img" target="_blank" *ngIf="item.img.indexOf('pdf') !== -1"> Arquivo {{i+1}}</a>
                 </td>
                 <!--<td class="center">
                     <button (click)="removeDocumento(item.id, i)" class="btn bgm-green waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-close"></i></button>

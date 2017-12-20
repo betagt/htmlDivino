@@ -68,7 +68,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             params.append('include', 'documentos,documentos.arquivos');
             this.veiculoService.show(this.routeParams.id, params).subscribe(veiculo => {
                 this.veiculo = Object.assign({}, veiculo);
-                this.listaModelo(veiculo.transporte_modelo_carro_id);
+                this.listaModelo(veiculo.transporte_marca_carro_id);
                 delete veiculo.documentos;
                 this.saveForm.patchValue(veiculo);
             });
@@ -122,8 +122,8 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     }
 
     listaModelo(id) {
-        this.modeloCarroService.todosByMarca(id, true).subscribe(marcas => {
-            this.modelosCarro = marcas;
+        this.modeloCarroService.todosByMarca(id, true).subscribe(modelos => {
+            this.modelosCarro = modelos;
         });
     }
 
