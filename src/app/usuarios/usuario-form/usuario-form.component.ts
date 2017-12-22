@@ -187,13 +187,16 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 'cpf_cnpj': [null, Validators.compose([Validators.required])],
                 'nec_especial': [null],
                 'data_nascimento': [null, Validators.compose([Validators.required])],
-                'rg': [null, Validators.compose([Validators.required])],
-                'orgao_emissor': [null, Validators.compose([Validators.required])],
+                'rg': [null],
+                'orgao_emissor': [null],
                 'escolaridade': [null, Validators.compose([Validators.required])],
                 'estado_civil': [null, Validators.compose([Validators.required])],
                 'tipo_sanguineo': [null, Validators.compose([Validators.required])],
                 'fantasia': [null],
                 'contato': [null],
+                'contato_segudo': [null],
+                'telefone_contato': [null],
+                'telefone_segundo_contato': [null],
             }),
             'endereco': this._fb.group({
                 'id': [null],
@@ -288,8 +291,9 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     }
 
     loadArquivos(arquivos) {
-        this.display = true;
-        this.arquivos = arquivos;
+        window.open(arquivos.data[0].img);
+        /*this.display = true;
+        this.arquivos = arquivos;*/
     }
 
     addDocumento() {
@@ -300,21 +304,6 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     delDocumento(index: number): void {
         const arrayControl = <FormArray>this.saveForm.controls['documentos'];
         arrayControl.removeAt(index);
-    }
-
-    removeDocumento(id, i) {
-        this.alertService.confirm({
-            title: 'Confirmação!',
-            text: 'Deseja realmente excluir este documento?',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-        }).then(sucess => {
-            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
-                AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
-                this.usuario.documentos.data.splice(i, 1);
-            });
-        }, error => {
-        });
     }
 
     changeListenerVeiculo(documento: any, $event) {
@@ -353,30 +342,29 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     }
 
     aceitar(id, index) {
-        this.alertService.confirm({
-            title: 'Confirmação!',
-            text: 'Deseja realmente recusar este documento?',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-        }).then(sucess => {
-            this.documentoService.aceitar(id).subscribe(res => {
-                AlertService.sucess('sucesso!', 'documento aceito!');
-                this.usuario.documentos.data[index].status = 'aceito';
-            });
-        }, error => {
+        this.documentoService.aceitar(id).subscribe(res => {
+            AlertService.flashMessage('Documento aceito', 'bounce', 'custom-success');
+            this.usuario.documentos.data[index].status = 'aceito';
         });
     }
 
     recusar(id, index) {
+        this.documentoService.recusar(id).subscribe(res => {
+            AlertService.flashMessage('Documento recusado', 'bounce', 'custom-error');
+            this.usuario.documentos.data[index].status = 'invalido';
+        });
+    }
+
+    removeDocumento(id, i) {
         this.alertService.confirm({
             title: 'Confirmação!',
-            text: 'Deseja realmente recusar este documento?',
+            text: 'Deseja realmente excluir este documento?',
             confirmButtonText: 'Sim',
             cancelButtonText: 'Não',
         }).then(sucess => {
-            this.documentoService.recusar(id).subscribe(res => {
-                AlertService.sucess('sucesso!', 'documento recusado!');
-                this.usuario.documentos.data[index].status = 'invalido';
+            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
+                AlertService.flashMessage('Documento excluído', 'bounce', 'custom-success');
+                this.usuario.documentos.data.splice(i, 1);
             });
         }, error => {
         });

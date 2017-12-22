@@ -29,14 +29,24 @@ export class AlertService {
         });
     }
 
-    static flashMessage(title: string, animate = 'shake') {
+    static flashMessage(title: string, animate = 'shake', classes = 'custom-alert', placement = {from: 'top', align: 'left'}) {
         $.growl({
             message: title
         }, {
             type: "inverse",
             allow_dismiss: !1,
             label: "Cancel",
-            className: "btn-xs custom-alert btn-inverse",
+            template: `
+                    <div data-growl="container" class="alert ${classes}" role="alert">
+                        <button type="button" aria-hidden="true" class="close" data-growl="dismiss">
+                            &times;
+                        </button>
+                        <span data-growl="icon"></span>
+                        <span data-growl="title"></span>
+                        <span data-growl="message"></span>
+                        <a href="#" data-growl="url"></a>
+                    </div>
+            `,
             placement: {
                 from: "top",
                 align: "left"

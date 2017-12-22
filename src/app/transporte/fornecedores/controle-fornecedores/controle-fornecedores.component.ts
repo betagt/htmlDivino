@@ -19,7 +19,7 @@ declare var $: any;
                 font-size: 1em !important;
             }
 
-            #controle-fornecedores td {
+            #controle-fornecedores td, #controle-fornecedores th {
                 white-space: nowrap;
             }
         `

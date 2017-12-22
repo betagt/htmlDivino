@@ -168,7 +168,7 @@
                                         <app-error-message [erros]="saveForm.controls['pessoa']?.controls['escolaridade']"></app-error-message>
                                     </div>
                                     </div>
-                                    <div class="row-large m-t-10">
+                                    <div class="row-large m-t-10" style="display: none">
                                         <div class="col-md-6">
                                         <div >
                                             <label>RG</label>
@@ -203,12 +203,12 @@
                                         </div>
                                     </div>
                                     <div class="row-large m-t-10">
-                                        <div class="col-md-6">
-                                            <div >
-                                                <label>Contato</label>
-                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['contato']" placeholder="Ex: Contato">
+                                        <div class="col-sm-6">
+                                            <div class="fg-line">
+                                                <label for="ts1" class="ts-label">Tipo Sanguineo</label>
+                                                <p-dropdown  placeholder="Selecione" [options]="tipoSanguineo" [formControl]="saveForm.controls['pessoa']?.controls['tipo_sanguineo']"></p-dropdown>
                                             </div>
-                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['contato']"></app-error-message>
+                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['tipo_sanguineo']"></app-error-message>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="fg-line">
@@ -219,12 +219,35 @@
                                         </div>
                                     </div>
                                     <div class="row-large m-t-10">
-                                        <div class="col-sm-6">
-                                            <div class="fg-line">
-                                                <label for="ts1" class="ts-label">Tipo Sanguineo</label>
-                                                <p-dropdown  placeholder="Selecione" [options]="tipoSanguineo" [formControl]="saveForm.controls['pessoa']?.controls['tipo_sanguineo']"></p-dropdown>
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label>1º Contato</label>
+                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['contato']" placeholder="Ex: Contato">
                                             </div>
-                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['tipo_sanguineo']"></app-error-message>
+                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['contato']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label>1º Telefone</label>
+                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['telefone_contato']" placeholder="Ex: 0000-0000">
+                                            </div>
+                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['telefone_contato']"></app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="row-large m-t-10">
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label>2º Contato</label>
+                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['contato_segudo']" placeholder="Ex: Contato">
+                                            </div>
+                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['contato_segudo']"></app-error-message>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label>2º Telefone</label>
+                                                <input type="text" class="form-control" [formControl]="saveForm.controls['pessoa']?.controls['telefone_segundo_contato']" placeholder="Ex: 0000-0000">
+                                            </div>
+                                            <app-error-message [erros]="saveForm.controls['pessoa']?.controls['telefone_segundo_contato']"></app-error-message>
                                         </div>
                                     </div>
                                 </form>
@@ -316,7 +339,6 @@
                             <h2 class="btn-clicle-middle m-b-10">
                                 <b>Documentos</b><br/>
                             </h2>
-                            <button (click)="addDocumento()" class="btn bgm-green" type="submit"><i class="zmdi zmdi-plus"></i> Adicionar</button>
                             <div class="m-b-25" [formGroup]="saveForm">
                                 <div *ngFor="let documento of saveForm.controls['documentos'].controls; let i=index">
                                     <div class="row-large m-t-25">
@@ -345,7 +367,8 @@
                                                           [documentoform]="documento"></app-switch-documento>
                                 </div>
                             </div>
-                            <h2 class="btn-clicle-middle m-b-10">
+                            <button (click)="addDocumento()" class="btn bgm-green" type="submit"><i class="zmdi zmdi-plus"></i> Adicionar</button>
+                            <h2 class="btn-clicle-middle m-b-10 m-t-10">
                                 <i class="zmdi zmdi-file m-r-10"></i>
                                 Documentos inseridos
                             </h2>
@@ -354,7 +377,7 @@
                                     <thead>
                                     <tr>
                                         <th>Tipo do Arquivo</th>
-                                        <th>Quantidade de Arquivos</th>
+                                        <th>Qtd.</th>
                                         <th>Status</th>
                                         <th>Ações</th>
                                     </tr>

@@ -13971,7 +13971,27 @@ html:not(.ie9) .select.fg-line:before {
 }
 /* custom alert*/
 .custom-alert{
-    background: green;
+    background: green !important;
+}
+.custom-success{
+    background-color: #dff0d8 !important;
+    border-color: #d0e9c6;
+    color: #3c763d;
+}
+.custom-error{
+    background-color: #f2dede !important;
+    border-color: #ebcccc;
+    color: #a94442;
+}
+.custom-info{
+    background-color: #d9edf7 !important;
+    border-color: #bcdff1;
+    color: #31708f;
+}
+.custom-warning{
+    background-color: #fcf8e3 !important;
+    border-color: #faf2cc;
+    color: #8a6d3b;
 }
 
 /* primeng dialog*/

@@ -22,21 +22,28 @@ export class ControleFornecedoresDetailComponent extends DetailAbstract implemen
                 activatedRoute: ActivatedRoute,
                 router: Router) {
         super(ref, location, activatedRoute, router, usuarioService);
+
+        this.item = {nota_fornecedor:0};
     }
 
     ngOnInit() {
+
         this.buttons.edit = true;
-        this.params.set('include', 'roles,endereco,telefones,documentos,documentos.arquivos');
+        this.params.set('include', 'roles,endereco,telefones,documentos,documentos.arquivos,veiculo_ativo.documentos');
         this.show(this.routeParams.id);
     }
 
     loadArquivos(arquivos) {
-        this.display = true;
-        this.arquivos = arquivos;
+        window.open(arquivos.data[0].img);
+
+        //this.display = true;
+        //this.arquivos = arquivos;
     }
 
     show(id: number) {
-        this.usuarioService.showFornecedor(id, this.params).subscribe(usuario => this.item = usuario);
+        this.usuarioService.showFornecedor(id, this.params).subscribe(usuario => {
+            this.item = usuario;
+        });
     }
 
 }

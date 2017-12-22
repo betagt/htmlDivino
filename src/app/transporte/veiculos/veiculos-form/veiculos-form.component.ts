@@ -187,22 +187,6 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
         const arrayControl = <FormArray>this.saveForm.controls['documentos'];
         arrayControl.removeAt(index);
     }
-
-    removeDocumento(id, i) {
-        this.alertService.confirm({
-            title: 'Confirmação!',
-            text: 'Deseja realmente excluir este documento?',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-        }).then(sucess => {
-            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
-                AlertService.flashMessage('Aquivo excluído com sucesso!', 'bounceIn');
-                this.veiculo.documentos.data.splice(i, 1);
-            });
-        }, error => {
-        });
-    }
-
     changeListenerVeiculo(documento: any, $event) {
         const file = this.utilService.readThisMultiple($event.target);
         const control = documento.controls['arquivos'];
@@ -216,8 +200,9 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     }
 
     loadArquivos(arquivos) {
-        this.display = true;
-        this.arquivos = arquivos;
+        window.open(arquivos.data[0].img);
+       /* this.display = true;
+        this.arquivos = arquivos;*/
     }
 
     search(event) {
@@ -237,32 +222,32 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
 
 
     aceitar(id, index) {
+        this.documentoService.aceitar(id).subscribe(res => {
+            AlertService.flashMessage('Documento aceito', 'bounce', 'custom-success');
+            this.veiculo.documentos.data[index].status = 'aceito';
+        });
+    }
+
+    recusar(id, index) {
+        this.documentoService.recusar(id).subscribe(res => {
+            AlertService.flashMessage('Documento recusado', 'bounce', 'custom-error');
+            this.veiculo.documentos.data[index].status = 'invalido';
+        });
+    }
+
+    removeDocumento(id, i) {
         this.alertService.confirm({
             title: 'Confirmação!',
-            text: 'Deseja realmente recusar este documento?',
+            text: 'Deseja realmente excluir este documento?',
             confirmButtonText: 'Sim',
             cancelButtonText: 'Não',
         }).then(sucess => {
-            this.documentoService.aceitar(id).subscribe(res => {
-                AlertService.sucess('sucesso!', 'documento aceito!');
-                this.veiculo.documentos.data[index].status = 'aceito';
+            this.documentoService.excluir({ids: [id]}, {ids: [id]}).subscribe(res => {
+                AlertService.flashMessage('Documento excluído', 'bounce', 'custom-success');
+                this.veiculo.documentos.data.splice(i, 1);
             });
         }, error => {
         });
     }
 
-    recusar(id, index) {
-        this.alertService.confirm({
-            title: 'Confirmação!',
-            text: 'Deseja realmente recusar este documento?',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-        }).then(sucess => {
-            this.documentoService.recusar(id).subscribe(res => {
-                AlertService.sucess('sucesso!', 'documento recusado!');
-                this.veiculo.documentos.data[index].status = 'invalido';
-            });
-        }, error => {
-        });
-    }
 }
