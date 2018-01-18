@@ -113,20 +113,36 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
         ];
         this.tipoSanguineo = [
             {
-                label: 'A',
-                value: 'A'
+                label: 'A+',
+                value: 'A+'
             },
             {
-                label: 'B',
-                value: 'B'
+                label: 'A-',
+                value: 'A-'
             },
             {
-                label: 'AB',
-                value: 'AB'
+                label: 'B+',
+                value: 'B+'
             },
             {
-                label: 'O',
-                value: 'O'
+                label: 'B-',
+                value: 'B-'
+            },
+            {
+                label: 'AB+',
+                value: 'AB+'
+            },
+            {
+                label: 'AB-',
+                value: 'AB-'
+            },
+            {
+                label: 'O+',
+                value: 'O+'
+            },
+            {
+                label: 'O-',
+                value: 'O-'
             },
         ];
         this.sexo = [
