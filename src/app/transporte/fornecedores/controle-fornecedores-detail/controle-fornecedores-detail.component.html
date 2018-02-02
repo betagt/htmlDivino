@@ -149,6 +149,9 @@
                                         </dl>-->
                                         <dl class="dl-horizontal">
                                             <dt>Avaliação</dt>
+                                            <dd *ngIf="!item?.nota_fornecedor">
+
+                                            </dd>
                                             <dd *ngIf="item?.nota_fornecedor">
                                                 <rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>
                                             </dd>
@@ -172,7 +175,7 @@
                                             </dl>-->
                                             <dl class="dl-horizontal">
                                                 <dt>Contato</dt>
-                                                <dd *ngIf="item?.pessoa?.data?.nec_especial">
+                                                <dd>
                                                     {{item?.pessoa?.data?.nec_especial}}
                                                 </dd>
                                             </dl>
@@ -203,8 +206,12 @@
                                 <div class="pmbb-body p-l-30">
                                     <div class="pmbb-view">
                                         <dl class="dl-horizontal">
-                                            <dt>Marca/Modelo</dt>
-                                            <dd>{{item?.veiculo_marca}}/{{item?.veiculo_modelo}}</dd>
+                                            <dt>Marca</dt>
+                                            <dd>{{item?.veiculo_marca}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Modelo</dt>
+                                            <dd>{{item?.veiculo_modelo}}</dd>
                                         </dl>
                                         <dl class="dl-horizontal">
                                             <dt>Placa</dt>
@@ -229,6 +236,22 @@
                                         <dl class="dl-horizontal">
                                             <dt>Vencimento do seguro</dt>
                                             <dd>{{item?.veiculo_seguro_vencimento|date:'dd/MM/y'}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Numero do seguro</dt>
+                                            <dd>{{item?.veiculo_seguro_numero}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Ano Fab.</dt>
+                                            <dd>{{item?.ano_modelo_fab}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Chassi</dt>
+                                            <dd>{{item?.chassi}}</dd>
+                                        </dl>
+                                        <dl class="dl-horizontal">
+                                            <dt>Renavam</dt>
+                                            <dd>{{item?.renavam}}</dd>
                                         </dl>
                                     </div>
                                 </div>

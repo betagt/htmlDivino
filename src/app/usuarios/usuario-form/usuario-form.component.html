@@ -137,9 +137,9 @@
                                 <form [formGroup]="saveForm.controls['pessoa']">
                                     <div class="row-large m-t-10">
                                         <div class="col-md-6">
-                                            <div >
+                                            <div>
                                                 <label>CPF/CNPJ</label>
-                                                <input type="text" [formControl]="saveForm.controls['pessoa']?.controls['cpf_cnpj']" class="form-control" placeholder="Ex: 999.999.999-99">
+                                                <input type="text" [maxlength]="20" [formControl]="saveForm.controls['pessoa']?.controls['cpf_cnpj']" class="form-control" placeholder="Ex: 999.999.999-99">
                                             </div>
                                             <app-error-message [erros]="saveForm.controls['pessoa']?.controls['cpf_cnpj']"></app-error-message>
                                         </div>

@@ -26,11 +26,14 @@ export class UsuarioListComponent extends ListAbstract implements OnInit {
         super(formBuilder, ref, usuariosService);
         this._params = new URLSearchParams();
         this.includes = ['roles'];
+        this.buttons.remove = true;
+        this.hasExclude = false;
     }
 
     ngOnInit(): void {
         super.form({
             'users.name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+            'pessoas.cpf_cnpj': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'users.email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'field': ['id'],
             'order': ['desc']

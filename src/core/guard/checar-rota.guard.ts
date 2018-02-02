@@ -30,7 +30,6 @@ export class ChecarRotaGuard implements CanActivateChild {
         const user: any = this.authService.getUser();
 
         if (isNullOrUndefined(user)) {
-            console.log('eetetet');
             this.router.navigate(['/login']);
             return false;
         }

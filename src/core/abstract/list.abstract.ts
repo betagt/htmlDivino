@@ -18,6 +18,7 @@ export abstract class ListAbstract {
     protected _params: URLSearchParams;
     pesquisaForm: FormGroup;
     lastChecked = null;
+    hasExclude = true;
     protected buttons = {
         new: false,
         view: false,
@@ -39,8 +40,10 @@ export abstract class ListAbstract {
     }
 
     list(page = null) {
-        this.buttons.restaurar = true;
-        this.buttons.remove = false;
+        if (this.hasExclude) {
+            this.buttons.restaurar = true;
+            this.buttons.remove = false;
+        }
         if (this.includes.length > 0) {
             this.addParams('include', this.includes.join(','));
         }
@@ -55,8 +58,10 @@ export abstract class ListAbstract {
     }
 
     lixeira() {
-        this.buttons.restaurar = false;
-        this.buttons.remove = true;
+        if (this.hasExclude) {
+            this.buttons.restaurar = false;
+            this.buttons.remove = true;
+        }
         this.defaultService.lixeira().subscribe(items => {
             this.load(items);
         });
