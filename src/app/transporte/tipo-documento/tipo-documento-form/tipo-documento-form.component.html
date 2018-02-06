@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="row-large m-t-10">
-              <div class="col-xs-6">
+              <div class="col-xs-3">
                 <div class="fg-line">
                   <label>
                     Precisa de Arquivo
@@ -58,6 +58,15 @@
                   <p-checkbox formControlName="possui_vencimento" binary="true"></p-checkbox>
                 </div>
                 <app-error-message [erros]="saveForm.controls['possui_vencimento']"></app-error-message>
+              </div>
+              <div class="col-xs-3">
+                <div class="fg-line">
+                  <label style="width: 100%;">
+                    Obrigatório
+                  </label>
+                  <p-checkbox formControlName="obrigatorio" binary="true"></p-checkbox>
+                </div>
+                <app-error-message [erros]="saveForm.controls['obrigatorio']"></app-error-message>
               </div>
             </div>
           </form>

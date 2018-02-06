@@ -37,12 +37,16 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
         ];
         this.tipo = [
             {
-                label: 'Pessoa',
-                value: 'pessoa'
+                label: 'Motorista',
+                value: 'motorista'
             },
             {
                 label: 'Veículo',
                 value: 'veiculo'
+            },
+            {
+                label: 'Cliente',
+                value: 'cliente'
             },
         ];
     }
@@ -53,6 +57,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
             'descricao': [null, Validators.compose([Validators.maxLength(255), Validators.required])],
             'precisa_de_documento': [true],
             'possui_vencimento': false,
+            'obrigatorio': false,
             'tipo': ['pessoa']
         });
         if (this.routeParams.id) {

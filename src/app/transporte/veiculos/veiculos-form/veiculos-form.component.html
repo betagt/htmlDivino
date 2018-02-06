@@ -162,7 +162,7 @@
                                         <label>
                                             Arquivo:
                                         </label>
-                                        <input type="file" class="form-control input-sm" multiple accept="image/*, application/pdf" (change)="changeListenerVeiculo(documento, $event)" >
+                                        <input type="file" class="form-control input-sm" multiple  (change)="changeListenerVeiculo(documento, $event)" >
                                         <app-error-message [erros]="documento.controls['arquivos']"></app-error-message>
                                     </div>
                                     <div class="col-xs-2 center-itens">
