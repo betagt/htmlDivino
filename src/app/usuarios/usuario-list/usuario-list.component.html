@@ -66,6 +66,14 @@
                     </ul>
                 </div>
             </div>
+            <tooltip-content #myTooltip >
+                <div style="text-align: justify; white-space: nowrap;">
+                    <b><i class="zmdi zmdi-circle" style="color: red"></i></b> <span style="color: #fff">Nenhum documento enviado.</span><br>
+                    <!--<b><i class="zmdi zmdi-circle" style="color: orangered"></i></b> <span style="color: #fff">Doc. entregue mas nao aceita.</span><br>-->
+                    <b><i class="zmdi zmdi-circle" style="color: yellow"></i></b> <span style="color: #fff">Doc. parcialmente entregue.</span><br>
+                    <b><i class="zmdi zmdi-circle" style="color: green"></i></b> <span style="color: #fff">Usuário Habilitado.</span><br>
+                </div>
+            </tooltip-content>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -73,6 +81,7 @@
                             <th>
                                 <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
                             </th>
+                            <th>COD</th>
                             <th>#</th>
                             <th (click)="orderby('name')">Nome</th>
                             <th (click)="orderby('email')">Email</th>
@@ -84,10 +93,25 @@
                     </thead>
 
                     <tbody>
-                    <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+                        <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
                             <td>
                                 <input type="checkbox" name="sizecb[]" value="{{item.id}}" (change)="count()" [(ngModel)]="item.state"/>
                             <td>{{item.id}}</td>
+                            <td class="text-center"
+                                [tooltip]="myTooltip"
+                                [tooltipDisabled]="false"
+                                [tooltipAnimation]="true"
+                                tooltipPlacement="top">
+                                <span *ngIf="item?.habilitado && item?.perfil == 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" style="color: green"></i>
+                                </span>
+                                <span *ngIf="!item?.habilitado && item?.perfil == 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': item?.pendencias?.cor}"></i>
+                                </span>
+                                <span *ngIf="item?.perfil != 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" style="color: green"></i>
+                                </span>
+                            </td>
                             <td>{{item.name}}</td>
                             <td>{{item.email}}</td>
                             <td>

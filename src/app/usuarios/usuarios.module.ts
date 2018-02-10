@@ -16,6 +16,7 @@ import {CalendarModule, DialogModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/primeng';
 import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/documento-switch-form/documento-switch-form.module";
 import {TextMaskModule} from "angular2-text-mask";
+import {TooltipModule} from "ngx-tooltip";
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {TextMaskModule} from "angular2-text-mask";
         DialogModule,
         DropdownModule,
         DocumentoSwitchFormModule,
-        TextMaskModule
+        TextMaskModule,
+        TooltipModule
     ],
     declarations: [
         UsuarioListComponent,

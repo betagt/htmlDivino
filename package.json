@@ -34,6 +34,7 @@
     "ng2-pagination": "^2.0.1",
     "ngx-modal": "0.0.29",
     "ngx-rating": "0.0.9",
+    "ngx-tooltip": "0.0.9",
     "primeng": "^4.0.0-rc.3",
     "rxjs": "^5.1.0",
     "sweetalert2": "^6.4.4",
