@@ -93,7 +93,7 @@ export class SwitchDocumentoComponent implements OnInit {
                 value: true
             },
             {
-                label: 'Não Alienante',
+                label: 'Não',
                 value: false
             },
         ];

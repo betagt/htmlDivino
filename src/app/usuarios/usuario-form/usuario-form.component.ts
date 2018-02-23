@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef, NgZone} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, NgZone, ViewEncapsulation} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
@@ -22,7 +22,7 @@ declare var $: any;
 @Component({
     selector: 'app-usuario-form',
     templateUrl: './usuario-form.component.html',
-    styleUrls: ['./usuario-form.component.scss'],
+    styleUrls: ['./usuario-form.component.css'],
     providers: [
         AlertService,
         DocumentoService,
@@ -32,7 +32,8 @@ declare var $: any;
         EstadosService,
         CidadesService,
         GeoService
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit {
 

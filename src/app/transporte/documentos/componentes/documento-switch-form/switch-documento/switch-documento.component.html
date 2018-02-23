@@ -16,7 +16,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <input required type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <label style="width: 100%;">
                     Estado
                 </label>
-                <select [formControl]="documentoform.controls['uf']">
+                <select required [formControl]="documentoform.controls['uf']">
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -61,7 +61,8 @@
                     <option value="SC">Santa Catarina</option>
                     <option value="SP">São Paulo</option>
                     <option value="SE">Sergipe</option>
-                    <option value="TO" [selected]="true">Tocantins</option>
+                    <option value="TO">Tocantins</option>
+                    <option value="" [selected]="true">Selecione</option>
                 </select>
                 <app-error-message [erros]="documentoform.controls['uf']"></app-error-message>
             </div>
@@ -96,7 +97,7 @@
                     </label>
                     <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                     <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                    <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
+                    <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
                     <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
                 </div>
             </div>
@@ -105,7 +106,7 @@
                     <label>
                         Orgão Emissor
                     </label>
-                    <input type="text"  [formControl]="documentoform.controls['orgao_amissor']" required class="form-control input-sm" placeholder="Ex: SSP">
+                    <input type="text" [formControl]="documentoform.controls['orgao_amissor']" required class="form-control input-sm" placeholder="Ex: SSP">
                     <app-error-message [erros]="documentoform.controls['orgao_amissor']"></app-error-message>
                 </div>
             </div>
@@ -146,7 +147,7 @@
                 <label>
                     Numero CNPJ (opcional)
                 </label>
-                <input type="text"  [formControl]="documentoform.controls['numero']"  maxlength="20" class="form-control input-sm" placeholder="Ex: 99999999999999">
+                <input type="text" required [formControl]="documentoform.controls['numero']"  maxlength="20" class="form-control input-sm" placeholder="Ex: 99999999999999">
                 <app-error-message [erros]="documentoform.controls['numero']"></app-error-message>
             </div>
         </div>
@@ -155,7 +156,7 @@
                 <label>
                     CNAE principal (opcional)
                 </label>
-                <input type="text"  [formControl]="documentoform.controls['cnae']"  maxlength="255" class="form-control input-sm" placeholder="Ex: Motorista">
+                <input type="text" required [formControl]="documentoform.controls['cnae']"  maxlength="255" class="form-control input-sm" placeholder="Ex: Motorista">
                 <app-error-message [erros]="documentoform.controls['cnae']"></app-error-message>
             </div>
         </div>
@@ -177,7 +178,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
@@ -186,7 +187,7 @@
                 <label>
                     Carga Horaria
                 </label>
-                <input type="text"  [formControl]="documentoform.controls['carga_horaria']" required class="form-control input-sm" placeholder="Ex: SSP">
+                <input type="text" [formControl]="documentoform.controls['carga_horaria']" required class="form-control input-sm" placeholder="Ex: SSP">
                 <app-error-message [erros]="documentoform.controls['carga_horaria']"></app-error-message>
             </div>
         </div>
@@ -216,7 +217,7 @@
                     Data inicio
                 </label>
                 <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_inicial']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_inicial']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_inicial']">
                 <app-error-message [erros]="documentoform.controls['data_vigencia_inicial']"></app-error-message>
             </div>
         </div>
@@ -226,7 +227,7 @@
                     Data da emissão
                 </label>
                 <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
@@ -248,7 +249,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
@@ -261,7 +262,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_emissao']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
                 <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
             </div>
         </div>
@@ -298,6 +299,17 @@
             <div class="fg-line">
                 <label>
                     Data Emissão
+                </label>
+                <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
+                <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_emissao']">
+                <app-error-message [erros]="documentoform.controls['data_emissao']"></app-error-message>
+            </div>
+        </div>
+        <div class="col-md-3" >
+            <div class="fg-line">
+                <label>
+                    Data Vencimento
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
@@ -350,7 +362,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
                 <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
             </div>
         </div>
@@ -404,7 +416,7 @@
                 </label>
                 <!--<input type="text"  [formControl]="documentoform.controls['data_emissao']" required class="form-control input-sm" placeholder="04/09/2015">-->
                 <!--<p-calendar [formControl]="documentoform.controls['data_vigencia_fim']" [monthNavigator]="true" yearRange="1949:2017" [yearNavigator]="true" dateFormat="dd/mm/yy" ></p-calendar>-->
-                <input type="text" class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
+                <input type="text" required class="form-control" [textMask]="{mask: maskData}" placeholder="Ex 00/00/0000" [formControl]="documentoform.controls['data_vigencia_fim']">
                 <app-error-message [erros]="documentoform.controls['data_vigencia_fim']"></app-error-message>
             </div>
         </div>

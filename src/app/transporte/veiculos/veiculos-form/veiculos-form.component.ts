@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {VeiculoService} from "../service/veiculo.service";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -20,7 +20,8 @@ import {DocumentoService} from "../../documentos/service/documento.service";
     styleUrls: ['./veiculos-form.component.css'],
     providers: [
         AlertService
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class VeiculosFormComponent extends CreateUpdateAbstract implements OnInit {
 

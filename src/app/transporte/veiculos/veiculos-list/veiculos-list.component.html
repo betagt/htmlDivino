@@ -53,7 +53,7 @@
         <div class="header-btn-actions">
           <ul class="actions">
             <li>
-              <a pTooltip="Atualizar" tooltipPosition="top" (click)="list()">
+              <a  (click)="list()">
                 <i class="zmdi zmdi-refresh-alt"></i>
               </a>
             </li>
@@ -63,7 +63,7 @@
               </a>
             </li>
             <li>
-              <a pTooltip="Lixeira" tooltipPosition="top" (click)="lixeira()">
+              <a (click)="lixeira()">
                 <i class="zmdi zmdi-delete"></i>
               </a>
             </li>
@@ -77,14 +77,16 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('transporte_veiculos.id')">#</th>
+            <th (click)="orderby('transporte_veiculos.id')">COD</th>
+            <th>#</th>
             <th (click)="orderby('transporte_veiculos.nome')">Proprietário</th>
             <th (click)="orderby('transporte_veiculos.nome')">Modelo</th>
             <th (click)="orderby('transporte_veiculos.descricao')">Marca</th>
             <th (click)="orderby('transporte_veiculos.observacao')">Placa</th>
             <th (click)="orderby('transporte_veiculos.observacao')">Tipo</th>
             <th (click)="orderby('created_at')">Criado</th>
-            <th (click)="orderby('updated_at')">Modificado</th>
+              <th (click)="orderby('updated_at')">Modificado</th>
+            <th (click)="orderby('updated_at')">Status</th>
           </tr>
           </thead>
           <tbody>
@@ -92,6 +94,18 @@
             <td>
               <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
             <td>{{item.id}}</td>
+            <td class="text-center"
+                [tooltip]="myTooltip"
+                [tooltipDisabled]="false"
+                [tooltipAnimation]="true"
+                tooltipPlacement="top">
+                    <span *ngIf="item?.habilitado">
+                        <i class="zmdi zmdi-circle" style="color: green"></i>
+                    </span>
+                    <span *ngIf="!item?.habilitado">
+                        <i class="zmdi zmdi-circle" [ngStyle]="{'color': item?.pendencias?.cor}"></i>
+                    </span>
+            </td>
             <td>{{item.proprietario}}</td>
             <td>{{item.modelo}}</td>
             <td>{{item.marca}}</td>
@@ -99,6 +113,7 @@
             <td>{{item.observacao}}</td>
             <td>{{item.created_at.date|date:'d-MM-y'}}</td>
             <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
+              <td>{{item.status}}</td>
           </tr>
           </tbody>
         </table>
