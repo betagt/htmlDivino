@@ -17,7 +17,7 @@
                     <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
                     <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
                     <div class="header-search input-group">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="fg-line">
                                 <input type="text" [formControl]="pesquisaForm.controls['users.name']" id="name" class="form-control" placeholder="Nome">
                             </div>
@@ -25,6 +25,17 @@
                         <div class="col-md-3">
                             <div class="fg-line">
                                 <input type="text" [formControl]="pesquisaForm.controls['users.email']" id="email" class="form-control" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="fg-line">
+                                <input type="text" [formControl]="pesquisaForm.controls['pessoas.cpf_cnpj']" id="cpf" class="form-control" placeholder="cpf/cnpj">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="fg-line">
+                                <p-dropdown [formControl]="pesquisaForm.controls['roles.slug']" [options]="perfil"
+                                            placeholder="selecione"></p-dropdown>
                             </div>
                         </div>
                         <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
@@ -84,6 +95,7 @@
                             <th>COD</th>
                             <th>#</th>
                             <th (click)="orderby('name')">Nome</th>
+                            <th (click)="orderby('pessoas.cpf_cnpj')">cpf/cnpj</th>
                             <th (click)="orderby('email')">Email</th>
                             <th (click)="orderby('roles.name')">Perfil</th>
                             <th (click)="orderby('created_at')">Criado</th>
@@ -93,7 +105,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+                        <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: items?.meta?.pagination?.per_page, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
                             <td>
                                 <input type="checkbox" name="sizecb[]" value="{{item.id}}" (change)="count()" [(ngModel)]="item.state"/>
                             <td>{{item.id}}</td>
@@ -113,6 +125,7 @@
                                 </span>
                             </td>
                             <td>{{item.name}}</td>
+                            <td>{{item.pessoa?.data?.cpf_cnpj}}</td>
                             <td>{{item.email}}</td>
                             <td>
                                 <ul class="list-group">
@@ -125,7 +138,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="pagination" >
+                <div class="pagination col-md-12" >
                     <!--<pagination-controls  id="some_id"
                                          (pageChange)="p = $event"
                                          maxSize="9"
@@ -137,7 +150,7 @@
                                          screenReaderPageLabel="page"
                                          screenReaderCurrentLabel="You're on page">
                    </pagination-controls>-->
-                    <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="" previousLabel="" autoHide="true" id="server"></pagination-controls>
+                    <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="Próximo" previousLabel="Anterior" autoHide="true" id="server"></pagination-controls>
                 </div>
             </div>
         </div>

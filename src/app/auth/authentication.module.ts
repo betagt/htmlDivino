@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from "./login/login.component";
 import {UtilService} from "../../core/services/util.service";
 import {OAuthService} from "angular2-oauth2/oauth-service";
+import {HttpClientService} from "../../core/http-client.service";
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {OAuthService} from "angular2-oauth2/oauth-service";
     ],
     providers: [
         UtilService,
-        OAuthService
+        OAuthService,
+        HttpClientService
     ]
 })
 export class AuthenticationModule {}

@@ -5,6 +5,7 @@ import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {UsuariosService} from '../../usuarios/usuarios.service';
 import {AlertService} from "../../../core/services/alert.service.com";
 import {ExtraValidators} from "../../../core/services/ExtraValidators.service";
+import {HttpClientService} from "../../../core/http-client.service";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
 
     constructor(public router: Router,
                 private authService: AuthService,
+                private httpClientService: HttpClientService,
                 private formBuilder: FormBuilder,
                 private usuariosService: UsuariosService) {
     }
@@ -66,7 +68,9 @@ export class LoginComponent implements OnInit {
                         this.usuariosService.getRotaAcessos().subscribe(rotas => {
 
                             this.authService.setRotas(rotas);
-
+                            setTimeout(()=>{
+                                this.logout();
+                            },4000000);
                             if (userResponse.roles.data.some(x => x.slug == 'cliente')) {
                                 AlertService.flashMessage('você não tem permissão para acessar essa area!');
                                 this.authService.logout();
@@ -88,7 +92,12 @@ export class LoginComponent implements OnInit {
                 }
             );
     }
-
+    logout() {
+        this.httpClientService.get('/api/v1/admin/user/logout').subscribe(res=>{
+            this.authService.logout();
+            this.router.navigate(['/login']);
+        },error=>{});
+    }
     cadastrar(data) {
         if (!this.cadastroForm.invalid) {
             this.usuariosService.registrar(data).subscribe(res => {

@@ -401,23 +401,23 @@
                                             <span *ngIf="item.tipo!=''">
                                                 {{item.tipo}}
                                             </span>
+                                            <span *ngIf="item.numero!=''">
+                                                <b>N.:</b> {{item.numero}}
+                                            </span>
                                             <span *ngIf="item.data_vigencia_inicial!=null">
-                                                <b>Data de Emissão:</b> {{item.data_vigencia_inicial|date:'dd/MM/y'}}
+                                                <b>Dt. Emis.:</b> {{item.data_vigencia_inicial|date:'dd/MM/y'}}
                                             </span>
                                             <span *ngIf="item.data_emissao!=null">
-                                                <b>Data de Emissão:</b> {{item.data_emissao|date:'dd/MM/y'}}
+                                                <b>Dt Emis:</b> {{item.data_emissao|date:'dd/MM/y'}}
                                             </span>
                                             <span *ngIf="item.data_vigencia_fim!=null">
-                                                <b>Data Vencimento:</b> {{item.data_vigencia_fim|date:'dd/MM/y'}}
+                                                <b>Dt Venc.:</b> {{item.data_vigencia_fim|date:'dd/MM/y'}}
                                             </span>
                                             <span *ngIf="item.categoria_cnh!=''">
-                                                <b>Categoria CNH:</b> {{item.categoria_cnh}}
-                                            </span>
-                                            <span *ngIf="item.numero!=''">
-                                                <b>Numero:</b> {{item.numero}}
+                                                <b>Cat. CNH:</b> {{item.categoria_cnh}}
                                             </span>
                                             <span *ngIf="item.orgao_amissor!=''">
-                                                <b>Orgao Emissor/UF:</b> {{item.orgao_amissor}}/{{item.uf}}
+                                                <b>Orgao Emis./UF:</b> {{item.orgao_amissor}}/{{item.uf}}
                                             </span>
                                             <span *ngIf="item.cnae!=''">
                                                 <b>CNAE:</b> {{item.cnae}}
