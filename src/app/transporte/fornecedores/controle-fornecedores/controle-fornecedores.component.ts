@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit, ViewEncapsulation} from '@angular/core';
 import {ChamadasService} from "../../chamadas/services/chamadas.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ListAbstract} from "../../../../core/abstract/list.abstract";
@@ -13,17 +13,7 @@ declare var $: any;
     providers: [
         UsuariosService
     ],
-    styles: [
-            `
-            i.star-icon.half0 {
-                font-size: 1em !important;
-            }
-
-            #controle-fornecedores td, #controle-fornecedores th {
-                white-space: nowrap;
-            }
-        `
-    ]
+    encapsulation: ViewEncapsulation.None
 })
 export class ControleFornecedoresComponent extends ListAbstract implements OnInit {
 

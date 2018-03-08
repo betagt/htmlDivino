@@ -148,6 +148,12 @@ textarea {
     width: 100%;
     display: flex;
 }
+.row-large-no-display{
+    width: 100%;
+}
+.lista-left li {
+    float: left;
+}
 .glyphicon,
 .popover,
 .tooltip,

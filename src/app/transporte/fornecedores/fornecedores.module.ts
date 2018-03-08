@@ -6,12 +6,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {
-    AutoCompleteModule, CalendarModule, CheckboxModule, DialogModule, DropdownModule,
-    TooltipModule
+    AutoCompleteModule, CalendarModule, CheckboxModule, DialogModule, DropdownModule
 } from "primeng/primeng";
 import { ControleFornecedoresDetailComponent } from './controle-fornecedores-detail/controle-fornecedores-detail.component';
 import {RatingModule} from "ngx-rating";
 import { FragListComponent } from './frag-list/frag-list.component';
+import {TooltipModule} from "ngx-tooltip";
 
 @NgModule({
     imports: [

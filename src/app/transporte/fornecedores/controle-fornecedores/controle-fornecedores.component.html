@@ -1,7 +1,7 @@
 <section id="content">
   <div class="container">
     <app-buttons
-            [title]="'Lista de LEVEZ-MOTORISTAS'"
+            [title]="'PAINEL DE MOTORISTAS (LEVEZ)'"
             [smalltext]="_total + ' Itens'"
             [subtitle]="'Aqui você gerencia todas as suas corridas realizadas.'"
             [itemSelected]="itemSelected"
@@ -108,12 +108,13 @@
             <th>
               <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
             </th>
-            <th (click)="orderby('habilidades.id')" pTooltip="Cod" tooltipPosition="top">#</th>
+            <th (click)="orderby('habilidades.id')" pTooltip="Cod" tooltipPosition="top">COD</th>
+            <th>#</th>
             <th pTooltip="Motorista" tooltipPosition="top">Motorista</th>
-            <th pTooltip="Sit. Operação" tooltipPosition="top">Status</th>
             <th pTooltip="CPF" tooltipPosition="top">CPF</th>
             <th pTooltip="Dt. Ativação" tooltipPosition="top">Dt.Inicio</th>
             <th pTooltip="Sit. Cadastro" tooltipPosition="top">Cadastro</th>
+            <th pTooltip="Sit. Operação" tooltipPosition="top">Operação</th>
             <th pTooltip="Nº Corridas" tooltipPosition="top">Corridas</th>
             <th pTooltip="Aval." tooltipPosition="top">Aval.</th>
             <th pTooltip="Km produtivo (mês)" tooltipPosition="top">Km prod.</th>
@@ -128,11 +129,26 @@
               <td>
                 <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
               <td>{{item.id}}</td>
+              <td class="text-center"
+                  [tooltip]="myTooltip"
+                  [tooltipDisabled]="false"
+                  [tooltipAnimation]="true"
+                  tooltipPlacement="top">
+                                <span *ngIf="item?.habilitado && item?.perfil == 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" style="color: green"></i>
+                                </span>
+                <span *ngIf="!item?.habilitado && item?.perfil == 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': item?.pendencias?.cor}"></i>
+                                </span>
+                <span *ngIf="item?.perfil != 'fornecedor'">
+                                    <i class="zmdi zmdi-circle" style="color: green"></i>
+                                </span>
+              </td>
               <td>{{item.name}}</td>
-              <td>{{item.disponivel?"Disponível":"Indisponivel"}}</td>
               <td>{{item?.pessoa?.data?.cpf_cnpj}}</td>
               <td>{{item.created_at.date|date:'d-MM-y'}}</td>
               <td>{{item.status}}</td>
+              <td>{{item.disponivel?"Online":"Offline"}}</td>
               <td>{{item.contagem_chamadas}},00</td>
               <td>
                 <!--<rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating>-->
