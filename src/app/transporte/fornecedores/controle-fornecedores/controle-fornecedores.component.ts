@@ -29,6 +29,9 @@ export class ControleFornecedoresComponent extends ListAbstract implements OnIni
     ngOnInit(): void {
         super.form({
             'users.name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+            'pessoas.cpf_cnpj': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+            'roles.slug': [null],
+            'users.email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'field': ['id'],
             'order': ['dec']
         });

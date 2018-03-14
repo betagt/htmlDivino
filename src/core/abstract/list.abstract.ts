@@ -27,6 +27,7 @@ export abstract class ListAbstract {
         restaurar: true,
         save: true,
         back: true,
+        custom: true,
     };
 
     constructor(private formBuilder: FormBuilder,

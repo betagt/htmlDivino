@@ -90,7 +90,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: items?.meta?.pagination?.per_page, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
             <td>
               <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
             <td>{{item.id}}</td>

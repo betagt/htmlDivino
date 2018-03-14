@@ -34,7 +34,10 @@ export class UtilService {
         myReader.readAsDataURL(file);
         return myReader;
     }
-
+    static chunk(a, l) {
+        if (a.length == 0) return [];
+        else return [a.slice(0, l)].concat(this.chunk(a.slice(l), l));
+    }
     readThisMultiple(inputValue: any) {
         let myReader: FileReader = new FileReader();
         const resultFile = [];

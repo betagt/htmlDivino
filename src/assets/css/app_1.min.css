@@ -188,7 +188,12 @@ input::-moz-focus-inner {
     border: 0;
     padding: 0
 }
-
+.right{
+    float: right;
+}
+.lista-documentos li{
+   line-height: 22px;
+}
 input[type=checkbox],
 input[type=radio] {
     box-sizing: border-box;

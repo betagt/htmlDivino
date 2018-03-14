@@ -18,6 +18,8 @@ export class ButtonsComponent implements OnInit {
 
     @Input('smalltext') smalltext;
 
+    @Input('custombuttomname') custombuttomname;
+
     @Input('countSelect') countSelect;
 
     @Input('hidebuttons') hidebuttons: any;
@@ -28,6 +30,8 @@ export class ButtonsComponent implements OnInit {
 
     @Output('restaurar') restaurar = new EventEmitter();
 
+    @Output('custom') custom = new EventEmitter();
+
     @Input('icon') icon;
 
 
@@ -35,9 +39,7 @@ export class ButtonsComponent implements OnInit {
                 private router: Router) {
     }
 
-    ngOnInit() {
-        //console.log(this.hidebuttons);
-    }
+    ngOnInit() {}
 
     voltar() {
         this.location.back();
@@ -62,6 +64,11 @@ export class ButtonsComponent implements OnInit {
 
     save() {
         this.eventsave.emit(true);
+        return false;
+    }
+
+    customEv() {
+        this.custom.emit(true);
         return false;
     }
 }

@@ -5,3 +5,21 @@ address, dl {
     position: relative !important;
     float: left;
 }
+
+.nome-motorista{
+    font-size: 17px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 8px;
+}
+.status-motorista{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+.motorista-documentos{
+    border-bottom: 1px solid #c5c5c5;
+    border-top: 1px solid #c5c5c5;
+    font-weight: bold;
+}
+.lista-documentos-motorista li{
+    line-height: 31px;
+}

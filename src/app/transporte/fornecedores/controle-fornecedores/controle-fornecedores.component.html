@@ -62,14 +62,24 @@
         <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
           <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
           <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
-          <div class="header-search input-group">
-            <div class="col-md-7">
-              <div class="fg-line">
-                <input type="text" [formControl]="pesquisaForm.controls['users.name']" id="name" class="form-control" placeholder="Nome">
-              </div>
+            <div class="header-search input-group">
+                <div class="col-md-2">
+                    <div class="fg-line">
+                        <input type="text" [formControl]="pesquisaForm.controls['users.name']" id="name" class="form-control" placeholder="Nome">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="fg-line">
+                        <input type="text" [formControl]="pesquisaForm.controls['users.email']" id="email" class="form-control" placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="fg-line">
+                        <input type="text" [formControl]="pesquisaForm.controls['pessoas.cpf_cnpj']" id="cpf" class="form-control" placeholder="cpf/cnpj">
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
             </div>
-            <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
-          </div>
         </form>
         <div class="header-btn-actions">
           <ul class="actions">
@@ -101,6 +111,14 @@
           </ul>
         </div>
       </div>
+        <tooltip-content #myTooltip >
+            <div style="text-align: justify; white-space: nowrap;">
+                <b><i class="zmdi zmdi-circle" style="color: red"></i></b> <span style="color: #fff">Nenhum documento enviado.</span><br>
+                <!--<b><i class="zmdi zmdi-circle" style="color: orangered"></i></b> <span style="color: #fff">Doc. entregue mas nao aceita.</span><br>-->
+                <b><i class="zmdi zmdi-circle" style="color: yellow"></i></b> <span style="color: #fff">Doc. parcialmente entregue.</span><br>
+                <b><i class="zmdi zmdi-circle" style="color: green"></i></b> <span style="color: #fff">Usuário Habilitado.</span><br>
+            </div>
+        </tooltip-content>
       <div class="table-responsive">
         <table class="table table-striped" id="controle-fornecedores">
           <thead>
@@ -125,7 +143,7 @@
           </tr>
           </thead>
           <tbody >
-            <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: 25, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+            <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: items?.meta?.pagination?.per_page, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
               <td>
                 <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
               <td>{{item.id}}</td>

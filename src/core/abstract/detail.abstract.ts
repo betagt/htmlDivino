@@ -17,6 +17,7 @@ export abstract class DetailAbstract {
         restaurar: true,
         save: true,
         back: false,
+        custom: true,
     };
     constructor(private ref: ChangeDetectorRef,
                 private location: Location,

@@ -3,6 +3,8 @@ import {UsuariosService} from "../../../usuarios/usuarios.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DetailAbstract} from "../../../../core/abstract/detail.abstract";
 import {Location} from "@angular/common";
+import {UtilService} from "../../../../core/services/util.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
     selector: 'app-controle-fornecedores-detail',
@@ -39,7 +41,16 @@ export class ControleFornecedoresDetailComponent extends DetailAbstract implemen
         //this.display = true;
         //this.arquivos = arquivos;
     }
-
+    chunk(array) {
+        if(!isNullOrUndefined(array))
+            return UtilService.chunk(array, 4);
+        return [];
+    }
+    chunkVeiculo(array) {
+        if(!isNullOrUndefined(array))
+            return UtilService.chunk(array, 2);
+        return [];
+    }
     show(id: number) {
         this.usuarioService.showFornecedor(id, this.params).subscribe(usuario => {
             this.item = usuario;

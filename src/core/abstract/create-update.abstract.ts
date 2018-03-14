@@ -24,6 +24,7 @@ export abstract class CreateUpdateAbstract {
         restaurar: true,
         save: false,
         back: false,
+        custom: true,
     };
 
     constructor(private formBuilder: FormBuilder,
