@@ -172,6 +172,20 @@
                             </div>
                             <div class="col-md-12 m-b-10 no-padding-right p-b-5 motorista-documentos">
                                 <p class="c-black m-b-5">Documentos</p>
+                                <div *ngIf="item?.pendencias && !item?.pendencias?.habilitado" class="col-sm-12 m-t-15 no-padding" style="opacity: 1;">
+                                    <div class="card">
+                                        <div class="block-header text-center no-padding m-t-0 m-b-10" style="margin-top:0;">
+                                            <h2 class="c-red" style="text-transform: capitalize;">Pendências</h2>
+                                        </div>
+                                        <div class="card-body card-padding bgm-red c-white">
+                                            <ng-template ngFor let-itemas [ngForOf]="item?.pendencias?.data" let-i="index">
+                                        <span class="m-r-20" *ngIf="itemas.contagem == 0">
+                                            <i class="zmdi zmdi-close"></i> {{itemas.nome}}
+                                        </span>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4 m-b-0 no-padding-right no-padding-left" *ngFor="let doc of chunk(item?.documentos?.data); let i=index">
                                     <ul class="clist no-padding lista-documentos-motorista" >
                                         <li class="m-r-10" *ngFor="let documento of doc; let ind=index">
@@ -190,10 +204,10 @@
                         <div class="row-large-no-display">
                             <div class="col-md-4 m-b-0 no-padding-right">
                                 <ul class="clist no-padding lista-documentos">
-                                    <li><b>Marca: </b>{{item?.name}}</li>
+                                    <li><b>Marca: </b>{{item?.veiculo_marca}}</li>
                                     <li><b>Modelo: </b>{{item?.veiculo_modelo}}</li>
                                     <li><b>Placa: </b>{{item?.veiculo_placa}}</li>
-                                    <li><b>Cor: </b>{{item?.veiculo_placa}}</li>
+                                    <li><b>Cor: </b>{{item?.veiculo_cor}}</li>
                                     <li><b>Situação: </b>{{item?.veiculo_status == 'aceito'?'Habilitado':'Não Habilitado'}}</li>
                                 </ul>
                             </div>
@@ -214,6 +228,32 @@
                             </div>
                             <div class="col-md-12 m-b-10 no-padding-right p-b-5 motorista-documentos" >
                                 <p class="c-black m-b-5">Documentos</p>
+                                <div *ngIf="item?.veiculo_ativo?.data?.pendencias && !item?.veiculo_ativo?.data?.pendencias?.habilitado" class="col-sm-12 m-t-15 no-padding" style="opacity: 1;">
+                                    <div class="card">
+                                        <div class="block-header text-center no-padding m-t-0 m-b-10" style="margin-top:0;">
+                                            <h2 class="c-red" style="text-transform: capitalize;">Pendências</h2>
+                                        </div>
+                                        <div class="card-body card-padding bgm-red c-white">
+                                            <ng-template ngFor let-itemas [ngForOf]="item?.veiculo_ativo?.data?.pendencias?.data" let-i="index">
+                                        <span class="m-r-20" *ngIf="itemas.contagem == 0">
+                                            <i class="zmdi zmdi-close"></i> {{itemas.nome}}
+                                        </span>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="!(item?.veiculo_ativo?.data?.pendencias && !item?.veiculo_ativo?.data?.pendencias?.habilitado)" class="col-sm-12 m-t-15 no-padding" style="opacity: 1;">
+                                    <div class="card">
+                                        <div class="block-header text-center no-padding m-t-0 m-b-10" style="margin-top:0;">
+                                            <h2 class="c-red" style="text-transform: capitalize;">Pendências</h2>
+                                        </div>
+                                        <div class="card-body card-padding bgm-red c-white text-center">
+                                            <span class="m-r-20 ">
+                                                Motorista sem veículo ativo!
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4 m-b-0 no-padding-right no-padding-left" *ngFor="let doc of chunkVeiculo(item?.veiculo_ativo?.data?.documentos?.data); let i=index">
                                     <ul class="clist no-padding lista-documentos-motorista" >
                                         <li class="m-r-10" *ngFor="let documento of doc; let ind=index">

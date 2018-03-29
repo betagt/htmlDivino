@@ -25,6 +25,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
                 activatedRoute: ActivatedRoute,
                 router: Router) {
         super(formBuilder, ref, location, activatedRoute, router, tipoDocumentoService, ['/transporte/tipo-documento']);
+
         this.status = [
             {
                 label: 'Sim',
@@ -35,6 +36,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
                 value: false
             },
         ];
+
         this.tipo = [
             {
                 label: 'Motorista',
@@ -58,7 +60,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
             'precisa_de_documento': [true],
             'possui_vencimento': false,
             'obrigatorio': false,
-            'tipo': ['pessoa']
+            'tipo': ['motorista']
         });
         if (this.routeParams.id) {
             this.tipoDocumentoService.show(this.routeParams.id).subscribe(formaPagamento => {
