@@ -9,7 +9,7 @@
       <h3>{{smalltext}}</h3>-->
     </div>
   </div>
-  <div class="header-pages-buttons">
+  <div *ngIf="!desabilitarBotoes" class="header-pages-buttons">
     <ul class="fixed-buttons">
       <li [hidden]="hidebuttons?.new">
         <button [routerLink]="['new']" class="btn btn-success waves-effect">

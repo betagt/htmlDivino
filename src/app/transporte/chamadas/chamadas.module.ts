@@ -6,17 +6,27 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {ChamadasService} from "./services/chamadas.service";
+import {GerenciarChamadasComponent} from "./gerenciar-chamadas/gerenciar-chamadas.component";
+import { ModalDetalheChamadaComponent } from './modal-detalhe-chamada/modal-detalhe-chamada.component';
+import {DialogModule} from "primeng/primeng";
+import {AgmCoreModule} from "angular2-google-maps/core";
 
 @NgModule({
     imports: [
+        AgmCoreModule.forRoot({apiKey: 'AIzaSyCqpi3xiwlyPBcZeGiG7tBkv4ulGYdzesM'}),
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
         Ng2PaginationModule,
+        DialogModule,
         ChamadasRouting
     ],
-    declarations: [MinhasChamadasComponent],
+    declarations: [
+        MinhasChamadasComponent,
+        GerenciarChamadasComponent,
+        ModalDetalheChamadaComponent
+    ],
     providers: [
         ChamadasService
     ]

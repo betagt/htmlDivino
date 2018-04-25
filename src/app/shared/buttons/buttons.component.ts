@@ -22,6 +22,8 @@ export class ButtonsComponent implements OnInit {
 
     @Input('countSelect') countSelect;
 
+    @Input('desabilitarBotoes') desabilitarBotoes = false;
+
     @Input('hidebuttons') hidebuttons: any;
 
     @Output('eventsave') eventsave = new EventEmitter();
