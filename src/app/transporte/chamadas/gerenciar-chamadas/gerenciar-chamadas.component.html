@@ -1,7 +1,7 @@
 <section id="content">
   <div class="container">
     <app-buttons
-            [title]="'Minhas Corridas'"
+            [title]="'Gerenciar Corridas'"
             [smalltext]="_total + ' Itens'"
             [subtitle]="'Aqui você gerencia todas as suas corridas realizadas.'"
             [itemSelected]="itemSelected"
@@ -114,7 +114,8 @@
             <th (click)="orderby('habilidades.nome')">Motorista</th>
             <th (click)="orderby('habilidades.descricao')">Tipo</th>
             <th (click)="orderby('habilidades.descricao')">Valor</th>
-            <th (click)="orderby('created_at')">Realizada</th>
+            <th (click)="orderby('created_at')">Hr. Chamada</th>
+            <th (click)="orderby('created_at')">Hr. Encerrada</th>
             <th (click)="orderby('updated_at')">status</th>
           </tr>
           </thead>
@@ -123,12 +124,13 @@
             <td>
               <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
             <td>{{item.id}}</td>
-            <td>{{item.cliente_nome}}</td>
-            <td>{{(item.fornecedor?.data?.name)?item.fornecedor?.data?.name:'--- Não Atendida ---'}}</td>
+            <td>{{item.cliente_nome.split(' ')[0]}}</td>
+            <td>{{(item.fornecedor?.data?.name)?item.fornecedor?.data?.name.split(' ')[0]:'--- Não Atendida ---'}}</td>
             <td>{{item.tipo}}</td>
             <td>{{item.valor|currency:"BRL":true}}</td>
-            <td>{{item.created_at.date|date:'d-MM-y'}}</td>
-            <td>{{item.status}}</td>
+            <td>{{item?.created_at.date|date:'HH:mm:ss'}}</td>
+            <td>{{(item?.datahora_desembarcou)?(item?.datahora_desembarcou|date:'HH:mm:ss'):' --- '}}</td>
+            <td>{{(item.status == 'pendente')? 'ativa' : item.status}}</td>
           </tr>
           </tbody>
         </table>
