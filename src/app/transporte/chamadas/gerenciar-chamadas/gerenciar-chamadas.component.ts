@@ -65,12 +65,10 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
             this.addParams('include', this.includes.join(','));
         }
 
-        this.addParams('consulta', '{"filtro":{"habilidades.nome":null,"field":"updated_at","order":"asc"},"order":"id;desc"}');
-
         if (page) {
             this.addParams('page', page);
         }
-        this.chamadasService.setSkyPreload(true).getList(this.params)
+        this.chamadasService.monitor(this.params)
             .subscribe(items => {
                 this.load(items);
             });

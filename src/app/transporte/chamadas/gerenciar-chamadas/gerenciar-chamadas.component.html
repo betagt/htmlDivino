@@ -106,9 +106,6 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>
-              <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
-            </th>
             <th (click)="orderby('habilidades.id')">#</th>
             <th (click)="orderby('habilidades.nome')">Passageiro</th>
             <th (click)="orderby('habilidades.nome')">Motorista</th>
@@ -120,9 +117,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: items?.meta?.pagination?.per_page, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
-            <td>
-              <input type="checkbox" name="itens" multiple value="{{item.id}}" [(ngModel)]="item.state"/>
+          <tr *ngFor="let item of items?.data" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
             <td>{{item.id}}</td>
             <td>{{item.cliente_nome.split(' ')[0]}}</td>
             <td>{{(item.fornecedor?.data?.name)?item.fornecedor?.data?.name.split(' ')[0]:'--- Não Atendida ---'}}</td>
@@ -134,9 +129,6 @@
           </tr>
           </tbody>
         </table>
-        <div class="pagination" >
-          <pagination-controls maxSize="6" (pageChange)="list($event)" directionLinks="true" nextLabel="" previousLabel="" autoHide="true" id="server"></pagination-controls>
-        </div>
       </div>
     </div>
   </div>
