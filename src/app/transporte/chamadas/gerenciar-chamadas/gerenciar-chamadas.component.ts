@@ -94,11 +94,16 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
         return UtilService.dateDiff(Date.now(), new Date(data));
     }
 
-    checkPrioridade(timer: any) {
-        switch (timer.getMinutes()){
-            case :
-                break;
+    checkPrioridade(tipo, status, timer: any) {
+        if(tipo == 'solicitacao'){
+            const tempo = new Date();
+            tempo.setTime(timer);
+            if(tempo.getMinutes() > 0 && status != 'cancelado'){
+                return '#f3b4b4';
+            }
+            return '#7ef576';
         }
+        return '#fff';
     }
 
     ngOnDestroy() {

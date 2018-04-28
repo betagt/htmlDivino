@@ -59,19 +59,19 @@
       </div>
     </div>-->
     <div class="card">
-      <div class="card-header card-header-theme">
-        <!--<form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
+      <!--<div class="card-header card-header-theme">
+        <form [formGroup]="pesquisaForm"  (ngSubmit)="pesquisar(pesquisaForm.value)">
           <input type="hidden" [formControl]="pesquisaForm.controls['field']" id="field" class="form-control">
           <input type="hidden" [formControl]="pesquisaForm.controls['order']" id="order" class="form-control">
           <div class="header-search input-group">
             <div class="col-md-7">
               <div class="fg-line">
-                <input type="text" [formControl]="pesquisaForm.controls['habilidades.nome']" id="name" class="form-control" placeholder="Nome">
+                <input type="text" readonly [formControl]="pesquisaForm.controls['habilidades.nome']" id="name" class="form-control" placeholder="Nome">
               </div>
             </div>
-            <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
+            <button type="submit" [disabled]="true" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
           </div>
-        </form>-->
+        </form>
         <div class="header-btn-actions">
           <ul class="actions">
             <li>
@@ -84,24 +84,9 @@
                 <i class="zmdi zmdi-file" [hidden]="!(countSelect == 1)" ></i>
               </a>
             </li>
-            <!--<li>
-              <a (click)="aceitar()" >
-                <i class="zmdi zmdi-check" [hidden]="(lastChecked?.status == 'aceito') || !(countSelect == 1)" pTooltip="Aceitar" tooltipPosition="top"></i>
-              </a>
-            </li>
-            <li>
-              <a (click)="recusar()" >
-                <i class="zmdi zmdi-close" [hidden]="(lastChecked?.status == 'invalido')  || !(countSelect == 1)" pTooltip="Recusar" tooltipPosition="top"></i>
-              </a>
-            </li>-->
-            <!--<li>
-              <a pTooltip="Lixeira" tooltipPosition="top" (click)="lixeira()">
-                <i class="zmdi zmdi-delete"></i>
-              </a>
-            </li>-->
           </ul>
         </div>
-      </div>
+      </div>-->
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
@@ -119,7 +104,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of items?.data" [ngStyle]="{'background': '#7ef576'}" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+          <tr *ngFor="let item of items?.data" [ngStyle]="{'background': checkPrioridade(item?.tipo, item?.status, item?.created_at.date|timer)}" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
             <td>{{item.id}}</td>
             <td>{{((item.tipo=='solicitacao' && item.status != 'cancelado')?(item?.created_at.date|timer|date:'mm:ss'):'-------')}}</td>
             <td>{{item.cliente_nome.split(' ')[0]}}</td>
