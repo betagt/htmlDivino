@@ -10,6 +10,7 @@ import {GerenciarChamadasComponent} from "./gerenciar-chamadas/gerenciar-chamada
 import { ModalDetalheChamadaComponent } from './modal-detalhe-chamada/modal-detalhe-chamada.component';
 import {DialogModule} from "primeng/primeng";
 import {AgmCoreModule} from "angular2-google-maps/core";
+import {TimerPipe} from "../../../core/pipes/timer.pipe";
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {AgmCoreModule} from "angular2-google-maps/core";
     declarations: [
         MinhasChamadasComponent,
         GerenciarChamadasComponent,
-        ModalDetalheChamadaComponent
+        ModalDetalheChamadaComponent,
+        TimerPipe
     ],
     providers: [
         ChamadasService

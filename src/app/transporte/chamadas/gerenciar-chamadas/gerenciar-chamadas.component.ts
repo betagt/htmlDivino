@@ -3,6 +3,7 @@ import {ChamadasService} from "../services/chamadas.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ListAbstract} from "../../../../core/abstract/list.abstract";
 import {IntervalObservable} from "rxjs/observable/IntervalObservable";
+import {UtilService} from "../../../../core/services/util.service";
 
 declare var $: any;
 
@@ -70,12 +71,19 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
         }
         this.chamadasService.monitor(this.params)
             .subscribe(items => {
-                this.load(items);
+                this.items = items;
             });
     }
 
     detalheChamada() {
         this.display = true;
+    }
+
+    timer(data){
+       return UtilService.dateDiff(Date.now(), new Date(data));
+    }
+
+    checkPrioridade(timer){
     }
 
     ngOnDestroy(){

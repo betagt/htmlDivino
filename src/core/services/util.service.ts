@@ -84,6 +84,16 @@ export class UtilService {
         return ['(', /[1-9]/, /[1-9]/, ')'];
     }
 
+    static addMinutes(date, minutes) {
+        return new Date(date.getTime() + (minutes * 60000));
+    }
+    static addSegundos(date: any, segundos: any): any {
+        return new Date(date.getTime() + (segundos * 1000));
+    }
+    static dateDiff(a, b) {
+        return a - +(b.valueOf());
+    }
+
     static phoneMask(value, self = null) {
         if (value == null) {
             return value;
