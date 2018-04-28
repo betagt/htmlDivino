@@ -80,9 +80,9 @@
             <tooltip-content #myTooltip >
                 <div style="text-align: justify; white-space: nowrap;">
                     <b><i class="zmdi zmdi-circle" style="color: red"></i></b> <span style="color: #fff">Nenhum documento enviado.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: orangered"></i></b> <span style="color: #fff">Não há veiculo Ativo.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: yellow"></i></b> <span style="color: #fff">Doc/Veic parcialmente entregue.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: green"></i></b> <span style="color: #fff">Usuário Habilitado.</span><br>
+                    <b><i class="zmdi zmdi-circle" style="color: #fe35ff"></i></b> <span style="color: #fff">Não há veiculo Ativo.</span><br>
+                    <b><i class="zmdi zmdi-circle" style="color: yellow"></i></b> <span style="color: #fff">Doc parcialmente entregue.</span><br>
+                    <b><i class="zmdi zmdi-circle" style="color: #4dd452"></i></b> <span style="color: #fff">Usuário Habilitado.</span><br>
                 </div>
             </tooltip-content>
             <div class="table-responsive">
@@ -118,10 +118,10 @@
                                     <i class="zmdi zmdi-circle" style="color: green"></i>
                                 </span>
                                 <span *ngIf="!item?.veiculo_ativo?.data && item?.perfil == 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': 'orangered'}"></i>
+                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': '#fe35ff'}"></i>
                                 </span>
                                 <span *ngIf="item?.status == 'bloqueado' && item?.perfil == 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': ((!item?.veiculo_ativo)?'yellow':item?.pendencias?.cor)}"></i>
+                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': item?.pendencias?.cor}"></i>
                                 </span>
                                 <span *ngIf="item?.perfil != 'fornecedor'">
                                     <i class="zmdi zmdi-circle" style="color: green"></i>

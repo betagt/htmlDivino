@@ -9,6 +9,14 @@ export class ChamadasService extends BaseServiceService {
         super(http, '/api/v1/admin/chamada');
     }
 
+    monitor(params: URLSearchParams): Observable<any> {
+        return this.httpClienteSevice.setSkypePreload(true).get(this.url + '/monitor-chamadas', params)
+            .map(res => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
     listarByUser(params: URLSearchParams): Observable<any> {
         return this.httpClienteSevice.setSkypePreload(this.skyPreload).get(this.url + '/minhas-chamadas', params)
             .map(res => {

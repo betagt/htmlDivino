@@ -89,8 +89,8 @@
                         <td>{{item.id}}</td>
                         <td>{{item.codigo}}</td>
                         <td>{{item.descricao}}</td>
-                        <td>{{item.saldo|currency:"BRL":true}}</td>
                         <td>{{item.valor|currency:"BRL":true}}</td>
+                        <td>{{item.saldo|currency:"BRL":true}}</td>
                         <td>{{item.tipo == 'c'?'Crédito':'Debito'}}</td>
                         <td>{{item.created_at.date|date:'d-MM-y'}}</td>
                         <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
