@@ -4,13 +4,19 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ListAbstract} from "../../../../core/abstract/list.abstract";
 import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 import {UtilService} from "../../../../core/services/util.service";
+import {PusherService} from "../../../../core/services/pusher.service";
+import {AlertService} from "../../../../core/services/alert.service.com";
 
 declare var $: any;
 
 @Component({
     selector: 'app-gerenciar-chamadas',
     templateUrl: './gerenciar-chamadas.component.html',
-    styleUrls: ['./gerenciar-chamadas.component.css']
+    styleUrls: ['./gerenciar-chamadas.component.css'],
+    providers: [
+        PusherService,
+        AlertService
+    ]
 })
 export class GerenciarChamadasComponent extends ListAbstract implements OnInit, OnDestroy {
 
@@ -20,6 +26,8 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
 
     constructor(private chamadasService: ChamadasService,
                 formBuilder: FormBuilder,
+                private util: UtilService,
+                private pusher: PusherService,
                 private ngZone: NgZone,
                 ref: ChangeDetectorRef) {
         super(formBuilder, ref, chamadasService);
@@ -35,6 +43,9 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
             this.sparklineLine("stats-line", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], 68, 35, "#fff", "rgba(0,0,0,0)", 1.25, "rgba(255,255,255,0.4)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.4)", 3, "#fff", "rgba(255,255,255,0.4)");
         });
         this.list();
+        this.pusher.observarChamada().messages.subscribe(data => {
+            AlertService.flashMessage('Uma nova chamada foi iniciada!');
+        });
         IntervalObservable.create(3000)
             .takeWhile(() => this.vida) // only fires when component is alive
             .subscribe(() => {
@@ -79,14 +90,18 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
         this.display = true;
     }
 
-    timer(data){
-       return UtilService.dateDiff(Date.now(), new Date(data));
+    timer(data) {
+        return UtilService.dateDiff(Date.now(), new Date(data));
     }
 
-    checkPrioridade(timer){
+    checkPrioridade(timer: any) {
+        switch (timer.getMinutes()){
+            case :
+                break;
+        }
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.vida = false; // switches your IntervalObservable off
     }
 }

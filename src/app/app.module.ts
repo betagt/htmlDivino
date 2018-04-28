@@ -33,7 +33,6 @@ import {ServicosModule} from "./servicos/servicos.module";
 import {DiMaskDirective} from "../core/directives/di-mask.directive";
 import {CoolStorageModule} from "angular2-cool-storage";
 import {TimeHelper} from "../core/helpers/time.helper";
-import {PdfViewerModule} from "ng2-pdf-viewer";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 
 
@@ -44,7 +43,6 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
         HttpModule,
         FinaceiroModule,
         ServicosModule,
-        PdfViewerModule,
         StaticModule,
         AuthenticationModule,
         AppRouting,

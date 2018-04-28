@@ -108,12 +108,13 @@
           <tr>
             <th (click)="orderby('habilidades.id')">#</th>
             <th (click)="orderby('habilidades.id')">Tempo</th>
-            <th (click)="orderby('habilidades.nome')">Passageiro</th>
-            <th (click)="orderby('habilidades.nome')">Motorista</th>
-            <th (click)="orderby('habilidades.descricao')">Tipo</th>
-            <th (click)="orderby('habilidades.descricao')">Valor</th>
+            <th (click)="orderby('habilidades.nome')">Pass.</th>
+            <th (click)="orderby('habilidades.nome')">Fone.</th>
             <th (click)="orderby('created_at')">Hr. Chamada</th>
             <th (click)="orderby('created_at')">Hr. Encerrada</th>
+            <th (click)="orderby('habilidades.descricao')">Tipo</th>
+            <th (click)="orderby('habilidades.descricao')">Origem</th>
+            <th (click)="orderby('habilidades.descricao')">Destino</th>
             <th (click)="orderby('updated_at')">status</th>
           </tr>
           </thead>
@@ -122,11 +123,12 @@
             <td>{{item.id}}</td>
             <td>{{((item.tipo=='solicitacao' && item.status != 'cancelado')?(item?.created_at.date|timer|date:'mm:ss'):'-------')}}</td>
             <td>{{item.cliente_nome.split(' ')[0]}}</td>
-            <td>{{(item.fornecedor?.data?.name)?item.fornecedor?.data?.name.split(' ')[0]:'--- Não Atendida ---'}}</td>
-            <td>{{item.tipo}}</td>
-            <td>{{item.valor|currency:"BRL":true}}</td>
+            <td>{{(item.cliente.data.ddd)?'('+item.cliente.data.ddd+') '+item.cliente.data.numero: '----'}}</td>
             <td>{{item?.created_at.date|date:'HH:mm:ss'}}</td>
             <td>{{(item?.datahora_desembarcou)?(item?.datahora_desembarcou|date:'HH:mm:ss'):' --- '}}</td>
+            <td>{{item?.tipo}}</td>
+            <td>{{item?.trajeto?.data[0]?.endereco}}</td>
+            <td>{{item?.trajeto?.data[1]?.endereco}}</td>
             <td>{{(item.status == 'pendente')? 'ativa' : item.status}}</td>
           </tr>
           </tbody>
