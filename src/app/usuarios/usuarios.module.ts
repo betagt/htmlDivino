@@ -17,6 +17,12 @@ import {DropdownModule} from 'primeng/primeng';
 import {DocumentoSwitchFormModule} from "../transporte/documentos/componentes/documento-switch-form/documento-switch-form.module";
 import {TextMaskModule} from "angular2-text-mask";
 import {TooltipModule} from "ngx-tooltip";
+import {UsuarioClienteListComponent} from "./usuario-cliente-list/usuario-cliente-list.component";
+import {UsuarioSistemaListComponent} from "./usuario-sistema-list/usuario-sistema-list.component";
+import {UsuarioClienteFormComponent} from "./usuario-cliente-form/usuario-cliente-form.component";
+import {UsuarioClienteDetailComponent} from "./usuario-cliente-detail/usuario-cliente-detail.component";
+import {UsuarioSistemaDetailComponent} from "./usuario-sistema-detail/usuario-sistema-detail.component";
+import {UsuarioSistemaFormComponent} from "./usuario-sistema-form/usuario-sistema-form.component";
 
 @NgModule({
     imports: [
@@ -38,7 +44,13 @@ import {TooltipModule} from "ngx-tooltip";
         UsuarioFormComponent,
         UsuarioDetailComponent,
         PerfilComponent,
-        MeusDadosDetailComponent
+        MeusDadosDetailComponent,
+        UsuarioClienteListComponent,
+        UsuarioClienteFormComponent,
+        UsuarioClienteDetailComponent,
+        UsuarioSistemaListComponent,
+        UsuarioSistemaDetailComponent,
+        UsuarioSistemaFormComponent
     ],
     exports: [
         RouterModule,

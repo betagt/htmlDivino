@@ -32,6 +32,12 @@
                                 <input type="text" [formControl]="pesquisaForm.controls['pessoas.cpf_cnpj']" id="cpf" class="form-control" placeholder="cpf/cnpj">
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="fg-line">
+                                <p-dropdown [formControl]="pesquisaForm.controls['roles.slug']" [options]="perfil"
+                                            placeholder="selecione"></p-dropdown>
+                            </div>
+                        </div>
                         <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
                     </div>
                 </form>
@@ -71,14 +77,6 @@
                     </ul>
                 </div>
             </div>
-            <tooltip-content #myTooltip >
-                <div style="text-align: justify; white-space: nowrap;">
-                    <b><i class="zmdi zmdi-circle" style="color: red"></i></b> <span style="color: #fff">Nenhum documento enviado.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: #fe35ff"></i></b> <span style="color: #fff">Não há veiculo Ativo.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: yellow"></i></b> <span style="color: #fff">Doc parcialmente entregue.</span><br>
-                    <b><i class="zmdi zmdi-circle" style="color: #4dd452"></i></b> <span style="color: #fff">Usuário Habilitado.</span><br>
-                </div>
-            </tooltip-content>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -87,11 +85,10 @@
                                 <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
                             </th>
                             <th>COD</th>
-                            <th>#</th>
                             <th (click)="orderby('name')">Nome</th>
                             <th (click)="orderby('pessoas.cpf_cnpj')">cpf/cnpj</th>
                             <th (click)="orderby('email')">Email</th>
-                            <th (click)="orderby('roles.name')">Perfil</th>
+                            <th (click)="orderby('telefone')">Telefone</th>
                             <th (click)="orderby('created_at')">Criado</th>
                             <th (click)="orderby('updated_at')">Modificado</th>
                             <th (click)="orderby('status')">Cadastro</th>
@@ -102,33 +99,12 @@
                         <tr *ngFor="let item of items?.data| paginate: { id: 'server', itemsPerPage: items?.meta?.pagination?.per_page, currentPage: _page, totalItems: _total }" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
                             <td>
                                 <input type="checkbox" name="sizecb[]" value="{{item.id}}" (change)="count()" [(ngModel)]="item.state"/>
-                            <td>{{item.id}}</td>
-                            <td class="text-center"
-                                [tooltip]="myTooltip"
-                                [tooltipDisabled]="false"
-                                [tooltipAnimation]="true"
-                                tooltipPlacement="top">
-                                <span *ngIf="item?.veiculo_ativo && item?.status == 'ativo' && item?.perfil == 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" style="color: green"></i>
-                                </span>
-                                <span *ngIf="!item?.veiculo_ativo?.data && item?.perfil == 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': '#fe35ff'}"></i>
-                                </span>
-                                <span *ngIf="item?.status == 'bloqueado' && item?.perfil == 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" [ngStyle]="{'color': item?.pendencias?.cor}"></i>
-                                </span>
-                                <span *ngIf="item?.perfil != 'fornecedor'">
-                                    <i class="zmdi zmdi-circle" style="color: green"></i>
-                                </span>
                             </td>
+                            <td>{{item.id}}</td>
                             <td>{{item.name}}</td>
                             <td>{{item.pessoa?.data?.cpf_cnpj}}</td>
                             <td>{{item.email}}</td>
-                            <td>
-                                <ul class="list-group">
-                                    <li *ngFor="let role of item.roles?.data" [value]="role"> {{role.name}}</li>
-                                </ul>
-                            </td>
+                            <td>{{item?.ddd}} {{item?.numero}}</td>
                             <td>{{item.created_at.date|date:'d-MM-y'}}</td>
                             <td>{{item.updated_at.date|date:'d-MM-y'}}</td>
                             <td>{{item.status}}</td>

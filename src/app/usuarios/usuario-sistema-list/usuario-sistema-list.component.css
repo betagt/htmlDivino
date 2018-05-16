@@ -1,0 +1,13 @@
+.input-group:not(.input-group-lg):not(.input-group-sm) .input-group-addon {
+    font-size: 23px !important;
+    background: #eae0e0 !important;
+}
+ul.ng2-pagination{
+    display: flex !important;
+    width: 25% !important;
+    margin: auto !important;
+    padding-left: 0 !important;
+}
+.ui-dropdown {
+    height: 35px !important;
+}

@@ -1,25 +1,16 @@
 import {Component, OnInit, ChangeDetectorRef, ViewEncapsulation} from '@angular/core';
 import {UsuariosService} from '../usuarios.service';
-import {Observable} from 'rxjs';
 import {URLSearchParams} from '@angular/http';
 import {ListAbstract} from '../../../core/abstract/list.abstract';
-import {ListInterface} from '../../../core/interfaces/list.interface';
 import {FormBuilder, Validators} from '@angular/forms';
 
-
-export interface Usuario {
-    id?: number;
-    data: any;
-    meta: any;
-}
-
 @Component({
-    selector: 'app-usuario-list',
-    templateUrl: './usuario-list.component.html',
-    styleUrls: ['./usuario-list.component.css'],
+    selector: 'app-usuario-sistema-list',
+    templateUrl: './usuario-sistema-list.component.html',
+    styleUrls: ['./usuario-sistema-list.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class UsuarioListComponent extends ListAbstract implements OnInit {
+export class UsuarioSistemaListComponent extends ListAbstract implements OnInit {
 
     perfil: any;
 
@@ -51,7 +42,7 @@ export class UsuarioListComponent extends ListAbstract implements OnInit {
         super.form({
             'users.name': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'pessoas.cpf_cnpj': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
-            'roles.slug': ['fornecedor'],
+            'roles.slug': [null],
             'users.email': [null, Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
             'field': ['id'],
             'order': ['desc']

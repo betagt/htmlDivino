@@ -47,11 +47,11 @@
       <thead>
       <tr>
         <th (click)="orderby('habilidades.id')" title="Código">#</th>
-        <th>Veiculo</th>
+        <th>Veiculo</th>n
         <th>Cliente</th>
         <th>Sit. Cadastro</th>
         <th>Aval.</th>
-        <th>Km Mês Rodados</th>
+        <th>Km Rodados</th>
         <th>Placa</th>
         <th>Situação Veic.</th>
       </tr>
@@ -65,7 +65,7 @@
         <td>
           {{item.avaliacao==0?'---':item.avaliacao| number:'1.1-2':'br'}}
         </td>
-        <td>{{item.km_mes_rodado==0?'---':'Km '+(item.km_mes_rodado| number:'1.1-2':'br')}}</td>
+        <td>{{item.km_rodado==0?'---':'Km '+(item.km_rodado| number:'1.1-2':'br')}}</td>
         <td>{{item.veiculo_placa}}</td>
         <td>{{item.veiculo_status?item.veiculo_status:"---"}}</td>
       </tr>

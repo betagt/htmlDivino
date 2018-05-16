@@ -163,6 +163,30 @@ export class UsuariosService extends BaseServiceService {
             .catch(this.handleError);
     }
 
+    updateOrCreateCliente(params: FormData, id: number = null): Observable<any> {
+        let url = '/api/v1/admin/user/cliente-cadastrar';
+
+        if (id) {
+            url = '/api/v1/admin/user/cliente-update/' + id;
+        }
+
+        if (id) {
+            return this.httpClienteSevice
+                .put(url, params)
+                .map(res => {
+                    return res.json();
+                })
+                .catch(this.handleError);
+        }
+
+        return this.httpClienteSevice
+            .post(url, params)
+            .map(res => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
     recuperarSenha(params) {
         return this.httpClienteSevice
             .post('/api/v1/admin/user/password/reset', params)

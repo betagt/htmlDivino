@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {UtilService} from "../services/util.service";
+import {isNullOrUndefined} from "util";
 
 @Pipe({
   name: 'timer'
@@ -7,7 +8,7 @@ import {UtilService} from "../services/util.service";
 export class TimerPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return UtilService.dateDiff(Date.now(), new Date(value));
+    return UtilService.dateDiff((isNullOrUndefined(args))?Date.now():new Date(args), new Date(value));
   }
 
 }

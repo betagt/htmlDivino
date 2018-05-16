@@ -20,9 +20,9 @@ import {GeoService} from "../../localidades/service/geo.service";
 declare var $: any;
 
 @Component({
-    selector: 'app-usuario-form',
-    templateUrl: './usuario-form.component.html',
-    styleUrls: ['./usuario-form.component.css'],
+    selector: 'app-usuario-cliente-form',
+    templateUrl: './usuario-cliente-form.component.html',
+    styleUrls: ['./usuario-cliente-form.component.css'],
     providers: [
         AlertService,
         DocumentoService,
@@ -35,7 +35,7 @@ declare var $: any;
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit {
+export class UsuarioClienteFormComponent extends CreateUpdateAbstract implements OnInit {
 
     usuario: any;
 
@@ -82,7 +82,7 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 location: Location,
                 activatedRoute: ActivatedRoute,
                 router: Router) {
-        super(formBuilder, ref, location, activatedRoute, router, usuarioService, ['/usuarios']);
+        super(formBuilder, ref, location, activatedRoute, router, usuarioService, ['/usuarios/cliente']);
         this.maskData = UtilService.maskData();
         this._fb = formBuilder;
     }
@@ -196,19 +196,19 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                 ),
             ])],
             'chk_newsletter': [0],
-            'perfil': ['fornecedor'],
+            'perfil': ['cliente'],
             'status': ['inativo'],
             'documentos': this._fb.array([]),
             'pessoa': this._fb.group({
                 'sexo': [null],
-                'cpf_cnpj': [null, Validators.compose([Validators.required])],
+                'cpf_cnpj': [null],
                 'nec_especial': [null],
-                'data_nascimento': [null, Validators.compose([Validators.required])],
+                'data_nascimento': [null],
                 'rg': [null],
                 'orgao_emissor': [null],
-                'escolaridade': [null, Validators.compose([Validators.required])],
-                'estado_civil': [null, Validators.compose([Validators.required])],
-                'tipo_sanguineo': [null, Validators.compose([Validators.required])],
+                'escolaridade': [null],
+                'estado_civil': [null],
+                'tipo_sanguineo': ['A+'],
                 'fantasia': [null],
                 'contato': [null],
                 'contato_segudo': [null],
@@ -217,13 +217,13 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             }),
             'endereco': this._fb.group({
                 'id': [null],
-                'estado_id': [null, Validators.compose([Validators.required])],
-                'cidade_id': [null, Validators.compose([Validators.required])],
-                'cidade_name': [null, Validators.compose([Validators.required])],
-                'estado_name': [null, Validators.compose([Validators.required])],
-                'endereco': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-                'cep': [null, Validators.compose([Validators.required])],
-                'numero': [null, Validators.compose([Validators.required])],
+                'estado_id': [null],
+                'cidade_id': [null],
+                'cidade_name': [null],
+                'estado_name': [null],
+                'endereco': [null, Validators.compose([ Validators.minLength(3), Validators.maxLength(255)])],
+                'cep': [null],
+                'numero': [null],
                 'complemento': [null],
             }),
             'telefone': this._fb.group({
@@ -232,11 +232,11 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
                     [null],
                 ]),
                 'ddd': this._fb.array([
-                    [null, Validators.compose([Validators.required])],
+                    [null],
                     [null],
                 ]),
                 'numero': this._fb.array([
-                    [null, Validators.compose([Validators.required])],
+                    [null],
                     [null],
                 ]),
                 'principal': this._fb.array([
@@ -433,5 +433,29 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
             });
         }
         return false;
+    }
+
+    updateOrCreate(data) {
+        if (!this.saveForm.invalid) {
+            this.usuarioService.updateOrCreateCliente(data, this.routeParams.id).subscribe(res => {
+                if (this.redirect) {
+                    this.router.navigate(this.redirect);
+                } else {
+                    AlertService.seccessTime(
+                        'Registro Salvo!');
+                }
+            }, erro => {
+                if (erro.status == 422) {
+                    const response = JSON.parse(erro._body);
+                    let text = '';
+                    for (let erro in response) {
+                        for (let msg in response[erro]) {
+                            text += erro + ': ' + response[erro][msg] + '<br>';
+                        }
+                    }
+                    AlertService.errorTime(text);
+                }
+            });
+        }
     }
 }

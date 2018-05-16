@@ -1,0 +1,170 @@
+<section id="content">
+    <app-buttons
+            [title]="'Detalhes do Usuário'"
+            [hidebuttons]="buttons"
+            [itemSelected]="routeParams.id"
+            [countSelect]="1"
+            [icon]="'zmdi zmdi-accounts'"
+            (eventsave)="updateOrCreate(saveForm.value)">
+    </app-buttons>
+        <!--<div class="block-header">
+            <h2>Malinda Hollaway
+                <small>Web/UI Developer, Edinburgh, Scotland</small>
+            </h2>
+
+            <ul class="actions m-t-20 hidden-xs">
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown">
+                        <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="">Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a href="">Account Settings</a>
+                        </li>
+                        <li>
+                            <a href="">Other Settings</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>-->
+
+        <div class="card" id="profile-main">
+            <div class="pm-overview c-overflow">
+
+                <div class="pmo-pic">
+                    <div class="p-relative">
+                        <a>
+                            <img class="img-responsive" onError="this.src='../../../assets/img/null-user.jpg'" [src]="item?.imagem" alt="">
+                        </a>
+                        <div class="dropdown pmop-message">
+                            <input type="file" style="display: none;" #fileEvent (change)="changeListener($event)">
+                            <a (click)="fileEvent.click()" class="btn bgm-white btn-float z-depth-1">
+                                <i class="zmdi zmdi-camera"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="pmo-stat">
+                        <h2 class="m-0 c-white">{{item?.name}}</h2>
+                        {{item?.status}}
+                    </div>
+                </div>
+
+                <div class="pmo-block pmo-contact hidden-xs">
+                    <h2>Contato</h2>
+
+                    <ul>
+                        <li *ngFor="let telfone of item?.telefones.data">
+                            <i class="zmdi zmdi-phone"></i> {{telfone.ddd}} {{telfone.numero}}
+                        </li>
+                        <li><i class="zmdi zmdi-email"></i> {{item?.email}}</li>
+                       <!-- <li><i class="zmdi zmdi-facebook-box"></i> malinda.hollaway</li>
+                        <li><i class="zmdi zmdi-twitter"></i> @malinda (twitter.com/malinda)</li>-->
+                        <li *ngIf="item?.endereco?.data">
+                            <i class="zmdi zmdi-pin"></i>
+                            <address class="m-b-0 ng-binding">
+                                {{item?.endereco.data.endereco}}, {{item?.endereco.data.complemento+','}} {{item?.endereco.data.numero+','}} <br>
+                                {{item?.endereco.data.cep+','}}
+                            </address>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pm-body clearfix">
+                <!--<ul class="tab-nav tn-justified">
+                    <li class="active"><a >Detalhes</a></li>
+                </ul>-->
+                <div class="pmb-block">
+                    <div class="pmbb-header">
+                        <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
+                        <!--<ul class="actions">
+                            <li class="dropdown">
+                                <a href="" data-toggle="dropdown">
+                                    <i class="zmdi zmdi-more-vert"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a data-ma-action="profile-edit" href="">Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>-->
+                    </div>
+                    <div class="pmbb-body p-l-30">
+                        <div class="pmbb-view">
+                            <dl class="dl-horizontal">
+                                <dt>Nome</dt>
+                                <dd>{{item?.name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Sexo</dt>
+                                <dd>{{item?.sexo_label}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Recebe Newsletter</dt>
+                                <dd>{{item?.chk_newsletter?'sim':'não'}}</dd>
+                            </dl>
+                            <!--<dl class="dl-horizontal">
+                                <dt>Birthday</dt>
+                                <dd>June 23, 1990</dd>
+                            </dl>-->
+                            <dl class="dl-horizontal">
+                                <dt>Status</dt>
+                                <dd>{{item?.status}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pmb-block">
+                    <div class="pmbb-header">
+                        <h2><i class="zmdi zmdi-phone m-r-10"></i> Informações de Contato</h2>
+                    </div>
+                    <div class="pmbb-body p-l-30">
+                        <div class="pmbb-view">
+                            <dl *ngIf="item?.telefones.data.length > 0" class="dl-horizontal">
+                                <dt>Mobile Phone</dt>
+                                <dd *ngFor="let telefone of item?.telefones.data">
+                                    {{telefone.ddd}} {{telefone.numero}}
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Email</dt>
+                                <dd>{{item?.email}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<p-dialog [modal]="'modal'" [(visible)]="display" >
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Arquivo</th>
+                <!--<th>Remover</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td *ngFor="let item of arquivos?.data; let i=index">
+                    <img src="{{item.img}}" width="150">
+                </td>
+                <!--<td class="center">
+                    <button (click)="removeDocumento(item.id, i)" class="btn bgm-green waves-effect" title="Excluir Documentos" type="button"><i class="zmdi zmdi-close"></i></button>
+                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</p-dialog>

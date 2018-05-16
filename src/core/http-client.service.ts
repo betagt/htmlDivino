@@ -146,7 +146,7 @@ export class HttpClientService extends Http {
             this.requestInterceptor();
         }
         return observable.catch((err, source) => {
-            if (err.status === 401 || err.status === 403) {
+            if (err.status === 401 || err.status === 403 || err.status === 429) {
                 return this.authService.refreshToken.flatMap(authenticationResult => {
                     this.authService.refreshToken = this.authService.requestRefreshToken().share();
                     return this.removeHeader('authorization')

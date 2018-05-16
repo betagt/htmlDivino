@@ -1,7 +1,7 @@
 <section id="content">
   <div class="container">
     <app-buttons
-            [title]="'Gerenciar Corridas'"
+            [title]="'Monitor de Chamadas'"
             [smalltext]="_total + ' Itens'"
             [subtitle]="'Aqui você gerencia todas as suas corridas realizadas.'"
             [itemSelected]="itemSelected"
@@ -90,32 +90,32 @@
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
-          <tr>
-            <th (click)="orderby('habilidades.id')">#</th>
-            <th (click)="orderby('habilidades.id')">Tempo</th>
-            <th (click)="orderby('habilidades.nome')">Pass.</th>
-            <th (click)="orderby('habilidades.nome')">Fone.</th>
-            <th (click)="orderby('created_at')">Hr. Chamada</th>
-            <th (click)="orderby('created_at')">Hr. Encerrada</th>
-            <th (click)="orderby('habilidades.descricao')">Tipo</th>
-            <th (click)="orderby('habilidades.descricao')">Origem</th>
-            <th (click)="orderby('habilidades.descricao')">Destino</th>
-            <th (click)="orderby('updated_at')">status</th>
-          </tr>
+            <tr>
+              <th (click)="orderby('habilidades.id')">#</th>
+              <th (click)="orderby('habilidades.id')">Tempo</th>
+              <th (click)="orderby('habilidades.nome')">Pass.</th>
+              <th (click)="orderby('habilidades.nome')">Fone.</th>
+              <th (click)="orderby('created_at')">Hr. Chamada</th>
+              <th (click)="orderby('created_at')">Hr. Encerrada</th>
+              <th (click)="orderby('habilidades.descricao')">Estágio</th>
+              <th (click)="orderby('habilidades.descricao')">Origem</th>
+              <th (click)="orderby('habilidades.descricao')">Destino</th>
+              <th (click)="orderby('updated_at')">status</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of items?.data" [ngStyle]="{'background': checkPrioridade(item?.tipo, item?.status, item?.created_at.date|timer)}" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
-            <td>{{item.id}}</td>
-            <td>{{((item.tipo=='solicitacao' && item.status != 'cancelado')?(item?.created_at.date|timer|date:'mm:ss'):'-------')}}</td>
-            <td>{{item.cliente_nome.split(' ')[0]}}</td>
-            <td>{{(item.cliente.data.ddd)?'('+item.cliente.data.ddd+') '+item.cliente.data.numero: '----'}}</td>
-            <td>{{item?.created_at.date|date:'HH:mm:ss'}}</td>
-            <td>{{(item?.datahora_desembarcou)?(item?.datahora_desembarcou|date:'HH:mm:ss'):' --- '}}</td>
-            <td>{{item?.tipo}}</td>
-            <td>{{item?.trajeto?.data[0]?.endereco}}</td>
-            <td>{{item?.trajeto?.data[1]?.endereco}}</td>
-            <td>{{(item.status == 'pendente')? 'ativa' : item.status}}</td>
-          </tr>
+            <tr *ngFor="let item of items?.data" [ngStyle]="{'background': checkPrioridade(item?.tipo, item?.status, item?.created_at.date|timer)}" [ngClass]="{'success c-white': item.state}" (click)="item.state = !item.state;count();alterarESeleciona($event, item)" >
+              <td>{{item.id}}</td>
+              <td>{{((item.tipo=='solicitacao' && item.status != 'cancelado')?(item?.created_at.date|timer|date:'mm:ss'): (item?.created_at.date|timer:item?.datahora_encerramento|date:'mm:ss'))}}</td>
+              <td>{{item.cliente_nome.split(' ')[0]}}</td>
+              <td>{{(item.cliente.data.ddd)?'('+item.cliente.data.ddd+') '+item.cliente.data.numero: '----'}}</td>
+              <td>{{item?.created_at.date|date:'HH:mm:ss'}}</td>
+              <td>{{(item?.datahora_encerramento)?(item?.datahora_encerramento|date:'HH:mm:ss'):' --- '}}</td>
+              <td>{{item?.tipo}}</td>
+              <td>{{item?.trajeto?.data[0]?.endereco}}</td>
+              <td>{{item?.trajeto?.data[1]?.endereco}}</td>
+              <td>{{(item.status == 'pendente')? 'ativa' : item.status}}</td>
+            </tr>
           </tbody>
         </table>
       </div>

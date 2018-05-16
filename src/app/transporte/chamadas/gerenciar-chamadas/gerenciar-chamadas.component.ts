@@ -95,6 +95,9 @@ export class GerenciarChamadasComponent extends ListAbstract implements OnInit, 
     }
 
     checkPrioridade(tipo, status, timer: any) {
+        if(status == 'cancelado' || tipo == 'finalizado'){
+            return '#f7b38a';
+        }
         if(tipo == 'solicitacao'){
             const tempo = new Date();
             tempo.setTime(timer);
