@@ -108,6 +108,16 @@
                                     </div>
                                 </div>
                                 <div class="row-large m-t-5">
+
+                                    <div class="col-md-6">
+                                        <div >
+                                            <label>Perfil</label>
+                                            <!--<input type="text" class="form-control" [formControl]="saveForm.controls['cor']" placeholder="Ex: preto">-->
+                                            <p-dropdown [formControl]="saveForm.controls['perfil']" [options]="perfil"
+                                                        placeholder="selecione"></p-dropdown>
+                                        </div>
+                                        <app-error-message [erros]="saveForm.controls['perfil']"></app-error-message>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Status</label>

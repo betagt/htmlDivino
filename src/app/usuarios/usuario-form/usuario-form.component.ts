@@ -90,12 +90,16 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
     ngOnInit() {
         this.perfil = [
             {
-                label: 'Passageiro',
-                value: 'cliente'
-            },
-            {
                 label: 'Motorista',
                 value: 'fornecedor'
+            },
+            {
+                label: 'Taxista',
+                value: 'taxista'
+            },
+            {
+                label: 'Mototaxista',
+                value: 'mototaxista'
             }
         ];
         this.status = [

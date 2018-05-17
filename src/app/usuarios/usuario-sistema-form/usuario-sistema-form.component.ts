@@ -82,7 +82,7 @@ export class UsuarioSistemaFormComponent extends CreateUpdateAbstract implements
                 location: Location,
                 activatedRoute: ActivatedRoute,
                 router: Router) {
-        super(formBuilder, ref, location, activatedRoute, router, usuarioService, ['/usuarios/cliente']);
+        super(formBuilder, ref, location, activatedRoute, router, usuarioService, ['/usuarios/sistema']);
         this.maskData = UtilService.maskData();
         this._fb = formBuilder;
     }
@@ -101,6 +101,18 @@ export class UsuarioSistemaFormComponent extends CreateUpdateAbstract implements
             {
                 label: 'Moderador',
                 value: 'moderador'
+            },
+            {
+                label: 'Monitor Chamadas',
+                value: 'monitor-chamadas'
+            },
+            {
+                label: 'Taxista',
+                value: 'taxista'
+            },
+            {
+                label: 'Mototaxista',
+                value: 'mototaxista'
             }
         ];
 
