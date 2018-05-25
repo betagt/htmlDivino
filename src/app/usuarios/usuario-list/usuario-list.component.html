@@ -32,6 +32,12 @@
                                 <input type="text" [formControl]="pesquisaForm.controls['pessoas.cpf_cnpj']" id="cpf" class="form-control" placeholder="cpf/cnpj">
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="fg-line">
+                                <p-dropdown [formControl]="pesquisaForm.controls['roles.slug']" [options]="perfil"
+                                            placeholder="selecione"></p-dropdown>
+                            </div>
+                        </div>
                         <button type="submit" [disabled]="!pesquisaForm.valid" class="input-group-addon"><i class="zmdi zmdi-search"></i></button>
                     </div>
                 </form>

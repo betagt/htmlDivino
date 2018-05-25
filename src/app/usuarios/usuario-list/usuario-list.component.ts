@@ -36,16 +36,16 @@ export class UsuarioListComponent extends ListAbstract implements OnInit {
     ngOnInit(): void {
         this.perfil = [
             {
-                label: 'Selecione',
-                value: null
-            },
-            {
-                label: 'Passageiro',
-                value: 'cliente'
-            },
-            {
                 label: 'Motorista',
                 value: 'fornecedor'
+            },
+            {
+                label: 'Taxista',
+                value: 'taxista'
+            },
+            {
+                label: 'Mototaxista',
+                value: 'mototaxista'
             }
         ];
         super.form({
