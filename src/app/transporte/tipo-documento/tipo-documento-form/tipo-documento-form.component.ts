@@ -50,6 +50,14 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
                 label: 'Cliente',
                 value: 'cliente'
             },
+            {
+                label: 'Taxista',
+                value: 'taxista'
+            },
+            {
+                label: 'Mototaxista',
+                value: 'mototaxista'
+            },
         ];
     }
 

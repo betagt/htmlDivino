@@ -155,7 +155,7 @@
                                 <ul class="clist no-padding">
                                     <li><b>Cidade/UF: </b>{{item?.endereco?.data?.cidade_name+' - '+item?.endereco?.data?.estado_uf}}</li>
                                     <li><b>Dt. de Nasc.: </b>{{item?.pessoa?.data?.data_nascimento|date:'dd/MM/y'}}</li>
-                                    <li><b>Tipo Sanguineo: </b>{{item?.pessoa?.data?.data_nascimento|date:'dd/MM/y'}}</li>
+                                    <li><b>Tipo Sanguineo: </b>{{item?.pessoa?.data?.tipo_sanguineo}}</li>
                                     <li><b>Avaliação: </b><span *ngIf="item?.nota_fornecedor"><rating [(ngModel)]="item.nota_fornecedor" [readonly]="true" [max]="5"> </rating></span></li>
                                     <li><b>Cadastro: </b>{{item?.status}}</li>
                                 </ul>
