@@ -40,7 +40,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
         this.tipo = [
             {
                 label: 'Motorista',
-                value: 'motorista'
+                value: 'fornecedor'
             },
             {
                 label: 'Veículo',
