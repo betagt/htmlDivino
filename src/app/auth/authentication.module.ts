@@ -5,6 +5,7 @@ import {LoginComponent} from "./login/login.component";
 import {UtilService} from "../../core/services/util.service";
 import {OAuthService} from "angular2-oauth2/oauth-service";
 import {HttpClientService} from "../../core/http-client.service";
+import {AlterarSenhaComponent} from "./alterar-senha/alterar-senha.component";
 
 @NgModule({
     imports: [
@@ -13,10 +14,12 @@ import {HttpClientService} from "../../core/http-client.service";
         ReactiveFormsModule
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        AlterarSenhaComponent
     ],
     exports: [
-        LoginComponent
+        LoginComponent,
+        AlterarSenhaComponent
     ],
     providers: [
         UtilService,

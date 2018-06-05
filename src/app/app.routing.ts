@@ -8,6 +8,7 @@ import {LoginComponent} from './auth/login/login.component';
 import {ChecarRotaGuard} from "../core/guard/checar-rota.guard";
 import {TemplateComponent} from "./shared/template/template.component";
 import {ConfiguracoesComponent} from "./configuracoes/configuracoes.component";
+import {AlterarSenhaComponent} from "./auth/alterar-senha/alterar-senha.component";
 
 const APP_ROUTES: Routes = [
     {
@@ -42,6 +43,7 @@ const APP_ROUTES: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
+    {path: 'alterar-senha/:hash', component: AlterarSenhaComponent, data: {title: 'Recuperar Senha'}},
     {path: 'notfound', canActivate: [CanActivateViaOAuthGuard], canActivateChild: [ChecarRotaGuard], component: NotFoundComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: '**', redirectTo: 'notfound'}

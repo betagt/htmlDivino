@@ -196,6 +196,15 @@ export class UsuariosService extends BaseServiceService {
             .catch(this.handleError);
     }
 
+    resetarSenha(params) {
+        return this.httpClienteSevice
+            .post('/api/v1/front/user/password/reset/change', params)
+            .map(res => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
     changePassword(params: FormData) {
         return this.httpClienteSevice
             .post('/api/v1/admin/user/password/change', params)

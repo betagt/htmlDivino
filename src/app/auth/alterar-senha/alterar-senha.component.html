@@ -1,0 +1,39 @@
+<div class="login-content" style="background: url('../../../assets/img/backlevez.jpg')">
+    <div *ngIf="!success" class="lc-block toggled" id="l-forget-password">
+        <form [formGroup]="senhaForm" (ngSubmit)="recuperarSenha(senhaForm.value)">
+            <div class="lcb-form">
+                <img width="52%" class="m-b-20" src="../../../assets/img/Logo%20Levez.png" />
+                <p class="text-left">Alterar Senha de acesso.</p>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <input type="text" [formControl]="senhaForm.controls['email']" class="form-control"
+                               placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <input type="password" [formControl]="senhaForm.controls['password']" class="form-control"
+                               placeholder="Senha">
+                    </div>
+                </div>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <div class="fg-line">
+                        <input type="password" [formControl]="senhaForm.controls['password_confirmation']"
+                               class="form-control" placeholder="Confirmar senha">
+                    </div>
+                </div>
+                <button  type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="success" class="lc-block toggled" id="l-forget-password">
+        <div class="lcb-form">
+            <img width="52%" class="m-b-20" src="../../../assets/img/Logo%20Levez.png" />
+            <p class="text-left">Senha alterada com sucesso!</p>
+        </div>
+    </div>
+</div>
+<!--<p-growl [(value)]="msgs" [life]="2000" ></p-growl>-->
