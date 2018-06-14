@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {Ng2PaginationModule} from "ng2-pagination";
-import {CheckboxModule, DropdownModule, TooltipModule} from "primeng/primeng";
+import {CheckboxModule, DropdownModule, MultiSelectModule, TooltipModule} from "primeng/primeng";
 import {TipoDocumentoListComponent} from "./tipo-documento-list/tipo-documento-list.component";
 import {TipoDocumentoService} from "./service/tipo-documento.service";
 import {TipoDocumentoRouting} from "./tipo-documento.routing";
@@ -20,7 +20,8 @@ import {TipoDocumentoDetailComponent} from "./tipo-documento-detail/tipo-documen
         TooltipModule,
         DropdownModule,
         CheckboxModule,
-        TipoDocumentoRouting
+        TipoDocumentoRouting,
+        MultiSelectModule
     ],
     declarations: [TipoDocumentoListComponent, TipoDocumentoFormComponent, TipoDocumentoDetailComponent],
     providers: [
