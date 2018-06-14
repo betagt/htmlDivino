@@ -6,6 +6,7 @@ import {CreateUpdateAbstract} from "../../../../core/abstract/create-update.abst
 import {Location} from "@angular/common";
 import {isBoolean} from "util";
 import {TipoDocumentoService} from "../service/tipo-documento.service";
+import {AlertService} from "../../../../core/services/alert.service.com";
 
 @Component({
     selector: 'app-tipo-documento-form',
@@ -68,7 +69,7 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
             'precisa_de_documento': [true],
             'possui_vencimento': false,
             'obrigatorio': false,
-            'tipo': ['motorista']
+            'tipo': []
         });
         if (this.routeParams.id) {
             this.tipoDocumentoService.show(this.routeParams.id).subscribe(formaPagamento => {
@@ -76,6 +77,33 @@ export class TipoDocumentoFormComponent extends CreateUpdateAbstract implements 
                 this.formaPagamento = formaPagamento;
             });
             return;
+        }
+    }
+
+    updateOrCreate(data) {
+        if (!this.saveForm.invalid) {
+
+            data.tipo = data.tipo.join(',');
+
+            this.tipoDocumentoService.updateOrCreate(data, this.routeParams.id).subscribe(res => {
+                if (this.redirect) {
+                    this.router.navigate(this.redirect);
+                } else {
+                    AlertService.seccessTime(
+                        'Registro Salvo!');
+                }
+            }, erro => {
+                if (erro.status == 422) {
+                    const response = JSON.parse(erro._body);
+                    let text = '';
+                    for (let erro in response) {
+                        for (let msg in response[erro]) {
+                            text += erro + ': ' + response[erro][msg] + '<br>';
+                        }
+                    }
+                    AlertService.errorTime(text);
+                }
+            });
         }
     }
 

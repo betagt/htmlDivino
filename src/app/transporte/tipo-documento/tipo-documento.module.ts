@@ -21,7 +21,8 @@ import {TipoDocumentoDetailComponent} from "./tipo-documento-detail/tipo-documen
         TooltipModule,
         DropdownModule,
         CheckboxModule,
-        TipoDocumentoRouting
+        TipoDocumentoRouting,
+        MultiSelectModule
     ],
     declarations: [TipoDocumentoListComponent, TipoDocumentoFormComponent, TipoDocumentoDetailComponent],
     providers: [
