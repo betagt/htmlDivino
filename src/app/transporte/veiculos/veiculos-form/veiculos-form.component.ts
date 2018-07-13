@@ -13,6 +13,7 @@ import {AlertService} from "../../../../core/services/alert.service.com";
 
 import {URLSearchParams} from '@angular/http';
 import {DocumentoService} from "../../documentos/service/documento.service";
+import {BasicValidators} from "../../../shared/basic-validators";
 
 @Component({
     selector: 'app-veiculos-form',
@@ -155,7 +156,7 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
     initDocumento(): FormGroup {
         return this._fb.group({
             'transporte_tipo_documento_id': [null, Validators.compose([Validators.required])],
-            'arquivos': [null, Validators.compose([Validators.required])],
+            'arquivos': [null, Validators.compose([Validators.required, BasicValidators.qtdarquivos])],
             'nome': [null],
             'numero': [null],
             'data_vigencia_inicial': [null],
@@ -249,6 +250,10 @@ export class VeiculosFormComponent extends CreateUpdateAbstract implements OnIni
             });
         }, error => {
         });
+    }
+
+    checkTamanhoArquivos(value) {
+        return UtilService.checkTamanhoarquivos(value, 1024);
     }
 
 }

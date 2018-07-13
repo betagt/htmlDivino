@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {URLSearchParams} from "@angular/http";
 import {createNumberMask} from "text-mask-addons/dist/textMaskAddons";
 import {conformToMask} from "text-mask-core/dist/textMaskCore";
+import {isNullOrUndefined} from "util";
+import {FormControl} from "@angular/forms";
 
 @Injectable()
 export class UtilService {
@@ -25,24 +27,42 @@ export class UtilService {
         return str;
     };
 
+    static checkTamanhoarquivos(control: FormControl, size) {
+        let error = false;
+        if (isNullOrUndefined(control.value)) {
+            return error;
+        }
+        for (let i = 0; i < control.value.length; i++) {
+            const byteLength = Number((control.value[i]).replace(/=/g, "").length * 0.75);
+            if (byteLength > size * 1000) {
+                error = true;
+            }
+        }
+        console.log(error);
+        return error;
+    }
+
     readThis(inputValue: any) {
         const file: File = inputValue.files[0];
         const myReader: FileReader = new FileReader();
         /*myReader.onloadend = (e) => {
-            const image = myReader.result;
-        }*/
+         const image = myReader.result;
+         }*/
         myReader.readAsDataURL(file);
         return myReader;
     }
+
     static chunk(a, l) {
         if (a.length == 0) return [];
         else return [a.slice(0, l)].concat(this.chunk(a.slice(l), l));
     }
+
     readThisMultiple(inputValue: any) {
         let myReader: FileReader = new FileReader();
         const resultFile = [];
         for (let i = 0; i < inputValue.files.length; i++) {
             myReader = new FileReader();
+            console.log(inputValue.files[i].size);
             myReader.readAsDataURL(inputValue.files[i]);
             resultFile.push(myReader);
         }
@@ -64,6 +84,7 @@ export class UtilService {
     static maskData() {
         return [/[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/];
     }
+
     static cepMasc() {
         return [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
     }
@@ -87,9 +108,11 @@ export class UtilService {
     static addMinutes(date, minutes) {
         return new Date(date.getTime() + (minutes * 60000));
     }
+
     static addSegundos(date: any, segundos: any): any {
         return new Date(date.getTime() + (segundos * 1000));
     }
+
     static dateDiff(a, b) {
         return a - +(b.valueOf());
     }
@@ -147,6 +170,7 @@ export class UtilService {
         return conformedPhoneNumber.conformedValue;
 
     }
+
     constructor() {
         this.urlSearchParams = new URLSearchParams();
     }

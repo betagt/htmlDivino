@@ -438,4 +438,9 @@ export class UsuarioFormComponent extends CreateUpdateAbstract implements OnInit
         }
         return false;
     }
+
+
+    checkTamanhoArquivos(value) {
+        return UtilService.checkTamanhoarquivos(value, 1024);
+    }
 }

@@ -103,6 +103,7 @@ export class ConfiguracoesComponent extends CreateUpdateAbstract implements OnIn
             'pbonusp': [null],
             'tempo_cancel_fornecedor_min': [null],
             'tempo_cancel_cliente_min': [null],
+            'valor_minimo_cancelamento': [null],
         });
         this.configuracoesService.view().subscribe(configuracoes => {
             configuracoes.ptxoper *= 100;

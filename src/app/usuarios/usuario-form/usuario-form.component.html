@@ -370,7 +370,12 @@
                                                 Arquivo:
                                             </label>
                                             <input type="file" class="form-control input-sm" multiple accept="image/*, application/pdf" (change)="changeListenerVeiculo(documento, $event)" >
-                                            <app-error-message [erros]="documento.controls['arquivos']"></app-error-message>
+                                            <small [hidden]="!(documento.controls['arquivos'].hasError('required') && documento.controls['arquivos'].invalid)" class="text-danger">
+                                                Obrigatório<br/>
+                                            </small>
+                                            <small [hidden]="!(checkTamanhoArquivos(documento.controls['arquivos']))" class="text-danger">
+                                                O tamanho do arquivo é muito grande reduza por favor para 900Kb;
+                                            </small>
                                         </div>
                                         <div class="col-xs-2 center-itens">
                                             <button (click)="delDocumento(i)" class="btn bgm-green waves-effect" type="button">
